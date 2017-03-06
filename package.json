@@ -1,0 +1,45 @@
+{
+    "name": "meuApp",
+    "version": "0.0.2",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ClubeDosGeeksCoding/basel-app.git"
+    },
+    "author": "Helio Adriao <elio.adriao@gmail.com>",
+    "license": "MIT",
+    "description": "SisGeZoo",
+    "bugs": {
+        "url": "https://github.com/ClubeDosGeeksCoding/basel-app/issues"
+    },
+    "homepage": "https://github.com/ClubeDosGeeksCoding/basel-app#readme",
+    "scripts": {
+        "postinstall": "install-app-deps",
+        "start": "electron main.js",
+        "dist": "build --linux --dir",
+        "win32": "build --win --ia32",
+        "win64": "build --win --x64",
+        "linux32": "build --linux deb tar.xz --ia32",
+        "linux64": "build --linux deb tar.xz --x64"
+    },
+    "dependencies": {
+        "jquery": "2.2.2",
+        "angular": "1.5.1"
+    },
+    "devDependencies": {
+        "electron-prebuilt": "1.4.13",
+        "electron-builder": "^13.8.2",
+        "basel-cli": "*",
+        "angular-route": "1.5.1",
+        "angular-utils-pagination": "0.11.0"
+    },
+    "build": {
+        "appId": "sisgezoo.helio",
+        "files": [ "node_modules/angular/*" , "node_modules", "**/*" ],
+        "mac": { "category": "public.app-category.tools" }
+    },
+    "titel": "meuApp",
+    "database": "database",
+    "title": "meuApp",
+    "type": "simple"
+}
