@@ -1,5 +1,4 @@
-<html ng-app="cdg" ng-controller="mainController">
-<head>
+<html ng-app="cdg" ng-controller="mainController"><head>
 	<title>Sistema de Gerenciamento Bovino</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 
@@ -11,7 +10,7 @@
 
 	<!-- Angular -->
 	<script src="node_modules/angular/angular.min.js"></script>
-	<!-- Angular - Pagination -->
+	<script src="node_modules/angular-cookies/angular-cookies.js"></script>
 	<script src="node_modules/angular-utils-pagination/dirPagination.js"></script>
 
 	<!-- App -->
@@ -20,21 +19,21 @@
 	<!-- Controllers -->
 	<script src="controllers/mainController.js"></script>
 	<script src="controllers/exampleController.js"></script>
-</head>
+	<script src="controllers/usuariosController.js"></script><script src="controllers/usuariosController.js"></script></head>
 <body>
 	<!-- Menu -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/">
-					{{app.title}}
-				</a>
+				<a class="navbar-brand" href="#/inicio">Inicio</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ng-repeat="menu in menus">
-						<a href="#/{{menu.route}}">{{menu.name}}</a>
-					</li>
+					<li role="presentation"><a href="#!/terra">Terra</a></li>
+		        	<li role="presentation"><a href="#!/maquinas">Maquinas</a></li>
+			        <li role="presentation"><a href="#!/instalacoes">Instalacoes</a></li>
+			        <li role="presentation"><a href="#!/animais">Animais</a></li>
+			        <li role="presentation"><a href="#">Patrimonio</a></li>
 				</ul>
 			</div>
 		</div>
@@ -42,5 +41,26 @@
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
 
-</body>
-</html>
+	<div class="modal show" id="loginController" tabindex="-1" role="dialog" ng-controller="mainController">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Login</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form" ng-submit="login()" role="form">
+						<div class="form-group">
+						<label>Usuario</label><input type="text" class="form-control" ng-model="usuario"></div>
+						<div class="form-group">
+						<label>Senha</label><input type="text" class="form-control" ng-model="senha"></div>
+						<button type="submit" class="btn btn-primary basel-btn-save">Entrar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div ng-show="error" class="alert alert-danger">{{error}}</div>						
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body></html>

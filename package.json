@@ -4,15 +4,15 @@
     "main": "main.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ClubeDosGeeksCoding/basel-app.git"
+        "url": "git+https://github.com/elioadriao/SGB"
     },
     "author": "Helio Adriao <elio.adriao@gmail.com>",
     "license": "MIT",
     "description": "SisGeZoo",
     "bugs": {
-        "url": "https://github.com/ClubeDosGeeksCoding/basel-app/issues"
+        "url": "https://github.com/elioadriao/SGB"
     },
-    "homepage": "https://github.com/ClubeDosGeeksCoding/basel-app#readme",
+    "homepage": "https://github.com/elioadriao/SGB",
     "scripts": {
         "postinstall": "install-app-deps",
         "start": "electron main.js",
@@ -24,18 +24,20 @@
     },
     "dependencies": {
         "jquery": "2.2.2",
-        "angular": "1.5.1"
+        "angular": "1.5.1",
+        "basel-cli": "*",
+        "angular-route": "1.5.1",
+        "angular-cookies": "1.5.1",
+        "angular-utils-pagination": "0.11.0"
     },
     "devDependencies": {
         "electron-prebuilt": "1.4.13",
-        "electron-builder": "^13.8.2",
-        "basel-cli": "*",
-        "angular-route": "1.5.1",
-        "angular-utils-pagination": "0.11.0"
+        "electron-builder": "^13.8.2"
     },
     "build": {
         "appId": "sisgezoo.helio",
-        "files": [ "node_modules/angular/*" , "node_modules", "**/*" ],
+        "files": [ "./node_modules/**/*" ,"**/*" ],
+        "asar": false,
         "mac": { "category": "public.app-category.tools" }
     },
     "titel": "meuApp",
