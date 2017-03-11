@@ -17,9 +17,10 @@
 	<script src="app.js"></script>
 
 	<!-- Controllers -->
-	<script src="controllers/mainController.js"></script>
+	<script src="controllers/mainController.js"></script><script src="controllers/propriedadeController.js"></script>
 	<script src="controllers/exampleController.js"></script>
-	<script src="controllers/usuariosController.js"></script><script src="controllers/usuariosController.js"></script></head>
+	<script src="controllers/usuariosController.js"></script>
+	<script src="controllers/loginController.js"></script><script src="controllers/propriedadeController.js"></script></head>
 <body>
 	<!-- Menu -->
 	<nav class="navbar navbar-default">
@@ -29,38 +30,22 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="#!/terra">Terra</a></li>
-		        	<li role="presentation"><a href="#!/maquinas">Maquinas</a></li>
-			        <li role="presentation"><a href="#!/instalacoes">Instalacoes</a></li>
-			        <li role="presentation"><a href="#!/animais">Animais</a></li>
-			        <li role="presentation"><a href="#">Patrimonio</a></li>
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="#/">Propriedade <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li role="presentation"><a href="#/terra">Terra</a></li>
+				        	<li role="presentation"><a href="#/maquinas">Maquinas</a></li>
+					        <li role="presentation"><a href="#/instalacoes">Instalacoes</a></li>
+					        <li role="presentation"><a href="#/animais">Animais</a></li>
+					        <li role="presentation"><a href="#">Patrimonio</a></li>
+						</ul>
+					</li>
+					<li role="presentation"><a href="#">Evolucao Rebanho</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
-
-	<div class="modal show" id="loginController" tabindex="-1" role="dialog" ng-controller="mainController">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Login</h4>
-				</div>
-				<div class="modal-body">
-					<form class="basel-form" ng-submit="login()" role="form">
-						<div class="form-group">
-						<label>Usuario</label><input type="text" class="form-control" ng-model="usuario"></div>
-						<div class="form-group">
-						<label>Senha</label><input type="text" class="form-control" ng-model="senha"></div>
-						<button type="submit" class="btn btn-primary basel-btn-save">Entrar</button>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<div ng-show="error" class="alert alert-danger">{{error}}</div>						
-				</div>
-			</div>
-		</div>
-	</div>
 
 </body></html>

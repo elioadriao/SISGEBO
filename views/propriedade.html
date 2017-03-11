@@ -1,0 +1,49 @@
+<div ng-controller="propriedadeController">
+	<div class="row">
+		<div class="col-md-8">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#propriedadeController"><span class="glyphicon glyphicon-plus"></span> New</button>
+		</div>
+		<div class="col-md-4">
+			<input class="form-control" placeholder="Search" ng-model="search">
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" ng-init="list()">
+				<thead class="basel-table-head">
+
+				<tr><th>id</th><th>proprietario</th><th>municipio</th><th>area</th><th></th></tr></thead>
+				<tbody class="basel-table-body">
+
+				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.id}}</td><td>{{item.proprietario}}</td><td>{{item.municipio}}</td><td>{{item.area}}</td><td><button class="btn btn-info btn-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span> Edit</button><button class="btn btn-danger btn-xs" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr></tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<dir-pagination-controls>
+			</dir-pagination-controls>
+		</div>
+	</div>
+
+	<div class="modal fade" id="propriedadeController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Propriedade</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">
+						
+					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Proprietario</label><input type="text" class="form-control" ng-model="form.proprietario"></div><div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div><div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div></form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="save()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,5 +1,5 @@
  var $routeProviderReference;
- var app = angular.module('cdg', [require('angular-route'),'angularUtils.directives.dirPagination']);
+ var app = angular.module('cdg', [require('angular-route'),'angularUtils.directives.dirPagination', 'ngCookies']);
  var basel = require('basel-cli');
  var routes = basel.routes();
 
@@ -7,17 +7,17 @@
  	$routeProviderReference = $routeProvider;
  }]);
 
- app.run(['$rootScope', '$http', '$route', '$cookieStore', function($rootScope, $http, $route, $cookieStore) {
+ app.run(['$rootScope', '$http', '$route', '$location', '$cookieStore', function($rootScope, $http, $route, $location, $cookieStore) {
     $rootScope.globals = $cookieStore.get('globals') || {};
     if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
     }
  
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         // redirect to login page if not logged in
         if (!$rootScope.globals.currentUser) {
-            //$location.path('/login');
-            $('#loginController').modal('show');
+            $location.path('/login');
+            //$('#loginController').modal('show');
         }
     });
 
@@ -35,9 +35,17 @@
     *   })
     *
     */
+    $routeProviderReference.when('/',{
+        controller: 'propriedadeController',
+        templateUrl: 'views/propriedade.html'
+        });
     $routeProviderReference.when('/inicio',{
         controller: 'usuariosController',
         templateUrl: 'views/usuarios.html'
+        });
+    $routeProviderReference.when('/login',{
+        controller: 'loginController',
+        templateUrl: 'views/login.html'
         });
     
     $routeProviderReference.otherwise({ redirectTo: '/' });

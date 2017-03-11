@@ -10,8 +10,8 @@ app.controller('loginController',
             AuthenticationService.Login($scope.usuario, $scope.senha, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.usuario, $scope.senha);
-                    //$location.path('/');
-                    $('#loginController').modal('hide');
+                    $location.path('/');
+                    //$('#loginController').modal('hide');
                 } else {
                     $scope.error = response.message;
                     //$scope.dataLoading = false;
