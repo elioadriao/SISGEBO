@@ -8,7 +8,7 @@
     },
     "author": "Helio Adriao <elio.adriao@gmail.com>",
     "license": "MIT",
-    "description": "SisGeZoo",
+    "description": "Sistema de Gerenciamento para Bovinocultura",
     "bugs": {
         "url": "https://github.com/elioadriao/SGB"
     },

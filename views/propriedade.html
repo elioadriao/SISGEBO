@@ -1,22 +1,47 @@
 <div ng-controller="propriedadeController">
+	<div ng-init="list()">
 	<div class="row">
-		<div class="col-md-8">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#propriedadeController"><span class="glyphicon glyphicon-plus"></span> New</button>
+		<div class="col-md-4">
+			<ul class="list-group">
+				<li class="dropdown" role="presentation">
+					<a data-toggle="dropdown">Nome: {{items[i].nome}} <span class="caret"></span></a>
+					<ul class="dropdown-menu" dir-paginate="item in items">
+						<li role="presentation">Outras..</a></li>
+					</ul>
+				</li>
+			</ul>
+			<p>Proprietario: {{items[i].proprietario}}</p>
 		</div>
 		<div class="col-md-4">
-			<input class="form-control" placeholder="Search" ng-model="search">
+			<p>Municipio: {{items[i].municipio}}</p>
+			<p>Area(ha): {{items[i].area}}</p>
 		</div>
+		<div class="col-md-4">
+			<button class="btn btn-info btn-xs" ng-click="edit(items[i])"><span class="glyphicon glyphicon-pencil"></span> Editar</button><br>
+			<button class="btn btn-danger btn-xs" ng-click="delete(items[i])"><span class="glyphicon glyphicon-trash"></span> Deletar</button>
+		</div>
+	</div>
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6 container">
 			<table class="table table-striped" ng-init="list()">
 				<thead class="basel-table-head">
-
-				<tr><th>id</th><th>proprietario</th><th>municipio</th><th>area</th><th></th></tr></thead>
+				Relatorio Cria:
+				<tr><th>Qtd</th><th>Pv(kg)</th><th>GMD(kg/d)</th><th>Periodo(meses)</th></tr></thead>
 				<tbody class="basel-table-body">
 
-				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.id}}</td><td>{{item.proprietario}}</td><td>{{item.municipio}}</td><td>{{item.area}}</td><td><button class="btn btn-info btn-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span> Edit</button><button class="btn btn-danger btn-xs" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr></tbody>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6 container">
+			<table class="table table-striped" ng-init="list()">
+				<thead class="basel-table-head">
+				Relatorio Cria(Comprado):
+				<tr><th>Qtd</th><th>Pv(kg)</th><th>GMD(kg/d)</th><th>Periodo(meses)</th></tr></thead>
+				<tbody class="basel-table-body">
+
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -37,7 +62,7 @@
 				<div class="modal-body">
 					<form class="basel-form">
 						
-					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Proprietario</label><input type="text" class="form-control" ng-model="form.proprietario"></div><div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div><div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div></form>
+					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Nome</label><input type="text" class="form-control" ng-model="form.nome"></div><div class="form-group"><label>Proprietario</label><input type="text" class="form-control" ng-model="form.proprietario"></div><div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div><div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div></form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>

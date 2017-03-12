@@ -3,6 +3,7 @@ app.controller("propriedadeController", function($scope, $location){
 
 	$scope.table_name = "propriedade";
 	$scope.primary_key = "id";
+	$scope.i = 0;
 
 	//List
 	$scope.list = function(){

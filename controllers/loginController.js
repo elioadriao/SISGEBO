@@ -17,7 +17,8 @@ app.controller('loginController',
                     //$scope.dataLoading = false;
                 }
             });
-        };
+        }
+
     }]
 )
 
