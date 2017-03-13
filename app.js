@@ -40,10 +40,26 @@
         controller: 'propriedadeController',
         templateUrl: 'views/propriedade.html'
         });
+    $routeProviderReference.when('/animal',{
+        controller: 'animalController',
+        templateUrl: 'views/animal.html'
+        });
     $routeProviderReference.when('/inicio',{
         controller: 'usuariosController',
         templateUrl: 'views/usuarios.html'
         });
+    $routeProviderReference.when('/manutencao',{
+        controller: 'manutencaoController',
+        templateUrl: 'views/manutencao.html'
+        });
+    $routeProviderReference.when('/benfeitorias',{
+        controller: 'benfeitoriasController',
+        templateUrl: 'views/benfeitorias.html'
+        });
+    $routeProviderReference.when('/maquinas',{
+        controller: 'maquinasController',
+        templateUrl: 'views/maquinas.html'
+        })
     $routeProviderReference.when('/login',{
         controller: 'loginController',
         templateUrl: 'views/login.html'

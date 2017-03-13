@@ -1,0 +1,52 @@
+<div ng-controller="manutencaoController">
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Items de Manutenção</h2>
+		</div>
+		<div class="col-md-4">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#manutencaoController"><span class="glyphicon glyphicon-plus"></span> Cadastrar</button>
+		</div>
+		<div class="col-md-4">
+			<input class="form-control" placeholder="Search" ng-model="search">
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" ng-init="list()">
+				<thead class="basel-table-head">
+
+				<tr><th>Valor</th><th>Descricao</th><th></th></tr></thead>
+				<tbody class="basel-table-body">
+
+				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.valor | number:2}}</td><td>{{item.descricao}}</td><td><button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button></td></tr></tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<dir-pagination-controls>
+			</dir-pagination-controls>
+		</div>
+	</div>
+
+	<div class="modal fade" id="manutencaoController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 class="modal-title" id="myModalLabel">Cadastro de items de Manutencao</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">
+						
+					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Valor</label><input type="text" class="form-control" ng-model="form.valor"></div><div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div></form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="save()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
