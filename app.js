@@ -17,8 +17,11 @@
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         // redirect to login page if not logged in
         if (!$rootScope.globals.currentUser) {
+            $('#menubar').hide();
             $location.path('/login');
             //$('#loginController').modal('show');
+        }else{
+            $('#menubar').show();
         }
     });
 

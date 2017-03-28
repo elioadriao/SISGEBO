@@ -16,14 +16,13 @@ app.on('ready', function() {
   // Cria a janela do browser.
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 700,
-    webPreferences: {
-      nodeIntegration: true
-    }
+    height: 700
   });
 
   // Carrega o arquivo html principal.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+  mainWindow.webContents.openDevTools();
 
   // aber o DevTools. (console, inspecionar elemento, etc)
   // mainWindow.webContents.openDevTools(); 

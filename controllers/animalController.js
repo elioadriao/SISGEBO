@@ -3,6 +3,16 @@ app.controller("animalController", function($scope, $location){
 
 	$scope.table_name = "animal";
 	$scope.primary_key = "id";
+	$scope.tipoAnimal = {
+		1 : "Matrizes",
+		2 : "Reprodutores", 
+		3 : "Bezerros", 
+		4 : "Novilhos 1/2 anos", 
+		5 : "Novilhos 2/3 anos", 
+		6 : "Bezerras", 
+		7 : "Novilhas 1/2 anos", 
+		8 : "Novilhas 2/3 anos"
+		};
 
 	//List
 	$scope.list = function(){

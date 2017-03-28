@@ -5,7 +5,7 @@
 			<ul class="nav list-group">
 				<li class="dropdown" role="presentation">
 					<a data-toggle="dropdown">Nome: {{items[i].nome}} <span class="caret"></span></a>
-					<ul class="dropdown-menu" dir-paginate="item in items">
+					<ul class="dropdown-menu" dir-paginate="item in items | filter: search | itemsPerPage: 10">
 						<li role="presentation"><button class="btn btn-block btn-sm" data-toggle="modal" data-target="#propriedadeController">Outras..</button></li>
 					</ul>
 				</li>

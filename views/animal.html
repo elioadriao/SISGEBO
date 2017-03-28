@@ -19,7 +19,7 @@
 				<tr><th>Descricao</th><th>Quantidade</th><th>Peso(kg)</th><th>Valor Unitario</th><th>Valor Total</th><th></th></tr></thead>
 				<tbody class="basel-table-body">
 
-				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.descricao}}</td><td>{{item.qtd}}</td><td>{{item.peso}}</td><td>{{item.valor | number:2}}</td><td>{{item.qtd*item.valor | number:2}}</td><td><button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button></td></tr></tbody>
+				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{tipoAnimal[item.tipo]}}</td><td>{{item.qtd}}</td><td>{{item.peso}}</td><td>{{item.valor | number:2}}</td><td>{{item.qtd*item.valor | number:2}}</td><td><button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button></td></tr></tbody>
 			</table>
 		</div>
 	</div>
@@ -39,8 +39,15 @@
 				</div>
 				<div class="modal-body">
 					<form class="basel-form">
-						
-					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div><div class="form-group"><label>Quantidade</label><input type="text" class="form-control" ng-model="form.qtd"></div><div class="form-group"><label>Peso(kg)</label><input type="text" class="form-control" ng-model="form.peso"></div><div class="form-group"><label>Valor(R$)</label><input type="text" class="form-control" ng-model="form.valor"></div></form>
+					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+					<div class="form-group"><label>Selecione a Classe do Animal:</label>
+					    <select class="form-control" ng-model="form.tipo">
+						    <option ng-repeat="(t, d) in tipoAnimal" ng-value="t">{{ d }}</option>
+					    </select>
+				    </div>
+					<div class="form-group"><label>Quantidade</label><input type="text" class="form-control" ng-model="form.qtd"></div>
+					<div class="form-group"><label>Peso(kg)</label><input type="text" class="form-control" ng-model="form.peso"></div>
+					<div class="form-group"><label>Valor(R$)</label><input type="text" class="form-control" ng-model="form.valor"></div></form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
