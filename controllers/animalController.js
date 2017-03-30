@@ -14,6 +14,32 @@ app.controller("animalController", function($scope, $location){
 		8 : "Novilhas 2/3 anos"
 		};
 
+	$scope.create = function(){
+		$scope.list();
+		$scope.ano = 1;
+
+		for (i in $scope.items){
+			if($scope.items[i].ano == $scope.ano){
+				$scope.ano++;
+			}
+		}
+
+		for (i=1;i<=8;i++){
+			$scope.form = {};
+			$scope.form.tipo = i;
+			$scope.form.ano= $scope.ano;
+			$scope.form.qtd = 0;
+			$scope.form.valor = 0;
+			$scope.form.peso = 0;
+			$scope.save();
+		}
+	}
+	
+	$scope.erase = function(a){
+		basel.database.delete($scope.table_name, {ano: a});
+		$scope.list();
+	}
+
 	//List
 	$scope.list = function(){
 		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
@@ -51,9 +77,12 @@ app.controller("animalController", function($scope, $location){
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Are you sure?")){
-			basel.database.delete($scope.table_name, {id: data[$scope.primary_key]});
-			$scope.list();
+		if(confirm("Deseja Resetar Linha?")){
+			$scope.form = data;
+			$scope.form.qtd = 0;
+			$scope.form.valor = 0;
+			$scope.form.peso = 0;
+			$scope.save();
 		}
 	}
 });

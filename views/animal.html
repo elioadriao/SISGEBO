@@ -4,10 +4,6 @@
 			<h2>Animais</h2>
 		</div>
 		<div class="col-md-4">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#animalController"><span class="glyphicon glyphicon-plus"></span> Cadastrar</button>
-		</div>
-		<div class="col-md-4">
-			<input class="form-control" placeholder="Search" ng-model="search">
 		</div>
 	</div>
 	<hr>
@@ -15,18 +11,36 @@
 		<div class="col-md-12">
 			<table class="table table-striped" ng-init="list()">
 				<thead class="basel-table-head">
-
-				<tr><th>Descricao</th><th>Quantidade</th><th>Peso(kg)</th><th>Valor Unitario</th><th>Valor Total</th><th></th></tr></thead>
+				<tr>
+					<th>Descricao</th>
+					<th>Quantidade</th>
+					<th>Peso(kg)</th>
+					<th>Valor Unitario</th>
+					<th>Valor Total</th>
+					<th></th>
+				</tr>
+				</thead>
 				<tbody class="basel-table-body">
-
-				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{tipoAnimal[item.tipo]}}</td><td>{{item.qtd}}</td><td>{{item.peso}}</td><td>{{item.valor | number:2}}</td><td>{{item.qtd*item.valor | number:2}}</td><td><button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button></td></tr></tbody>
+				<tr ng-repeat="item in items">
+					<td>{{tipoAnimal[item.tipo]}}</td>
+					<td>{{item.qtd}}</td>
+					<td>{{item.peso}}</td>
+					<td>{{item.valor | number:2}}</td>
+					<td>{{item.qtd*item.valor | number:2}}</td>
+					<td>
+						<button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+						<button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button>
+					</td>
+				</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<dir-pagination-controls>
-			</dir-pagination-controls>
+			<button class="btn btn-info btn-sm" ng-click="create()"><span class="glyphicon glyphicon-plus-sign"></span></button>
+			<button class="btn btn-danger btn-sm" ng-click="erase(1)"><span class="glyphicon glyphicon-minus-sign"></span></button>
 		</div>
 	</div>
 
@@ -38,16 +52,25 @@
 					<h4 class="modal-title" id="myModalLabel">Cadastro de Animais</h4>
 				</div>
 				<div class="modal-body">
-					<form class="basel-form">
-					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
-					<div class="form-group"><label>Selecione a Classe do Animal:</label>
-					    <select class="form-control" ng-model="form.tipo">
-						    <option ng-repeat="(t, d) in tipoAnimal" ng-value="t">{{ d }}</option>
-					    </select>
-				    </div>
-					<div class="form-group"><label>Quantidade</label><input type="text" class="form-control" ng-model="form.qtd"></div>
-					<div class="form-group"><label>Peso(kg)</label><input type="text" class="form-control" ng-model="form.peso"></div>
-					<div class="form-group"><label>Valor(R$)</label><input type="text" class="form-control" ng-model="form.valor"></div></form>
+					<table class="table table-striped">
+					<thead class="basel-table-head">
+					<tr>
+						<th>Descricao</th>
+						<th>Quantidade</th>
+						<th>Peso(kg)</th>
+						<th>Valor Unitario</th>
+					</tr>
+					</thead>
+					<tbody class="basel-table-body">
+					<tr>
+						<input type="hidden" class="form-control" ng-model="form.id">
+						<td><input type="text" class="form-control" ng-value="tipoAnimal[form.tipo]" readonly></td>
+						<td><input type="number" min="0" class="form-control" ng-model="form.qtd"></td>
+						<td><input type="number" min="0" class="form-control" ng-model="form.peso"></td>
+						<td><input type="number" min="0" class="form-control" ng-model="form.valor"></td>
+					</tr>
+					</tbody>
+					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
