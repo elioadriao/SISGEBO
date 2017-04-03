@@ -13,25 +13,50 @@ app.controller("animalController", function($scope, $location){
 		7 : "Novilhas 1/2 anos", 
 		8 : "Novilhas 2/3 anos"
 		};
+	$scope.ano = {1 : true, 2 : true, 3 : true, 4 : true, 5 : true, 6 : true, 7 : true, 8 :true, 9 : true, 10 :true};
 
-	$scope.create = function(){
+
+	$scope.sincAno = function(){
 		$scope.list();
-		$scope.ano = 1;
+		var j;
 
-		for (i in $scope.items){
-			if($scope.items[i].ano == $scope.ano){
-				$scope.ano++;
+		for(i in $scope.ano){
+			for(j in $scope.items){
+				if($scope.items[j].ano == i){
+					$scope.ano[i] = false;
+				}
 			}
 		}
+	}
 
-		for (i=1;i<=8;i++){
-			$scope.form = {};
-			$scope.form.tipo = i;
-			$scope.form.ano= $scope.ano;
-			$scope.form.qtd = 0;
-			$scope.form.valor = 0;
-			$scope.form.peso = 0;
-			$scope.save();
+	$scope.getAno = function(){
+		$scope.sincAno();
+		var result = 0;
+
+		for(i in $scope.ano){
+			if($scope.ano[i]){
+				console.log(i);
+				result = i;
+				break;
+			}
+		}
+		return result;
+	}
+
+	$scope.create = function(){
+		var ano = $scope.getAno();
+		if(ano == 0){
+			alert("Limite de Anos Atingido!");
+		}else{
+			for (i=1;i<=8;i++){
+				$scope.form = {};
+				$scope.form.tipo = i;
+				$scope.form.ano= ano;
+				$scope.form.qtd = 0;
+				$scope.form.valor = 0;
+				$scope.form.peso = 0;
+				$scope.save();
+			}
 		}
 	}
 	
