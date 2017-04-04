@@ -9,7 +9,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-striped" ng-init="list()">
+			<table class="table table-striped" ng-init="listWhere(getAnoFalse())">
 				<thead class="basel-table-head">
 				<tr>
 					<th>Descricao</th>
@@ -42,12 +42,12 @@
 
 			<nav aria-label="Page navigation">
 				<ul class="pagination" ng-init="sincAno()">
-			    	<li ng-repeat="i in ano"><a href="#">{{i}}</a></li>
+			    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]"><a href="" ng-if="!ano[i]" ng-click="listWhere(i)">{{i}}</a></li>
 			  	</ul>
 			</nav>
 
-			<button class="btn btn-info btn-sm" ng-click="create()"><span class="glyphicon glyphicon-plus-sign"></span></button>
-			<button class="btn btn-danger btn-sm" ng-click="erase(1)"><span class="glyphicon glyphicon-minus-sign"></span></button>
+			<button class="btn btn-info btn-sm" ng-click="create()"><span class="glyphicon glyphicon-plus"></span> Ano</button>
+			<button class="btn btn-danger btn-sm" ng-click="erase(items[0].ano)"><span class="glyphicon glyphicon-minus"></span> Ano {{items[0].ano}}</button>
 		</div>
 	</div>
 

@@ -13,16 +13,16 @@ app.controller("animalController", function($scope, $location){
 		7 : "Novilhas 1/2 anos", 
 		8 : "Novilhas 2/3 anos"
 		};
-	$scope.ano = {1 : true, 2 : true, 3 : true, 4 : true, 5 : true, 6 : true, 7 : true, 8 :true, 9 : true, 10 :true};
-
 
 	$scope.sincAno = function(){
 		$scope.list();
+		$scope.ano = { 1 : true, 2 : true, 3 : true, 4 : true, 5 : true,
+					   6 : true, 7 : true, 8 : true, 9 : true, 10 :true };
 		var j;
 
 		for(i in $scope.ano){
-			for(j in $scope.items){
-				if($scope.items[j].ano == i){
+			for(j in $scope.dados){
+				if($scope.dados[j].ano == i){
 					$scope.ano[i] = false;
 				}
 			}
@@ -35,7 +35,19 @@ app.controller("animalController", function($scope, $location){
 
 		for(i in $scope.ano){
 			if($scope.ano[i]){
-				console.log(i);
+				result = i;
+				break;
+			}
+		}
+		return result;
+	}
+
+	$scope.getAnoFalse = function(){
+		$scope.sincAno();
+		var result = 0;
+
+		for(i in $scope.ano){
+			if(!$scope.ano[i]){
 				result = i;
 				break;
 			}
@@ -57,17 +69,25 @@ app.controller("animalController", function($scope, $location){
 				$scope.form.peso = 0;
 				$scope.save();
 			}
+			$scope.listWhere(ano);
+			$scope.sincAno();
 		}
 	}
 	
 	$scope.erase = function(a){
 		basel.database.delete($scope.table_name, {ano: a});
-		$scope.list();
+		$scope.listWhere($scope.getAnoFalse());
 	}
 
 	//List
 	$scope.list = function(){
 		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
+			$scope.dados = data;
+		});
+	}
+
+	$scope.listWhere = function(a){
+		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE ano="+a, function(data){
 			$scope.items = data;
 		});
 	}
@@ -85,7 +105,6 @@ app.controller("animalController", function($scope, $location){
 			basel.database.insert($scope.table_name, $scope.form); // entidade, dados
 		}
 		$scope.form = {};
-		$scope.list();
 		$('#animalController').modal('hide');
 	}
 
