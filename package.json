@@ -1,18 +1,18 @@
 {
-    "name": "meuApp",
-    "version": "0.0.2",
+    "name": "SISGEBO",
+    "version": "0.1.0",
     "main": "main.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/elioadriao/SGB"
+        "url": "git+https://github.com/elioadriao/SISGEBO"
     },
     "author": "Helio Adriao <elio.adriao@gmail.com>",
     "license": "MIT",
-    "description": "Sistema de Gerenciamento para Bovinocultura",
+    "description": "Sistema de Gerenciamento para Bovinocultura de Corte",
     "bugs": {
-        "url": "https://github.com/elioadriao/SGB"
+        "url": "https://github.com/elioadriao/SISGEBO"
     },
-    "homepage": "https://github.com/elioadriao/SGB",
+    "homepage": "https://github.com/elioadriao/SISGEBO",
     "scripts": {
         "postinstall": "install-app-deps",
         "start": "electron main.js",
@@ -35,13 +35,13 @@
         "electron-builder": "^13.8.2"
     },
     "build": {
-        "appId": "sisgezoo.helio",
+        "appId": "sisgebo.helio",
         "files": [ "./node_modules/**/*" ,"**/*" ],
-        "asar": false,
+        "asar": true,
         "mac": { "category": "public.app-category.tools" }
     },
-    "titel": "meuApp",
+    "titel": "SISGEBO",
     "database": "database",
-    "title": "meuApp",
+    "title": "SISGEBO",
     "type": "simple"
 }

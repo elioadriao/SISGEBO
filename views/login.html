@@ -1,8 +1,12 @@
-<div class="container-fluid" role="dialog" ng-controller="loginController">
-	<div class="modal-dialog modal-sm" role="document">
+<div class="container" role="dialog" ng-controller="loginController">
+	<div class="container-fluid">
+		<img src="model/8x2r-logo.png" class="img-responsive center-block" />
+	</div>
+
+	<div class="modal-dialog modal-sm" role="document">		
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Login no Sistema</h4>
+				<h4 class="modal-title text-center">Login no Sistema</h4>
 			</div>
 			<div class="modal-body">
 				<form class="basel-form" ng-submit="login()" role="form">
@@ -14,7 +18,11 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<div ng-show="error" class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span> {{error}}</div>						
+				<div ng-show="error" class="alert alert-danger">
+					<p class="text-center">
+						<span class="glyphicon glyphicon-exclamation-sign"></span> {{error}}
+					</p>
+				</div>						
 			</div>
 		</div>
 	</div>
