@@ -19,6 +19,27 @@ app.controller('loginController',
             });
         }
 
+        $scope.save = function(){
+            if($scope.form["id"]){
+                //Edit
+                var id = $scope.form["id"];
+                delete $scope.form["id"];
+                delete $scope.form.$$hashKey; //Apaga elemento $$hashKey do objeto
+                basel.database.update("usuarios", $scope.form, {id: id}); //entidade, dados, where
+            }else{
+                //new
+                basel.database.insert("usuarios", $scope.form); // entidade, dados
+            }
+            $scope.form = {};
+            //$scope.list();
+            $('#loginController').modal('hide');
+        }
+
+        // Cancel form
+        $scope.cancel = function(){
+            $scope.form = {};
+        }
+
     }]
 )
 
@@ -26,27 +47,20 @@ app.controller('loginController',
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
+        var response = { success: false };
 
         service.Login = function (username, password, callback) {
 
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
             $timeout(function () {
-                var response = { success: username === 'admin' && password === 'admin' };
-                if (!response.success) {
-                    response.message = 'Usuario ou senha Incorretos!';
-                }
+                basel.database.runAsync("SELECT * FROM usuarios WHERE login='"+username+"' AND senha='"+password+"'", function(data){
+                    if(data[0] != null){
+                        response = { success: true };    
+                    }else{
+                        response.message = 'Usuario ou senha Incorretos!';
+                    }
+                });
                 callback(response);
             }, 1000);
-
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-
         };
 
         service.SetCredentials = function (username, password) {
@@ -59,7 +73,7 @@ app.controller('loginController',
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             $cookieStore.put('globals', $rootScope.globals);
         };
 
@@ -154,6 +168,4 @@ app.controller('loginController',
             return output;
         }
     };
-
-    /* jshint ignore:end */
 });

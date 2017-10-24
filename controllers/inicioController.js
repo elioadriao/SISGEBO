@@ -1,19 +1,25 @@
 "use strict";
-app.controller("propriedadeController", function($scope, $location){
+app.controller("inicioController", function($scope, $rootScope, $location){
 
 	$scope.table_name = "propriedade";
 	$scope.primary_key = "id";
 	$scope.i = 0;
+	$scope.propriedade = "none";
+	$scope.usuario = $rootScope.globals.currentUser.username;
 
 	//List
 	$scope.list = function(){
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
-			if(data[0] != null){
-				$scope.items = data;
-			}else{
-				$('#propriedadeController').modal('show');
-			}
-		});
+		if ($scope.propriedade == "none"){
+			
+		}else{
+			basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
+				if(data[0] != null){
+					$scope.items = data;
+				}else{
+					$('#inicioController').modal('show');
+				}
+			});
+		}
 	}
 
 	//Saving
@@ -30,7 +36,7 @@ app.controller("propriedadeController", function($scope, $location){
 		}
 		$scope.form = {};
 		$scope.list();
-		$('#propriedadeController').modal('hide');
+		$('#inicioController').modal('hide');
 	}
 
 	// Cancel form
@@ -41,7 +47,7 @@ app.controller("propriedadeController", function($scope, $location){
 	//Abrindo para editar
 	$scope.edit = function(data){
 		$scope.form = data;
-		$('#propriedadeController').modal('show');
+		$('#inicioController').modal('show');
 	}
 
 	//Excluindo

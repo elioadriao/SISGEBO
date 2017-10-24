@@ -1,4 +1,5 @@
 <div class="container" role="dialog" ng-controller="loginController">
+	
 	<div class="container-fluid">
 		<img src="model/8x2r-logo.png" class="img-responsive center-block" />
 	</div>
@@ -6,7 +7,7 @@
 	<div class="modal-dialog modal-sm" role="document">		
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title text-center">Login no Sistema</h4>
+				<h4 class="modal-title text-center">Bem Vindo ao Sistema!</h4>
 			</div>
 			<div class="modal-body">
 				<form class="basel-form" ng-submit="login()" role="form">
@@ -18,11 +19,36 @@
 				</form>
 			</div>
 			<div class="modal-footer">
+				<h5 class="text-right">Não possui conta?, <a href="" data-toggle="modal" data-target="#loginController">Cadastre-se</a></h5>
 				<div ng-show="error" class="alert alert-danger">
 					<p class="text-center">
 						<span class="glyphicon glyphicon-exclamation-sign"></span> {{error}}
 					</p>
 				</div>						
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="loginController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Usuarios</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Login:</label><input type="text" class="form-control" ng-model="form.login"></div>
+						<div class="form-group"><label>Senha:</label><input type="password" class="form-control" ng-model="form.senha"></div>
+						<div class="form-group"><label>Nome:</label><input type="text" class="form-control" ng-model="form.nome"></div>
+						<div class="form-group"><label>E-mail:</label><input type="text" class="form-control" ng-model="form.email"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="save()">Cadastrar</button>
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+				</div>
 			</div>
 		</div>
 	</div>

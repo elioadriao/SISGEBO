@@ -40,8 +40,8 @@
     *
     */
     $routeProviderReference.when('/',{
-        controller: 'propriedadeController',
-        templateUrl: 'views/propriedade.html'
+        controller: 'inicioController',
+        templateUrl: 'views/inicio.html'
         });
     $routeProviderReference.when('/animal',{
         controller: 'animalController',

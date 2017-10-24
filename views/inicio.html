@@ -1,0 +1,62 @@
+<div ng-controller="inicioController">
+	<div class="container" ng-init="list()">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        Usuario: <h4>{{$scope.usuario}}</h4>
+                        <small><cite title="Municipio"> Municipio <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+                        </p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inicioController">Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">|<span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+
+	<div class="modal fade" id="inicioController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Propriedade</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.usuarioLogin_FK" ng-value=$scope.usuario></div>
+						<div class="form-group"><label>Nome da Propriedade</label><input type="text" class="form-control" ng-model="form.nome"></div>
+						<div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div>
+						<div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="save()">Salvar</button>
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
