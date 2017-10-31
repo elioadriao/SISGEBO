@@ -12,11 +12,17 @@
 		<div class="col-md-12">
 			<table class="table table-striped" ng-init="list()">
 				<thead class="basel-table-head">
-
-				<tr><th>id</th><th>login</th><th>senha</th><th></th></tr></thead>
+					<tr>
+						<th>Nome</th>
+						<th>Municipio</th>
+					</tr>
+				</thead>
 				<tbody class="basel-table-body">
-
-				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.id}}</td><td>{{item.login}}</td><td>{{item.senha}}</td><td><button class="btn btn-info btn-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span> Edit</button><button class="btn btn-danger btn-xs" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span> Delete</button></td></tr></tbody>
+					<tr dir-paginate="item in items | filter: search | itemsPerPage: 10">
+						<td>{{item.nome}}</td>
+						<td>{{item.municipio}}</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>

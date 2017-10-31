@@ -5,16 +5,14 @@ app.controller("inicioController", function($scope, $rootScope, $location){
 	$scope.primary_key = "id";
 	$scope.i = 0;
 	$scope.propriedade = "none";
-	$scope.usuario = $rootScope.globals.currentUser.username;
 
 	//List
 	$scope.list = function(){
 		if ($scope.propriedade == "none"){
-			
-		}else{
 			basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
 				if(data[0] != null){
 					$scope.items = data;
+					$('#selectController').modal('show');
 				}else{
 					$('#inicioController').modal('show');
 				}
