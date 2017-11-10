@@ -32,6 +32,9 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#/">Inicio</a>
 			</div>
+			<div class="navbar-right">
+				<a class="navbar-brand" ng-click="logoff()" href="#/login" >Deslogar</a>
+			</div>
 			<div>
 				<ul class="nav navbar-nav">
 					<li class="dropdown" role="presentation">
@@ -45,13 +48,24 @@
 					</li>
 					<li role="presentation"><a href="#">Evolucao Rebanho</a></li>
 				</ul>
-				<p class="navbar-text navbar-right"><a href="#/inicio" ng-click="logoff()" class="btn btn-danger btn-xs">
-					<span class="glyphicon glyphicon-user"></span> {{globals.currentUser.username}}, Sair
-				</a></p>
 			</div>
 		</div>
 	</nav>
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
+
+	<nav class="navbar navbar-default navbar-fixed-bottom" id="menubarb">
+		<div class="container-fluid">
+			<div class="navbar-header navbar-right">
+				<a class="navbar-brand" ng-click="clearId()" href="#/" >Mudar Propriedade</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li role="presentation"><a data-toggle="dropdown" href="">Propriedade <span class="caret"></span></a></li>
+					<li role="presentation"><a href="#">Evolucao Rebanho</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 </body></html>

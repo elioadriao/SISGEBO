@@ -1,23 +1,50 @@
 "use strict";
-app.controller("inicioController", function($scope, $rootScope, $location){
+app.controller("inicioController", function($scope, $rootScope, $location, $window){
 
 	$scope.table_name = "propriedade";
 	$scope.primary_key = "id";
-	$scope.i = 0;
-	$scope.propriedade = "none";
-
+	
 	//List
 	$scope.list = function(){
-		if ($scope.propriedade == "none"){
+		$scope.idPropriedade = $scope.getId();
+
+		if ($scope.idPropriedade === null){
 			basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
 				if(data[0] != null){
 					$scope.items = data;
 					$('#selectController').modal('show');
 				}else{
 					$('#inicioController').modal('show');
+					//Não tem propriedades
+				}
+			});
+		} else {
+			basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE id="+$scope.idPropriedade, function(data){
+				if(data[0] != null){
+					$scope.atual = data[0];
+				}else{
+					$('#selectController').modal('show');
+					//Error
 				}
 			});
 		}
+	}
+
+	$scope.setId = function(id){
+		$window.localStorage['idPropriedade'] = id;
+		$scope.list();
+	}
+
+	$scope.getId = function(){
+		return $window.localStorage.getItem("idPropriedade");
+	}
+
+	$scope.clearId = function(){
+		$scope.setId(null);
+	}
+
+	$scope.getUser = function(){
+		return $rootScope.globals.currentUser.username
 	}
 
 	//Saving

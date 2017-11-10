@@ -18,10 +18,12 @@
         // redirect to login page if not logged in
         if (!$rootScope.globals.currentUser) {
             $('#menubar').hide();
+            $('#menubarb').hide();
             $location.path('/login');
             //$('#loginController').modal('show');
         }else{
             $('#menubar').show();
+            $('#menubarb').show();
         }
     });
 
@@ -47,10 +49,10 @@
         controller: 'animalController',
         templateUrl: 'views/animal.html'
         });
-    $routeProviderReference.when('/inicio',{
+    /*$routeProviderReference.when('/inicio',{
         controller: 'usuariosController',
         templateUrl: 'views/usuarios.html'
-        });
+        });*/
     $routeProviderReference.when('/manutencao',{
         controller: 'manutencaoController',
         templateUrl: 'views/manutencao.html'

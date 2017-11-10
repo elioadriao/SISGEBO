@@ -5,27 +5,19 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
-                        <img src="model/380x500.png" alt="" class="img-rounded img-responsive" />
+                        <div class="btn-group btn-group-lg btn-group-vertical" role="group" aria-label="...">
+                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/maquinas';">Maquinas</button>
+                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/benfeitorias';">Benfeitorias</button>
+                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/manutencao';">Manutenção</button>
+                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/animal';">Animais</button>
+                        </div>
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>Olá, {{globals.currentUser.username}}</h4>
-                        <small><cite title="Municipio"> Arapiraca-AL <i class="glyphicon glyphicon-map-marker"></i></cite></small>
-                        <p>
-                            <i class="glyphicon glyphicon-envelope"></i> email@gmail.com
-                            <br />
-                            <i class="glyphicon glyphicon-globe"></i> Propriedade: {{items[0].nome}}
-                        </p>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><a href="#/maquinas">Maquinas</a></li>
-                                <li role="presentation"><a href="#/benfeitorias">Benfeitorias</a></li>
-                                <li role="presentation"><a href="#/manutencao">Manutencao</a></li>
-                                <li role="presentation"><a href="#/animal">Animais</a></li>
-                                <li role="presentation"><button href="" data-toggle="modal" data-target="#inicioController">Adicionar Propriedade</button></li>
-                            </ul>
-                        </div>
+                        <h2>Seja Bem Vindo, {{getUser()}}</h4>
+                        <br>
+                        <h3>Propriedade: {{atual.nome}}</h3>
+                        <h4>Municipio: {{atual.municipio}}</h3>
+                        <h4>Área: {{atual.area}}</h3>
                     </div>
                 </div>
             </div>
@@ -43,7 +35,7 @@
 				<div class="modal-body">
 					<form class="basel-form">
 						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
-						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.usuarioLogin_FK" ng-value=globals.currentUser.username></div>
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.usuarioLogin_FK" ng-value=getUser()></div>
 						<div class="form-group"><label>Nome da Propriedade</label><input type="text" class="form-control" ng-model="form.nome"></div>
 						<div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div>
 						<div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div>
@@ -62,7 +54,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Propriedades do Usuario</h4>
+                    <h4 class="modal-title" id="myModalLabel">Selecione uma Propriedade</h4>
                 </div>
                 <div class="modal-body">
                     <table class="table table-striped" ng-init="list()">
@@ -73,14 +65,15 @@
                             </tr>
                         </thead>
                         <tbody class="basel-table-body">
-                            <tr dir-paginate="item in items | filter: search | itemsPerPage: 10">
-                                <td>{{item.nome}}</td>
+                            <tr dir-paginate="item in items | itemsPerPage: 10">
+                                <td><button type="button" class="btn btn-default" ng-click="setId(item.id)" data-dismiss="modal">{{item.nome}}</button></td>
                                 <td>{{item.municipio}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inicioController"">Nova Propriedade</button>
                 </div>
             </div>
         </div>
