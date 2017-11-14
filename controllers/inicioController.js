@@ -8,7 +8,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	$scope.list = function(){
 		$scope.idPropriedade = $scope.getId();
 
-		if ($scope.idPropriedade === null){
+		if ($scope.idPropriedade == null){
 			basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
 				if(data[0] != null){
 					$scope.items = data;
@@ -40,7 +40,8 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	}
 
 	$scope.clearId = function(){
-		$scope.setId(null);
+		$window.localStorage.removeItem("idPropriedade");
+		$scope.list();
 	}
 
 	$scope.getUser = function(){

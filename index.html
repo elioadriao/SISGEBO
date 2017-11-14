@@ -32,21 +32,42 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#/">Inicio</a>
 			</div>
-			<div class="navbar-right">
-				<a class="navbar-brand" ng-click="logoff()" href="#/login" >Deslogar</a>
-			</div>
+			
 			<div>
 				<ul class="nav navbar-nav">
+					<li role="presentation"><a href="#/null">Evolucao Rebanho</a></li>
+					
 					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Propriedade <span class="caret"></span></a>
+						<a data-toggle="dropdown" href="">Fase de Cria <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/maquinas">Maquinas</a></li>
-					        <li role="presentation"><a href="#/benfeitorias">Benfeitorias</a></li>
-					        <li role="presentation"><a href="#/manutencao">Manutencao</a></li>
-					        <li role="presentation"><a href="#/animal">Animais</a></li>
+				        	<li role="presentation"><a href="#/null">Cria</a></li>
+					        <li role="presentation"><a href="#/null">Comprado</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
 						</ul>
 					</li>
-					<li role="presentation"><a href="#">Evolucao Rebanho</a></li>
+
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Fase de ReCria I <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a href="#/null">Cria</a></li>
+					        <li role="presentation"><a href="#/null">Comprado</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Fase de ReCria II <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a href="#/null">Cria</a></li>
+					        <li role="presentation"><a href="#/null">Comprado</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+						</ul>
+					</li>
+
+					<li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
 				</ul>
 			</div>
 		</div>
@@ -56,13 +77,34 @@
 
 	<nav class="navbar navbar-default navbar-fixed-bottom" id="menubarb">
 		<div class="container-fluid">
-			<div class="navbar-header navbar-right">
-				<a class="navbar-brand" ng-click="clearId()" href="#/" >Mudar Propriedade</a>
+			<div>
+				<div class="navbar-right">
+				<a class="navbar-brand" ng-click="logoff()" href="#/login" >Deslogar</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a data-toggle="dropdown" href="">Propriedade <span class="caret"></span></a></li>
-					<li role="presentation"><a href="#">Evolucao Rebanho</a></li>
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Terminacao Animal<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a href="#/null">Termino</a></li>
+					        <li role="presentation"><a href="#/null">Comprado</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+						</ul>
+					</li>
+
+					<li role="presentation"><a href="#/null">Balanco Animal</a></li>
+
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Administrativo<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a href="#/null">Investimento</a></li>
+					        <li role="presentation"><a href="#/null">Gastos</a></li>
+					        <li role="presentation"><a href="#/null">Receita</a></li>
+					        <li role="presentation"><a href="#/null">Financeiro Anual</a></li>
+					        <li role="presentation"><a href="#/null">Balanço Financeiro Geral</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>

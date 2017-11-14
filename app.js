@@ -49,10 +49,10 @@
         controller: 'animalController',
         templateUrl: 'views/animal.html'
         });
-    /*$routeProviderReference.when('/inicio',{
+    $routeProviderReference.when('/null',{
         controller: 'usuariosController',
         templateUrl: 'views/usuarios.html'
-        });*/
+        });
     $routeProviderReference.when('/manutencao',{
         controller: 'manutencaoController',
         templateUrl: 'views/manutencao.html'
