@@ -48,8 +48,14 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 		return $rootScope.globals.currentUser.username
 	}
 
+	$scope.hideSelect = function(){
+		$('#selectController').modal('hide');
+	}
+
 	//Saving
 	$scope.save = function(){
+		$scope.form.usuarioLogin_FK = $scope.getUser();
+
 		if($scope.form[$scope.primary_key]){
 			//Edit
 			var id = $scope.form[$scope.primary_key];
@@ -78,8 +84,12 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Are you sure?")){
+		if(confirm("Deseja realmente Deletar?")){
 			basel.database.delete($scope.table_name, {id: data[$scope.primary_key]});
+			basel.database.delete("animal", {propriedadeId_FK: data[$scope.primary_key]});
+			basel.database.delete("benfeitorias", {propriedadeId_FK: data[$scope.primary_key]});
+			basel.database.delete("manutencao", {propriedadeId_FK: data[$scope.primary_key]});
+			basel.database.delete("maquinas", {propriedadeId_FK: data[$scope.primary_key]});
 			$scope.list();
 		}
 	}
