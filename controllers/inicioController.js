@@ -4,12 +4,12 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	$scope.table_name = "propriedade";
 	$scope.primary_key = "id";
 	
-	//List
+	//Lista as Propriedades
 	$scope.list = function(){
 		$scope.idPropriedade = $scope.getId();
 
 		if ($scope.idPropriedade == null){
-			basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
+			basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE usuarioLogin_FK='"+$scope.getUser()+"'", function(data){
 				if(data[0] != null){
 					$scope.items = data;
 					$('#selectController').modal('show');
@@ -45,14 +45,18 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	}
 
 	$scope.getUser = function(){
-		return $rootScope.globals.currentUser.username
+		if($rootScope.globals.currentUser){
+			return $rootScope.globals.currentUser.username	
+		}else{
+			return null;
+		}
 	}
 
 	$scope.hideSelect = function(){
 		$('#selectController').modal('hide');
 	}
 
-	//Saving
+	//Salva no Banco
 	$scope.save = function(){
 		$scope.form.usuarioLogin_FK = $scope.getUser();
 
@@ -60,7 +64,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 			//Edit
 			var id = $scope.form[$scope.primary_key];
 			delete $scope.form[$scope.primary_key];
-			delete $scope.form.$$hashKey; //Apaga elemento $$hashKey do objeto
+			delete $scope.form.$$hashKey; 
 			basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
 		}else{
 			//new
@@ -71,7 +75,6 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 		$('#inicioController').modal('hide');
 	}
 
-	// Cancel form
 	$scope.cancel = function(){
 		$scope.form = {};
 	}

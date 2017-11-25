@@ -6,15 +6,15 @@ app.controller('loginController',
         AuthenticationService.ClearCredentials();
 
         $scope.login = function () {
-            //$scope.dataLoading = true;
+            localStorage.clear();
             AuthenticationService.Login($scope.usuario, $scope.senha, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials($scope.usuario, $scope.senha);
                     $location.path('/');
-                    //$('#loginController').modal('hide');
                 } else {
                     $scope.error = response.message;
-                    //$scope.dataLoading = false;
+                    $scope.usuario = "";
+                    $scope.senha = "";
                 }
             });
         }

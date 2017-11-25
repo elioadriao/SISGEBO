@@ -18,78 +18,63 @@ app.controller("animalController", function($scope, $location, $window){
 		return $window.localStorage.getItem("idPropriedade");
 	}
 
-	$scope.initTable = function(){
-		$scope.list(1);
-		if($scope.items == null){
-			$scope.create();
-		}
-	}
-
+	/* Cria Tabela de Animais */
 	$scope.create = function(){
-
 		for (var a=1; a<=10; a++){
 			for (var i=1; i<=8; i++){
 				$scope.form = {};
+				$scope.form.id;
 				$scope.form.tipo = i;
-				$scope.form.ano= a;
+				$scope.form.ano = a;
 				$scope.form.qtd = 0;
 				$scope.form.valor = 0;
 				$scope.form.peso = 0;
-				$scope.save();
+				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.new();
 			}
-		}
-		
+		}		
 		$scope.list(1);	
 	}
-	
-	/*$scope.erase = function(a){
-		basel.database.delete($scope.table_name, {ano: a});
-		$scope.listWhere($scope.getAnoFalse());
-	}
 
-	
-	$scope.list = function(){
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
-			$scope.dados = data;
-		});
-	}*/
-
+	/* Lista Animais da Propriedade x no ano y */
 	$scope.list = function(a){
 		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+a, function(data){
-			$scope.items = data;
+			if(data[0] != null){
+				$scope.items = data;
+				console.log("existe");
+			}else{
+				console.log("existe nao");
+				$scope.create();
+			}
 		});
 	}
 
-	//Saving
+	/* Salvando no Banco */
 	$scope.save = function(){
-		$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
-
-		if($scope.form[$scope.primary_key]){
-			//Edit
-			var id = $scope.form[$scope.primary_key];
-			delete $scope.form[$scope.primary_key];
-			delete $scope.form.$$hashKey; //Apaga elemento $$hashKey do objeto
-			basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
-		}else{
-			//new
-			basel.database.insert($scope.table_name, $scope.form); // entidade, dados
-		}
+		var id = $scope.form[$scope.primary_key];
+		delete $scope.form[$scope.primary_key];
+		delete $scope.form.$$hashKey; 
+		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
+		
 		$scope.form = {};
 		$('#animalController').modal('hide');
 	}
 
-	// Cancel form
-	$scope.cancel = function(){
+	/* Inserindo no Banco */
+	$scope.new = function(){
+		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
 		$scope.form = {};
 	}
 
-	//Abrindo para editar
 	$scope.edit = function(data){
 		$scope.form = data;
 		$('#animalController').modal('show');
 	}
 
-	//Excluindo
+	$scope.cancel = function(){
+		$scope.form = {};
+	}
+
 	$scope.delete = function(data){
 		if(confirm("Deseja Resetar Valores?")){
 			$scope.form = data;

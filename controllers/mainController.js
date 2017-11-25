@@ -5,6 +5,7 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 	
 	$scope.logoff = function (){
 		AuthenticationService.ClearCredentials();
+		localStorage.clear();
 		$location.path('/login');
 	}
 
