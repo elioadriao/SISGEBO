@@ -64,7 +64,11 @@
     $routeProviderReference.when('/maquinas',{
         controller: 'maquinasController',
         templateUrl: 'views/maquinas.html'
-        })
+        });
+    $routeProviderReference.when('/evolucao',{
+        controller: 'evoanimalController',
+        templateUrl: 'views/evoanimal.html'
+        });
     $routeProviderReference.when('/login',{
         controller: 'loginController',
         templateUrl: 'views/login.html'
