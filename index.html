@@ -1,4 +1,5 @@
-<html ng-app="cdg" ng-controller="mainController"><head>
+<html ng-app="cdg" ng-controller="mainController">
+<head>
 	<title>SISGEBO</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 
@@ -26,6 +27,7 @@
 	<script src="controllers/usuariosController.js"></script>
 	<script src="controllers/loginController.js"></script>
 	<script src="controllers/evoanimalController.js"></script>
+</head>
 <body>
 	<!-- Menu -->
 	<nav class="navbar navbar-default" id="menubar">
@@ -69,6 +71,13 @@
 					</li>
 
 					<li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
+
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span></a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a ng-click="logoff()" href="#/login" >Sair</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -76,39 +85,5 @@
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
 
-	<nav class="navbar navbar-default navbar-fixed-bottom" id="menubarb">
-		<div class="container-fluid">
-			<div>
-				<div class="navbar-right">
-				<a class="navbar-brand" ng-click="logoff()" href="#/login" >Deslogar</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Terminacao Animal<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/null">Termino</a></li>
-					        <li role="presentation"><a href="#/null">Comprado</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
-						</ul>
-					</li>
-
-					<li role="presentation"><a href="#/null">Balanco Animal</a></li>
-
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Administrativo<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/null">Investimento</a></li>
-					        <li role="presentation"><a href="#/null">Gastos</a></li>
-					        <li role="presentation"><a href="#/null">Receita</a></li>
-					        <li role="presentation"><a href="#/null">Financeiro Anual</a></li>
-					        <li role="presentation"><a href="#/null">Balanço Financeiro Geral</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-</body></html>
+</body>
+</html>
