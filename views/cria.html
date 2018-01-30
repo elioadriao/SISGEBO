@@ -1,0 +1,307 @@
+<div ng-controller="maquinasController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Cria <small>Inicial</small></h1>
+		</div>
+		<nav aria-label="Page navigation">
+			<h4>Selecione o Ano:</h4>
+			<ul class="pagination">
+		    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+		    		<a href="" ng-click="updateAno(i)">{{i}}</a>
+	    		</li>
+		  	</ul>
+		</nav>
+	</div>
+	<!-- TABELAS -->
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Desempenho Animal</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-condensed" ng-init="listDesempenho()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>Quantidade</th>
+					<th>P.V. <small>inicial</small></th>
+					<th>G.M.D.</th>
+					<th>Periodo</th>
+					<th>Desmame <small>PV/kg</small></th>
+					<th>Desmame <small>@</small></th>
+					<th></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsDesempenho">
+					<td>{{item.descricao}}</td>
+					<td>{{item.qtd}}</td>
+					<td>{{item.pvi}}</td>
+					<td>{{item.gmd}}</td>
+					<td>{{item.periodo}}</td>
+					<td>{{item.desmame}}</td>
+					<td>{{item.desmamea}}</td>
+					<td><button class="btn btn-info btn-sm" ng-click="editDesempenho(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Alimentacao Animal</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">	
+			<table class="table table-condensed" ng-init="listAlimentacao()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>C.M.S. <small>(%/PV)</small></th>
+					<th>Vol. <small>(%)</small></th>
+					<th>Vol. <small>(Kg/Reb./Peri.)</small></th>
+					<th>Conc. <small>(%)</small></th>
+					<th>Conc. <small>(Kg/Reb./Peri.)</small></th>
+					<th></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsAlimentacao">
+					<td>{{item.descricao}}</td>
+					<td>{{item.cms}}</td>
+					<td>{{item.vol}}</td>
+					<td>{{item.volf}}</td>
+					<td>{{item.conc}}</td>
+					<td>{{item.conf}}</td>
+					<td><button class="btn btn-info btn-sm" ng-click="editAlimentacao(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Valor da Racao</h2>
+		</div>
+	</div>
+	<div class="row"> 
+		<div class="col-md-12">	
+			<table class="table table-condensed" ng-init="listRacao()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>Vol. <small>(R$/Kg)</small></th>
+					<th>Vol. <small>(Total R$)</small></th>
+					<th>Conc. <small>(R$/Kg)</small></th>
+					<th>Conc. <small>(Total R$)</small></th>
+					<th>Racao <small>(Total R$)</small></th>
+					<th></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsRacao">
+					<td>{{item.descricao}}</td>
+					<td>{{item.vol}}</td>
+					<td>{{item.volt}}</td>
+					<td>{{item.con}}</td>
+					<td>{{item.cont}}</td>
+					<td>{{item.racaott}}</td>
+					<td><button class="btn btn-info btn-sm" ng-click="editRacao(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Valor da Producao Animal</h2>
+		</div>
+	</div>
+	<div class="row"> 
+		<div class="col-md-12">	
+			<table class="table table-condensed" ng-init="listProducao()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>Valor <small>(R$/@)</small></th>
+					<th>Animal <small>(R$)</small></th>
+					<th>Total <small>(R$)</small></th>
+					<th></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsProducao">
+					<td>{{item.descricao}}</td>
+					<td>{{item.valor}}</td>
+					<td>{{item.vanimal}}</td>
+					<td>{{item.vtotal}}</td>
+					<td><button class="btn btn-info btn-sm" ng-click="editProducao(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Custos Operacionais</h2>
+		</div>
+	</div>
+	<div class="row"> 
+		<div class="col-md-12">	
+			<table class="table table-condensed" ng-init="listOperacional()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>Quantidade</th>
+					<th>Valor <small>(R$)</small></th>
+					<th>Total <small>(R$)</small></th>
+					<th></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsOperacional">
+					<td>{{item.descricao}}</td>
+					<td>{{item.qtd}}</td>
+					<td>{{item.valor}}</td>
+					<td>{{item.total}}</td>
+					<td><button class="btn btn-info btn-sm" ng-click="editOperacional(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Balanco</h2>
+		</div>
+	</div>
+	<div class="row"> 
+		<div class="col-md-12">	
+			<table class="table table-condensed" ng-init="listBalanco()">
+				<thead class="basel-table-head"><tr>
+					<th>Descricao</th>
+					<th>Animal <small>(R$)</small></th>
+					<th>Arroba <small>(R$)</small></th>
+					<th>Total <small>(R$)</small></th>
+				</tr></thead>
+				<tbody class="basel-table-body"><tr ng-repeat="item in itemsBalanco">
+					<td>{{item.descricao}}</td>
+					<td>{{item.animal}}</td>
+					<td>{{item.arroba}}</td>
+					<td>{{item.total}}</td>
+				</tr></tbody>
+			</table>
+		</div>
+	</div>
+	<!-- CONTROLLERS -->
+	<div class="modal fade" id="desempenhoController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Informe os Dados de Desempenho Animal</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div>
+						<div class="form-group"><label>Quantidade</label><input type="text" class="form-control" ng-model="form.qtd"></div>
+						<div class="form-group"><label>P.V. <small>inicial</small></label><input type="text" class="form-control" ng-model="form.pvi"></div>
+						<div class="form-group"><label>G.M.D.</label><input type="text" class="form-control" ng-model="form.gmd"></div>
+						<div class="form-group"><label>Periodo</label><input type="text" class="form-control" ng-model="form.periodo"></div>
+						<div class="form-group"><label>Desmame <small>PV/kg</small></label><input type="text" class="form-control" ng-model="form.desmame"></div>
+						<div class="form-group"><label>Desmame <small>@</small></label><input type="text" class="form-control" ng-model="form.desmamea"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="saveDesempenho()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="alimentacaoController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Informe os Dados de Alimentacao Animal</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div>
+						<div class="form-group"><label>C.M.S. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.cms"></div>
+						<div class="form-group"><label>Vol. <small>(%)</small></label><input type="text" class="form-control" ng-model="form.vol"></div>
+						<div class="form-group"><label>Vol. <small>(Kg/Reb./Peri.)</small></label><input type="text" class="form-control" ng-model="form.volf"></div>
+						<div class="form-group"><label>Conc. <small>(%)</small></label><input type="text" class="form-control" ng-model="form.conc"></div>
+						<div class="form-group"><label>Conc. <small>(Kg/Reb./Peri.)</small></label><input type="text" class="form-control" ng-model="form.conf"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="saveAlimentacao()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="racaoController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Informe os Valores da Racao</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div>
+						<div class="form-group"><label>Vol. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.vol"></div>
+						<div class="form-group"><label>Vol. <small>(Total R$)</small></label><input type="text" class="form-control" ng-model="form.volt"></div>
+						<div class="form-group"><label>Conc. <small>(%)</small></label><input type="text" class="form-control" ng-model="form.con"></div>
+						<div class="form-group"><label>Conc. <small>(Total R$)</small></label><input type="text" class="form-control" ng-model="form.cont"></div>
+						<div class="form-group"><label>Racao <small>(Total R$)</small></label><input type="text" class="form-control" ng-model="form.racaot"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="saveRacao()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="producaoController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Informe os Valores da Producao Animal</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div>
+						<div class="form-group"><label>Valor <small>(R$/@)</small></label><input type="text" class="form-control" ng-model="form.valor"></div>
+						<div class="form-group"><label>Animal <small>(R$)</small></label><input type="text" class="form-control" ng-model="form.vanimal"></div>
+						<div class="form-group"><label>Total <small>(R$)</small></label><input type="text" class="form-control" ng-model="form.vtotal"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="saveProducao()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="operacionalController" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Informe os Custos Operacionais</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+						<div class="form-group"><label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao"></div>
+						<div class="form-group"><label>Quantidade</label><input type="text" class="form-control" ng-model="form.qtd"></div>
+						<div class="form-group"><label>Valor <small>(R$)</small></label><input type="text" class="form-control" ng-model="form.valor"></div>
+						<div class="form-group"><label>Total <small>(R$)</small></label><input type="text" class="form-control" ng-model="form.total"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary basel-btn-save" ng-click="saveOperacional()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

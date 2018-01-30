@@ -41,6 +41,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/cria',{
+        controller: 'criaController',
+        templateUrl: 'views/cria.html'
+        });
     $routeProviderReference.when('/',{
         controller: 'inicioController',
         templateUrl: 'views/inicio.html'
