@@ -54,6 +54,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="basel-form">
+						<input type="hidden" class="form-control" ng-model="form.id">
 						<div class="form-group"><label>Idade de Abate</label><input type="number" min="0" max="10" class="form-control" ng-model="form.idade_abate"></div>
 						<div class="form-group"><label>Taxa de Natalidade</label><input type="number" min="0" max="100" class="form-control" ng-model="form.natalidade"></div>
 						<div class="form-group"><label>Taxa Mortalidade Cria</label><input type="number" min="0" max="100" class="form-control" ng-model="form.mortalidade_cria"></div>
@@ -68,6 +69,38 @@
 				<div class="modal-footer">
 					<div class="btn-group" role="group">
                         <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="evoanimalnewController" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-center" id="myModalLabel">Informe os Dados sobre Evolucao Animal:</h4>
+				</div>
+				<div class="modal-body">
+					<form class="basel-form">
+						<input type="hidden" class="form-control" ng-model="form.id">
+						<div class="form-group"><label>Idade de Abate</label><input type="number" min="0" max="10" class="form-control" ng-model="form.idade_abate"></div>
+						<div class="form-group"><label>Taxa de Natalidade</label><input type="number" min="0" max="100" class="form-control" ng-model="form.natalidade"></div>
+						<div class="form-group"><label>Taxa Mortalidade Cria</label><input type="number" min="0" max="100" class="form-control" ng-model="form.mortalidade_cria"></div>
+						<div class="form-group"><label>Taxa Mortalidade Recria</label><input type="number" min="0" max="100" class="form-control" ng-model="form.mortalidade_recria"></div>
+						<div class="form-group"><label>Taxa Mortalidade Adultos</label><input type="number" min="0" max="100" class="form-control" ng-model="form.mortalidade_adultos"></div>
+						<div class="form-group"><label>Taxa de Descarte Matrizes</label><input type="number" min="0" max="100" class="form-control" ng-model="form.descarte_matrizes"></div>
+						<div class="form-group"><label>Taxa de Descarte Bezerras</label><input type="number" min="0" max="100" class="form-control" ng-model="form.descarte_bezerras"></div>
+						<div class="form-group"><label>Taxa de Descarte Novilhas 1+</label><input type="number" min="0" max="100" class="form-control" ng-model="form.descarte_novilha1"></div>
+						<div class="form-group"><label>Taxa de Descarte Novilhas 2+</label><input type="number" min="0" max="100" class="form-control" ng-model="form.descarte_novilha2"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group" role="group">
+                        <button class="btn btn-success" ng-click="newTaxas()"><span class="glyphicon glyphicon-ok"></button>
                     </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>

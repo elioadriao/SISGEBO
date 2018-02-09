@@ -2,51 +2,77 @@
 app.controller("evoanimalController", function($scope, $location, $window){
 
 	$scope.table_name = "evolucao";
-	$scope.primary_key = "propriedadeId_FK";
-		
+	$scope.primary_key = "id";
+			
 	$scope.init = function(){
-		var SQL = "SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade();
-		
-		basel.database.runAsync(SQL, function(data){
-			if(data[0] != null){
-				$scope.itemBanco = data[0];
-				$scope.existe = true;
-			}else{
-				$scope.existe = false;
-				console.log("nao existe variaveis");
-				$('#evoanimalController').modal('show');
-			}
-		});
+		$scope.initAnimal();
+		$scope.initTaxas();
 	}
 
-	$scope.getAnimais = function(ano){
-		var SQL = "SELECT * FROM animal WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+ano;
+	/* INICIA AS TAXAS NA VARIAVEL */
+	$scope.initTaxas = function(){
+		$scope.itemBanco = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
 
-		basel.database.runAsync(SQL, function(data){
-			if(data[0] != null){
-				$scope.itemAnimais = data;
-				console.log("existe animais");
-			}else{
-				console.log("nao existe animais");
-			}
-		});
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					$scope.itemBanco[i-1] = data[0];
+					console.log("Carregou Taxas..");
+				}else{
+					console.log("Nao Carregou Taxas..");
+					$('#evoanimalnewController').modal('show');
+					//$scope.newTaxas();
+				}
+			});
+		}
+	}
+
+	$scope.initAnimal = function(){
+		$scope.itemAnimais = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM animal WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					$scope.itemAnimais[i-1] = data;
+					console.log("Carregou Animais..");
+				}else{
+					console.log("Nao Carregou Animais..");
+					$location.path('/animal');
+				}
+			});
+		}
+	}
+
+	$scope.newTaxas = function(){
+		$('#evoanimalnewController').modal('hide');
+		for(var i=1;i<=10;i++){
+			//$scope.form = {};
+			$scope.form.id;
+			$scope.form.ano=i;
+			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+			$scope.new();
+		}
 	}
 
 	$scope.getTaxas = function(){
 		return {
-				idadeabate : $scope.itemBanco.idade_abate,
-				natalidade : $scope.itemBanco.natalidade/100,
-				mortalidadeCria : $scope.itemBanco.mortalidade_cria/100,
-				mortalidadeRecria : $scope.itemBanco.mortalidade_recria/100,
-				mortalidadeAdultos : $scope.itemBanco.mortalidade_adultos/100,
-				descarteMatrizes : $scope.itemBanco.descarte_matrizes/100,
-				descarteBezerras : $scope.itemBanco.descarte_bezerras/100,
-				descarteNovilha1 : $scope.itemBanco.descarte_novilha1/100,
-				descarteNovilha2 : $scope.itemBanco.descarte_novilha2/100
+				idadeabate : $scope.itemBanco[$scope.ano_atual-1].idade_abate,
+				natalidade : $scope.itemBanco[$scope.ano_atual-1].natalidade/100,
+				mortalidadeCria : $scope.itemBanco[$scope.ano_atual-1].mortalidade_cria/100,
+				mortalidadeRecria : $scope.itemBanco[$scope.ano_atual-1].mortalidade_recria/100,
+				mortalidadeAdultos : $scope.itemBanco[$scope.ano_atual-1].mortalidade_adultos/100,
+				descarteMatrizes : $scope.itemBanco[$scope.ano_atual-1].descarte_matrizes/100,
+				descarteBezerras : $scope.itemBanco[$scope.ano_atual-1].descarte_bezerras/100,
+				descarteNovilha1 : $scope.itemBanco[$scope.ano_atual-1].descarte_novilha1/100,
+				descarteNovilha2 : $scope.itemBanco[$scope.ano_atual-1].descarte_novilha2/100
 		};
 	}
 
 	$scope.updateAno = function(ano){
+		$scope.ano_atual = ano;
+
 		$scope.ano = [
 			$scope.getLinha(ano, 1),
 			$scope.getLinha(ano, 2),
@@ -58,6 +84,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 			$scope.getLinha(ano, 8),
 			$scope.getLinha(ano, 9)
 		];
+		console.log("Gerou ano:"+$scope.ano_atual);
 	}
 
 	$scope.getLinha = function(ano, tipo){
@@ -100,9 +127,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	// Calcula valor de Compras
 	$scope.getComp = function(ano, tipo){
-		$scope.getAnimais(ano);
-	
-		return $scope.itemAnimais[tipo-1].qtd;
+		return $scope.itemAnimais[ano-1][tipo-1].qtd;
 	}
 
 	// Calcula valor de Cabeças Inicial
@@ -202,21 +227,22 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	$scope.save = function(){
 		$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+		$scope.form.ano = $scope.ano_atual;
 
-		if($scope.existe){
-			var id = $scope.form[$scope.primary_key];
-			delete $scope.form[$scope.primary_key];
-			delete $scope.form.$$hashKey;
-			basel.database.update($scope.table_name, $scope.form, {"propriedadeId_FK": id}); //entidade, dados, where
-			console.log("velho");
-		}else{
-			basel.database.insert($scope.table_name, $scope.form); // entidade, dados
-			console.log("novo");
-			$scope.existe = true;
-		}
+		var id = $scope.form[$scope.primary_key];
+		delete $scope.form[$scope.primary_key];
+		delete $scope.form.$$hashKey;
+		basel.database.update($scope.table_name, $scope.form, {"ano": $scope.form.ano}); //entidade, dados, where
+
 		$('#evoanimalController').modal('hide');
 		$scope.form = {};
-		$scope.updateAno(1);
+		//$scope.updateAno(1);
+	}
+
+	$scope.new = function(){
+		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
+
+		//$scope.form = {};
 	}
 
 	$scope.cancel = function(){
@@ -225,8 +251,8 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	//Abrindo para editar
 	$scope.edit = function(){
-		$scope.init();
-		$scope.form = $scope.itemBanco;
+		//$scope.init();
+		$scope.form = $scope.itemBanco[$scope.ano_atual];
 		$('#evoanimalController').modal('show');
 	}
 
