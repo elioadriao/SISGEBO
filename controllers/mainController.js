@@ -14,7 +14,7 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 			return $rootScope.globals.currentUser.username	
 		}else{
 			return null;
-		}		
+		}
 	}
 
 });

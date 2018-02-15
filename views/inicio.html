@@ -2,25 +2,19 @@
 	<div class="container" ng-init="list()">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="well well-sm">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="btn-group btn-group-lg btn-group-vertical" role="group" aria-label="...">
-                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/maquinas';">Maquinas</button>
-                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/benfeitorias';">Benfeitorias</button>
-                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/manutencao';">Manutenção</button>
-                            <button type="button" class="btn btn-info btn-block" onclick="location.href = '#/animal';">Animais</button>
-                            <button type="button" class="btn btn-warning btn-block" ng-click="clearId()">Sair da Propriedade</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-8">
-                        <h2>Seja Bem Vindo, {{getUser()}}</h4>
-                        
-                        <h3>Propriedade: {{atual.nome}}</h3>
-                        <h4>Municipio: {{atual.municipio}}</h3>
-                        <h4>Área: {{atual.area}}</h3>
-                        <h5>Balanço de Gastos Geral: R$ 0,00</h5>
-                    </div>
+            <div class="jumbotron">
+                <div class="container-fluid">
+                        <img src="model/8x2r-logo.png" class="img-responsive center-block" />
+                </div>
+                <div>
+                    <h2>Seja Bem Vindo, {{getUser()}}</h4>
+                    
+                    <h3>Propriedade: {{atual.nome}}</h3>
+                    <h4>Municipio: {{atual.municipio}}</h3>
+                    <h4>Área: {{atual.area}} <small>Hectares</small></h3>
+                    <h5>Gastos Geral: R$ 0,00</h5>
+                    <h5>Lucros Geral: R$ 0,00</h5>
+                    <h5>Balanço: R$ 0,00</h5>
                 </div>
             </div>
         </div>

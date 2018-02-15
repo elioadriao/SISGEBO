@@ -31,58 +31,70 @@
 </head>
 <body>
 	<!-- Menu -->
-	<nav class="navbar navbar-default" id="menubar">
+	<nav class="navbar navbar-default navbar-fixed-top" id="menubar">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/">Inicio</a>
+				<a class="navbar-brand" href="#/">SISGEBO</a>
+				<a class="navbar-brand" ng-click="logoff()" href=""><span class="glyphicon glyphicon-user"></span></a>
 			</div>
 			
 			<div>
 				<ul class="nav navbar-nav">
-					<li role="presentation"><a href="#/evolucao">Evolucao Rebanho</a></li>
+										
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Propriedade</a>
+						<ul class="dropdown-menu">
+				        	<li role="presentation"><a href="#/maquinas">Maquinas</a></li>
+					        <li role="presentation"><a href="#/benfeitorias">Benfeitorias</a></li>
+					        <li role="presentation"><a href="#/manutencao">Manutencao</a></li>
+					        <li role="separator" class="divider"></li>
+					        <li role="presentation"><a href="#/animal">Animal</a></li>
+					        <li role="presentation"><a href="#/evolucao">Evolucao Rebanho</a></li>
+					        <li role="presentation"><a href="#/null">Terminacao</a></li>
+					        <li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown" role="presentation">
+						<a data-toggle="dropdown" href="">Fase de Cria</a>
+						<ul class="dropdown-menu">
+					        <li class="dropdown-submenu">
+							    <a data-toggle="dropdown-menu" href="">Cria I</a>
+							    <ul class="dropdown-menu">
+							    	<li role="presentation"><a href="#/null">Cria</a></li>
+							        <li role="presentation"><a href="#/null">Comprado</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+							    </ul>
+						  	</li>
+
+						  	<li class="dropdown-submenu">
+							    <a data-toggle="dropdown-menu" href="">Cria II</a>
+							    <ul class="dropdown-menu">
+							    	<li role="presentation"><a href="#/null">Cria</a></li>
+							        <li role="presentation"><a href="#/null">Comprado</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+							    </ul>
+						  	</li>
+
+						  	<li class="dropdown-submenu">
+							    <a data-toggle="dropdown-menu" href="">Cria III</a>
+							    <ul class="dropdown-menu">
+							    	<li role="presentation"><a href="#/null">Cria</a></li>
+							        <li role="presentation"><a href="#/null">Comprado</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
+							        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
+							    </ul>
+						  	</li>
+						</ul>
+					</li>
 					
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Fase de Cria <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/cria">Cria</a></li>
-					        <li role="presentation"><a href="#/null">Comprado</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Fase de ReCria I <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/null">Cria</a></li>
-					        <li role="presentation"><a href="#/null">Comprado</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href="">Fase de ReCria II <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a href="#/null">Cria</a></li>
-					        <li role="presentation"><a href="#/null">Comprado</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Anual</a></li>
-					        <li role="presentation"><a href="#/null">Relatorio Geral</a></li>
-						</ul>
-					</li>
-
-					<li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
-
-					<li class="dropdown" role="presentation">
-						<a data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span></a>
-						<ul class="dropdown-menu">
-				        	<li role="presentation"><a ng-click="logoff()" href="#/login" >Sair</a></li>
-						</ul>
-					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
 

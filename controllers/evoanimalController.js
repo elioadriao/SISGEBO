@@ -111,7 +111,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 			9 : 1.0
 		};
 
-		return {
+		return {	
 			descricao : tipoAnimal[tipo],
 			ua : uaAnimal[tipo],
 			cabi : $scope.getCabi(ano, tipo),
