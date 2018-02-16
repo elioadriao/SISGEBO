@@ -136,9 +136,9 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		
 		if(ano == 1){
 			res = $scope.getComp(ano, tipo);
-		}else{
+		}/*else{
 			res = $scope.getCabf(ano-1, tipo) + $scope.getComp(ano-1, tipo);
-		}
+		}*/
 
 		return res;
 	}
@@ -149,9 +149,9 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 		if(ano == 1){
 			res = $scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
-		}else{
+		}/*else{
 			res = $scope.getCabi(ano, tipo) + $scope.getComp(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
-		}
+		}*/
 
 		return res;
 	}
