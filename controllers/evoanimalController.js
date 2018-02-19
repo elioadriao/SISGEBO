@@ -70,6 +70,11 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		};
 	}
 
+	$scope.initAnos = function(){
+		var anos = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+	}
+
 	$scope.updateAno = function(ano){
 		$scope.ano_atual = ano;
 
@@ -127,7 +132,14 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	// Calcula valor de Compras
 	$scope.getComp = function(ano, tipo){
-		return $scope.itemAnimais[ano-1][tipo-1].qtd;
+		switch(ano){
+			case 0:
+				return $scope.itemAnimais[ano][tipo-1].qtd;
+			case 1:
+				return 0;
+			default:
+				return $scope.itemAnimais[ano-1][tipo-1].qtd;
+		}
 	}
 
 	// Calcula valor de Cabeças Inicial
@@ -135,10 +147,30 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		var res = 0;
 		
 		if(ano == 1){
-			res = $scope.getComp(ano, tipo);
-		}/*else{
-			res = $scope.getCabf(ano-1, tipo) + $scope.getComp(ano-1, tipo);
-		}*/
+			res = $scope.getComp(ano-1, tipo);
+		}else if(ano > 3 && tipo == 1){
+			res = $scope.getCabf(ano-1, tipo) + $scope.getComp(ano-1, tipo) + $scope.getCabf(ano-1, 8);
+		}else{
+			switch(tipo){
+				case 3:
+				case 6:
+					res = $scope.getComp(ano, tipo);
+					break;
+				case 4:
+				case 5:
+				case 7:
+				case 8:
+					res = $scope.getCabf(ano-1, tipo-1) + $scope.getComp(ano-1, tipo-1);
+					break;
+
+				case 9:
+					res = $scope.getCabf(ano-1, 5) + $scope.getComp(ano-1, 5);
+					break;
+
+				default:
+					res = $scope.getCabf(ano-1, tipo) + $scope.getComp(ano-1, tipo);
+			}			
+		}
 
 		return res;
 	}
@@ -148,10 +180,18 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		var res = 0;
 
 		if(ano == 1){
-			res = $scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
-		}/*else{
-			res = $scope.getCabi(ano, tipo) + $scope.getComp(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
-		}*/
+			if(tipo == 3 || tipo == 6){
+				res = $scope.getCabi(ano, tipo) + $scope.getNasc(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
+			}else{
+				res = $scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
+			}
+		}else{
+			if(tipo == 3 || tipo == 6){
+				res = $scope.getCabi(ano, tipo) + $scope.getComp(ano, tipo) + $scope.getNasc(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
+			}else{
+				res = $scope.getCabi(ano, tipo) + $scope.getComp(ano, tipo) - $scope.getMort(ano, tipo) - $scope.getVend(ano, tipo);
+			}
+		}
 
 		return res;
 	}
@@ -174,7 +214,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		switch(tipo){
 			case 3:
 			case 6:
-				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * $scope.getTaxas().mortalidadeCria;
+				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo) + $scope.getNasc(ano, tipo)) * $scope.getTaxas().mortalidadeCria;
 				break;
 			
 			case 4:
