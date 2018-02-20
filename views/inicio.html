@@ -6,16 +6,31 @@
                 <div class="container-fluid">
                         <img src="model/8x2r-logo.png" class="img-responsive center-block" />
                 </div>
-                <div>
-                    <h2>Seja Bem Vindo, {{getUser()}}</h4>
-                    
-                    <h3>Propriedade: {{atual.nome}}</h3>
-                    <h4>Municipio: {{atual.municipio}}</h3>
-                    <h4>Área: {{atual.area}} <small>Hectares</small></h3>
-                    <h5>Gastos Geral: R$ 0,00</h5>
-                    <h5>Lucros Geral: R$ 0,00</h5>
-                    <h5>Balanço: R$ 0,00</h5>
-                </div>
+                <hr>
+                <div class="container">
+                    <table class="table table-sm table-bordered">
+                        <thead class="thead-inverse"">
+                            <th>Propriedade</th>
+                            <th>Municipio</th>
+                            <th>Área</th>
+                            <th>Área <small>Utilizavel</small></td></th>
+                            <th>Gastos Geral</th>
+                            <th>Lucros Geral</th>
+                            <th>Balanço</th>
+                        </thead>
+                        <tbody class="basel-table-body">
+                            <tr>
+                                <td>{{atual.nome}}</td>
+                                <td>{{atual.municipio}}</td>
+                                <td>{{atual.area}} <small>Hectares</small></td>
+                                <td>{{atual.area*0.2}} <small>Hectares</small></td>
+                                <td>R$ 0,00</td>
+                                <td>R$ 0,00</td>
+                                <td>R$ 0,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                    
             </div>
         </div>
     </div>

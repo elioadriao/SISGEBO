@@ -3,39 +3,53 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	$scope.table_name = "evolucao";
 	$scope.primary_key = "id";
+	var TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var REBANHO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANO_ATUAL = 1;
+	var TAXAS = { idadeabate : 0,
+					natalidade : 0,
+					mortalidadeCria : 0,
+					mortalidadeRecria : 0,
+					mortalidadeAdultos : 0,
+					descarteMatrizes : 0,
+					descarteBezerras : 0,
+					descarteNovilha1 : 0,
+					descarteNovilha2 : 0 };
+
 			
 	$scope.init = function(){
-		$scope.initAnimal();
+		$scope.initRebanho();
 		$scope.initTaxas();
 	}
 
 	/* INICIA AS TAXAS NA VARIAVEL */
 	$scope.initTaxas = function(){
-		$scope.itemBanco = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+		//TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 		for(var i=1;i<=10;i++){
 			var SQL = "SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
-					$scope.itemBanco[i-1] = data[0];
+					TAXAS_BANCO[i-1] = data[0];
 					console.log("Carregou Taxas..");
 				}else{
 					console.log("Nao Carregou Taxas..");
 					$('#evoanimalnewController').modal('show');
-					//$scope.newTaxas();
 				}
 			});
 		}
 	}
 
-	$scope.initAnimal = function(){
-		$scope.itemAnimais = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	/* INICIA O REBANHO NA VARIAVEL */
+	$scope.initRebanho = function(){
+		//REBANHO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 		for(var i=1;i<=10;i++){
 			var SQL = "SELECT * FROM animal WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
-					$scope.itemAnimais[i-1] = data;
+					REBANHO_BANCO[i-1] = data;
 					console.log("Carregou Animais..");
 				}else{
 					console.log("Nao Carregou Animais..");
@@ -45,38 +59,30 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		}
 	}
 
-	$scope.newTaxas = function(){
-		$('#evoanimalnewController').modal('hide');
-		for(var i=1;i<=10;i++){
-			//$scope.form = {};
-			$scope.form.id;
-			$scope.form.ano=i;
-			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
-			$scope.new();
-		}
-	}
+	
 
 	$scope.getTaxas = function(){
 		return {
-				idadeabate : $scope.itemBanco[$scope.ano_atual-1].idade_abate,
-				natalidade : $scope.itemBanco[$scope.ano_atual-1].natalidade/100,
-				mortalidadeCria : $scope.itemBanco[$scope.ano_atual-1].mortalidade_cria/100,
-				mortalidadeRecria : $scope.itemBanco[$scope.ano_atual-1].mortalidade_recria/100,
-				mortalidadeAdultos : $scope.itemBanco[$scope.ano_atual-1].mortalidade_adultos/100,
-				descarteMatrizes : $scope.itemBanco[$scope.ano_atual-1].descarte_matrizes/100,
-				descarteBezerras : $scope.itemBanco[$scope.ano_atual-1].descarte_bezerras/100,
-				descarteNovilha1 : $scope.itemBanco[$scope.ano_atual-1].descarte_novilha1/100,
-				descarteNovilha2 : $scope.itemBanco[$scope.ano_atual-1].descarte_novilha2/100
+				idadeabate : TAXAS_BANCO[ANO_ATUAL-1].idade_abate,
+				natalidade : TAXAS_BANCO[ANO_ATUAL-1].natalidade/100,
+				mortalidadeCria : TAXAS_BANCO[ANO_ATUAL-1].mortalidade_cria/100,
+				mortalidadeRecria : TAXAS_BANCO[ANO_ATUAL-1].mortalidade_recria/100,
+				mortalidadeAdultos : TAXAS_BANCO[ANO_ATUAL-1].mortalidade_adultos/100,
+				descarteMatrizes : TAXAS_BANCO[ANO_ATUAL-1].descarte_matrizes/100,
+				descarteBezerras : TAXAS_BANCO[ANO_ATUAL-1].descarte_bezerras/100,
+				descarteNovilha1 : TAXAS_BANCO[ANO_ATUAL-1].descarte_novilha1/100,
+				descarteNovilha2 : TAXAS_BANCO[ANO_ATUAL-1].descarte_novilha2/100
 		};
 	}
 
 	$scope.initAnos = function(){
-		var anos = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+		
 
 	}
 
 	$scope.updateAno = function(ano){
-		$scope.ano_atual = ano;
+		ANO_ATUAL = ano;
+		TAXAS = $scope.getTaxas();
 
 		$scope.ano = [
 			$scope.getLinha(ano, 1),
@@ -89,7 +95,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 			$scope.getLinha(ano, 8),
 			$scope.getLinha(ano, 9)
 		];
-		console.log("Gerou ano:"+$scope.ano_atual);
+		console.log("Gerou ano:"+ANO_ATUAL);
 	}
 
 	$scope.getLinha = function(ano, tipo){
@@ -119,14 +125,14 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		return {	
 			descricao : tipoAnimal[tipo],
 			ua : uaAnimal[tipo],
-			cabi : $scope.getCabi(ano, tipo),
-			uai : uaAnimal[tipo] * $scope.getCabi(ano, tipo),
-			cabf : $scope.getCabf(ano,tipo),
-			uaf : uaAnimal[tipo] * $scope.getCabf(ano, tipo),
-			mortes : $scope.getMort(ano, tipo),
-			compras : $scope.getComp(ano, tipo),
-			vendas : $scope.getVend(ano, tipo),
-			nasc : $scope.getNasc(ano, tipo)
+			cabi : Math.round($scope.getCabi(ano, tipo)),
+			uai : Math.round(uaAnimal[tipo] * $scope.getCabi(ano, tipo)),
+			cabf : Math.round($scope.getCabf(ano,tipo)),
+			uaf : Math.round(uaAnimal[tipo] * $scope.getCabf(ano, tipo)),
+			mortes : Math.round($scope.getMort(ano, tipo)),
+			compras : Math.round($scope.getComp(ano, tipo)),
+			vendas : Math.round($scope.getVend(ano, tipo)),
+			nasc : Math.round($scope.getNasc(ano, tipo))
 		};
 	}
 
@@ -134,11 +140,11 @@ app.controller("evoanimalController", function($scope, $location, $window){
 	$scope.getComp = function(ano, tipo){
 		switch(ano){
 			case 0:
-				return $scope.itemAnimais[ano][tipo-1].qtd;
+				return REBANHO_BANCO[ano][tipo-1].qtd;
 			case 1:
 				return 0;
 			default:
-				return $scope.itemAnimais[ano-1][tipo-1].qtd;
+				return REBANHO_BANCO[ano-1][tipo-1].qtd;
 		}
 	}
 
@@ -201,10 +207,10 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		var res = 0;
 		
 		if(tipo == 3 || tipo == 6){
-			res = ((($scope.getCabi(ano, 1) * $scope.getTaxas().natalidade) /2) + (($scope.getComp(ano, 1) * $scope.getTaxas().natalidade) /2)) - $scope.getCabi(ano, tipo);
+			res = ((($scope.getCabi(ano, 1) * TAXAS.natalidade) /2) + (($scope.getComp(ano, 1) * TAXAS.natalidade) /2)) - $scope.getCabi(ano, tipo);
 		}
 
-		return res.toFixed(0);
+		return res;
 	}
 
 	// Calcula valor de Mortes
@@ -214,19 +220,19 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		switch(tipo){
 			case 3:
 			case 6:
-				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo) + $scope.getNasc(ano, tipo)) * $scope.getTaxas().mortalidadeCria;
+				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo) + $scope.getNasc(ano, tipo)) * TAXAS.mortalidadeCria;
 				break;
 			
 			case 4:
 			case 7:
-				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * $scope.getTaxas().mortalidadeRecria;
+				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * TAXAS.mortalidadeRecria;
 				break;
 			
 			default:
-				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * $scope.getTaxas().mortalidadeAdultos;
+				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * TAXAS.mortalidadeAdultos;
 		}
 		
-		return res.toFixed(0);
+		return res;
 	}
 
 	// Calcula valor de Vendas
@@ -235,19 +241,19 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 		switch(tipo){
 			case 1:
-				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * $scope.getTaxas().descarteMatrizes;
+				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * TAXAS.descarteMatrizes;
 				break;
 			
 			case 6:
-				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * $scope.getTaxas().descarteBezerras;
+				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * TAXAS.descarteBezerras;
 				break;
 			
 			case 7:
-				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * $scope.getTaxas().descarteNovilha1;
+				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * TAXAS.descarteNovilha1;
 				break;
 			
 			case 8:
-				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * $scope.getTaxas().descarteNovilha2;
+				res = ($scope.getCabi(ano, tipo) - $scope.getMort(ano, tipo)) * TAXAS.descarteNovilha2;
 				break;
 
 			case 9:
@@ -258,7 +264,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 				res = 0;
 		}
 
-		return res.toFixed(0);
+		return res;
 	}
 
 	$scope.getIdPropriedade = function(){
@@ -267,7 +273,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	$scope.save = function(){
 		$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
-		$scope.form.ano = $scope.ano_atual;
+		$scope.form.ano = ANO_ATUAL;
 
 		var id = $scope.form[$scope.primary_key];
 		delete $scope.form[$scope.primary_key];
@@ -285,6 +291,17 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		//$scope.form = {};
 	}
 
+	$scope.newTaxas = function(){
+		$('#evoanimalnewController').modal('hide');
+		for(var i=1;i<=10;i++){
+			//$scope.form = {};
+			$scope.form.id;
+			$scope.form.ano=i;
+			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+			$scope.new();
+		}
+	}
+
 	$scope.cancel = function(){
 		$scope.form = {};
 	}
@@ -292,7 +309,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 	//Abrindo para editar
 	$scope.edit = function(){
 		//$scope.init();
-		$scope.form = $scope.itemBanco[$scope.ano_atual];
+		$scope.form = TAXAS_BANCO[ANO_ATUAL];
 		$('#evoanimalController').modal('show');
 	}
 

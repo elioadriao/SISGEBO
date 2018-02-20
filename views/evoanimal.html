@@ -8,15 +8,15 @@
 	<div class="row text-center" ng-init="init()">
 		<nav aria-label="Page navigation">
 			<h4>Selecione o Ano:</h4>
-			<ul class="pagination">
+			<ul class="pagination pagination-sm">
 		    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
 		    		<a href="" ng-click="updateAno(i)">{{i}}</a>
 	    		</li>
 		  	</ul>
 		</nav>
 		<div class="container-fluid">
-			<table class="table table-responsive table-hover table-condensed" ng-init="updateAno(1)">
-				<thead class="basel-table-head">
+			<table class="table table-responsive table-hover table-sm table-bordered" ng-init="updateAno(1)">
+				<thead class="thead-inverse"">
 					<th>Descricao</th>
 					<th>UA</th>
 					<th>CAB(Inicial)</th>
