@@ -1,13 +1,13 @@
-<div ng-controller="evoanimalController">
+<div ng-controller="evolucaoController">
 	<div class="row">
 		<div class="page-header">
 			<h1>Evoluçao <small>Rebanho</small></h1>
 			<a href="" ng-click="edit()"><span class="glyphicon glyphicon-cog"></span></a>
 		</div>
 	</div>
+
 	<div class="row text-center" ng-init="init()">
 		<nav aria-label="Page navigation">
-			<h4>Selecione o Ano:</h4>
 			<ul class="pagination pagination-sm">
 		    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
 		    		<a href="" ng-click="updateAno(i)">{{i}}</a>
@@ -46,7 +46,7 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="evoanimalController" tabindex="-1" role="dialog" >
+	<div class="modal fade" id="evolucaoController" tabindex="-1" role="dialog" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -78,7 +78,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="evoanimalnewController" tabindex="-1" role="dialog" >
+	<div class="modal fade" id="evolucaonewController" tabindex="-1" role="dialog" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

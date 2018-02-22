@@ -49,9 +49,9 @@
         controller: 'inicioController',
         templateUrl: 'views/inicio.html'
         });
-    $routeProviderReference.when('/animal',{
-        controller: 'animalController',
-        templateUrl: 'views/animal.html'
+    $routeProviderReference.when('/rebanho',{
+        controller: 'rebanhoController',
+        templateUrl: 'views/rebanho.html'
         });
     $routeProviderReference.when('/null',{
         controller: 'usuariosController',
@@ -70,8 +70,8 @@
         templateUrl: 'views/maquinas.html'
         });
     $routeProviderReference.when('/evolucao',{
-        controller: 'evoanimalController',
-        templateUrl: 'views/evoanimal.html'
+        controller: 'evolucaoController',
+        templateUrl: 'views/evolucao.html'
         });
     $routeProviderReference.when('/login',{
         controller: 'loginController',

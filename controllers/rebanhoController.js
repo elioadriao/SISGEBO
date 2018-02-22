@@ -1,7 +1,7 @@
 "use strict";
-app.controller("animalController", function($scope, $location, $window){
+app.controller("rebanhoController", function($scope, $location, $window){
 
-	$scope.table_name = "animal";
+	$scope.table_name = "rebanho";
 	$scope.primary_key = "id";
 	$scope.tipoAnimal = {
 		1 : "Matrizes",
@@ -19,7 +19,7 @@ app.controller("animalController", function($scope, $location, $window){
 		return $window.localStorage.getItem("idPropriedade");
 	}
 
-	/* Cria Tabela de Animais */
+	/* Cria Tabela do Rebanho */
 	$scope.create = function(){
 		for (var a=1; a<=10; a++){
 			for (var i=1; i<=9; i++){
@@ -37,7 +37,7 @@ app.controller("animalController", function($scope, $location, $window){
 		$scope.list(1);	
 	}
 
-	/* Lista Animais da Propriedade x no ano y */
+	/* Lista Rebanho da Propriedade x no ano y */
 	$scope.list = function(a){
 		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+a, function(data){
 			if(data[0] != null){
@@ -58,7 +58,7 @@ app.controller("animalController", function($scope, $location, $window){
 		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
 		
 		$scope.form = {};
-		$('#animalController').modal('hide');
+		$('#rebanhoController').modal('hide');
 	}
 
 	/* Inserindo no Banco */
@@ -69,7 +69,7 @@ app.controller("animalController", function($scope, $location, $window){
 
 	$scope.edit = function(data){
 		$scope.form = data;
-		$('#animalController').modal('show');
+		$('#rebanhoController').modal('show');
 	}
 
 	$scope.cancel = function(){

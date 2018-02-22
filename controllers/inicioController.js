@@ -1,5 +1,5 @@
 "use strict";
-app.controller("inicioController", function($scope, $rootScope, $location, $window){
+app.controller("inicioController", function($scope, $rootScope, $location, $window, AuthenticationService){
 
 	$scope.table_name = "propriedade";
 	$scope.primary_key = "id";
@@ -50,6 +50,12 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 		}else{
 			return null;
 		}
+	}
+
+	$scope.logoff = function (){
+		AuthenticationService.ClearCredentials();
+		localStorage.clear();
+		$location.path('/login');
 	}
 
 	$scope.hideSelect = function(){

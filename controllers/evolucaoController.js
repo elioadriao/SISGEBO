@@ -1,7 +1,7 @@
 "use strict";
-app.controller("evoanimalController", function($scope, $location, $window){
+app.controller("evolucaoController", function($scope, $location, $window){
 
-	$scope.table_name = "evolucao";
+	//$scope.table_name = "evolucao";
 	$scope.primary_key = "id";
 	var TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var REBANHO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -25,9 +25,8 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	/* INICIA AS TAXAS NA VARIAVEL */
 	$scope.initTaxas = function(){
-		//TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM evolucao_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
@@ -35,7 +34,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 					console.log("Carregou Taxas..");
 				}else{
 					console.log("Nao Carregou Taxas..");
-					$('#evoanimalnewController').modal('show');
+					$('#evolucaonewController').modal('show');
 				}
 			});
 		}
@@ -43,9 +42,8 @@ app.controller("evoanimalController", function($scope, $location, $window){
 
 	/* INICIA O REBANHO NA VARIAVEL */
 	$scope.initRebanho = function(){
-		//REBANHO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM animal WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM rebanho WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
@@ -53,7 +51,7 @@ app.controller("evoanimalController", function($scope, $location, $window){
 					console.log("Carregou Animais..");
 				}else{
 					console.log("Nao Carregou Animais..");
-					$location.path('/animal');
+					$location.path('/rebanho');
 				}
 			});
 		}
@@ -278,21 +276,21 @@ app.controller("evoanimalController", function($scope, $location, $window){
 		var id = $scope.form[$scope.primary_key];
 		delete $scope.form[$scope.primary_key];
 		delete $scope.form.$$hashKey;
-		basel.database.update($scope.table_name, $scope.form, {"ano": $scope.form.ano}); //entidade, dados, where
+		basel.database.update("evolucao_taxas", $scope.form, {"ano": $scope.form.ano}); //entidade, dados, where
 
-		$('#evoanimalController').modal('hide');
+		$('#evolucaoController').modal('hide');
 		$scope.form = {};
 		//$scope.updateAno(1);
 	}
 
 	$scope.new = function(){
-		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
+		basel.database.insert("evolucao_taxas", $scope.form); // entidade, dados
 
 		//$scope.form = {};
 	}
 
 	$scope.newTaxas = function(){
-		$('#evoanimalnewController').modal('hide');
+		$('#evolucaonewController').modal('hide');
 		for(var i=1;i<=10;i++){
 			//$scope.form = {};
 			$scope.form.id;
@@ -310,13 +308,13 @@ app.controller("evoanimalController", function($scope, $location, $window){
 	$scope.edit = function(){
 		//$scope.init();
 		$scope.form = TAXAS_BANCO[ANO_ATUAL];
-		$('#evoanimalController').modal('show');
+		$('#evolucaoController').modal('show');
 	}
 
 	/*
 	$scope.delete = function(data){
 		if(confirm("Are you sure?")){
-			basel.database.delete($scope.table_name, {PRIMARY_KEY: data[$scope.primary_key]});
+			basel.database.delete(evolucao_taxas, {PRIMARY_KEY: data[$scope.primary_key]});
 			$scope.list();
 		}
 	}*/
