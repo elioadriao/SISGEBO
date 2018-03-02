@@ -21,6 +21,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 	$scope.init = function(){
 		$scope.initRebanho();
 		$scope.initTaxas();
+		$scope.initAnos();
 	}
 
 	/* INICIA AS TAXAS NA VARIAVEL */
@@ -57,7 +58,22 @@ app.controller("evolucaoController", function($scope, $location, $window){
 		}
 	}
 
-	
+	/* INICIA OS ANOS NA VARIAVEL */
+	$scope.initAnos = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM evolucao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS[i-1] = data[0];
+					console.log("Carregou Ano..");
+				}else{
+					$scope.newAno(i);
+					console.log("Gerou Ano..");					
+				}
+			});
+		}
+	}
 
 	$scope.getTaxas = function(){
 		return {
@@ -71,29 +87,11 @@ app.controller("evolucaoController", function($scope, $location, $window){
 				descarteNovilha1 : TAXAS_BANCO[ANO_ATUAL-1].descarte_novilha1/100,
 				descarteNovilha2 : TAXAS_BANCO[ANO_ATUAL-1].descarte_novilha2/100
 		};
-	}
+	}	
 
-	$scope.initAnos = function(){
-		
-
-	}
-
-	$scope.updateAno = function(ano){
+	$scope.getAno = function(ano){
 		ANO_ATUAL = ano;
-		TAXAS = $scope.getTaxas();
-
-		$scope.ano = [
-			$scope.getLinha(ano, 1),
-			$scope.getLinha(ano, 2),
-			$scope.getLinha(ano, 3),
-			$scope.getLinha(ano, 4),
-			$scope.getLinha(ano, 5),
-			$scope.getLinha(ano, 6),
-			$scope.getLinha(ano, 7),
-			$scope.getLinha(ano, 8),
-			$scope.getLinha(ano, 9)
-		];
-		console.log("Gerou ano:"+ANO_ATUAL);
+		$scope.ano = ANOS[ano-1];
 	}
 
 	$scope.getLinha = function(ano, tipo){
@@ -280,14 +278,12 @@ app.controller("evolucaoController", function($scope, $location, $window){
 
 		$('#evolucaoController').modal('hide');
 		$scope.form = {};
-		//$scope.updateAno(1);
+		//$scope.getAno(1);
 	}
 
-	$scope.new = function(){
+	/*$scope.new = function(){
 		basel.database.insert("evolucao_taxas", $scope.form); // entidade, dados
-
-		//$scope.form = {};
-	}
+	}*/
 
 	$scope.newTaxas = function(){
 		$('#evolucaonewController').modal('hide');
@@ -296,7 +292,42 @@ app.controller("evolucaoController", function($scope, $location, $window){
 			$scope.form.id;
 			$scope.form.ano=i;
 			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
-			$scope.new();
+			
+			basel.database.insert("evolucao_taxas", $scope.form);
+		}
+	}
+
+	$scope.newAno = function(ano){
+		ANO_ATUAL = ano;
+		TAXAS = $scope.getTaxas();
+		ANOS[ano-1] = [
+			$scope.getLinha(ano, 1),
+			$scope.getLinha(ano, 2),
+			$scope.getLinha(ano, 3),
+			$scope.getLinha(ano, 4),
+			$scope.getLinha(ano, 5),
+			$scope.getLinha(ano, 6),
+			$scope.getLinha(ano, 7),
+			$scope.getLinha(ano, 8),
+			$scope.getLinha(ano, 9)
+		];
+
+		for(var i=0;i<9;i++){
+			$scope.form = {};
+			$scope.form.id;
+			$scope.form.descricao = ANOS[ano-1][i].descricao;
+			$scope.form.ua = ANOS[ano-1][i].ua;
+			$scope.form.cabi = ANOS[ano-1][i].cabi;
+			$scope.form.cabf = ANOS[ano-1][i].cabf;
+			$scope.form.uaf = ANOS[ano-1][i].uaf;
+			$scope.form.mortes = ANOS[ano-1][i].mortes;
+			$scope.form.compras = ANOS[ano-1][i].compras;
+			$scope.form.vendas = ANOS[ano-1][i].vendas;
+			$scope.form.nasc = ANOS[ano-1][i].nasc;
+			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+			$scope.form.ano = ano;
+						
+			basel.database.insert("evolucao", $scope.form);
 		}
 	}
 
