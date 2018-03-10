@@ -20,59 +20,77 @@ app.controller("evolucaoController", function($scope, $location, $window){
 			
 	$scope.init = function(){
 		$scope.initRebanho();
-		$scope.initTaxas();
-		$scope.initAnos();
 	}
 
 	/* INICIA AS TAXAS NA VARIAVEL */
-	$scope.initTaxas = function(){
-		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM evolucao_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+	$scope.initTaxas = function(){			
+		var SQL = "SELECT * FROM evolucao_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade();
 
-			basel.database.runAsync(SQL, function(data){
-				if(data[0] != null){
-					TAXAS_BANCO[i-1] = data[0];
-					console.log("Carregou Taxas..");
-				}else{
-					console.log("Nao Carregou Taxas..");
-					$('#evolucaonewController').modal('show');
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				for(var i=0;i<10;i++){
+					TAXAS_BANCO[i] = data[i];
+					//console.log(TAXAS_BANCO[i]);
 				}
-			});
-		}
+				console.log("Carregou Taxas..");
+				$scope.initAnos();
+			}else{
+				console.log("Nao Carregou Taxas..");
+				$('#evolucaonewController').modal('show');
+			}
+		});
+				
 	}
 
 	/* INICIA O REBANHO NA VARIAVEL */
-	$scope.initRebanho = function(){
+	$scope.initRebanho = function(){	
 		for(var i=1;i<=10;i++){
 			var SQL = "SELECT * FROM rebanho WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
 					REBANHO_BANCO[i-1] = data;
-					console.log("Carregou Animais..");
+					//console.log(REBANHO_BANCO[i-1]);
+					res =true;
 				}else{
-					console.log("Nao Carregou Animais..");
-					$location.path('/rebanho');
+					res= false;
 				}
 			});
+		}
+
+		if(res){
+			console.log("Carregou Animais..");
+			$scope.initTaxas();
+		}else{
+			console.log("Nao Carregou Animais..");
+			$location.path('/rebanho');
 		}
 	}
 
 	/* INICIA OS ANOS NA VARIAVEL */
-	$scope.initAnos = function(){
+	$scope.initAnos = function(){	
 		for(var i=1;i<=10;i++){
 			var SQL = "SELECT * FROM evolucao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
-					ANOS[i-1] = data[0];
-					console.log("Carregou Ano..");
+					ANOS[i-1] = data;
+					res = true;
+					console.log(ANOS[i-1]);		
 				}else{
-					$scope.newAno(i);
-					console.log("Gerou Ano..");					
+					res = false;			
 				}
 			});
 		}
+
+		if(res){
+			console.log("Carregou Anos..");
+		}else{
+			$scope.newAno(i);
+			console.log("Gerou Anos..");
+		}	
 	}
 
 	$scope.getTaxas = function(){
@@ -286,7 +304,6 @@ app.controller("evolucaoController", function($scope, $location, $window){
 	}*/
 
 	$scope.newTaxas = function(){
-		$('#evolucaonewController').modal('hide');
 		for(var i=1;i<=10;i++){
 			//$scope.form = {};
 			$scope.form.id;
@@ -295,40 +312,70 @@ app.controller("evolucaoController", function($scope, $location, $window){
 			
 			basel.database.insert("evolucao_taxas", $scope.form);
 		}
+		$('#evolucaonewController').modal('hide');
+		$scope.initTaxas();
 	}
 
-	$scope.newAno = function(ano){
-		ANO_ATUAL = ano;
-		TAXAS = $scope.getTaxas();
-		ANOS[ano-1] = [
-			$scope.getLinha(ano, 1),
-			$scope.getLinha(ano, 2),
-			$scope.getLinha(ano, 3),
-			$scope.getLinha(ano, 4),
-			$scope.getLinha(ano, 5),
-			$scope.getLinha(ano, 6),
-			$scope.getLinha(ano, 7),
-			$scope.getLinha(ano, 8),
-			$scope.getLinha(ano, 9)
-		];
+	$scope.newAno = function(){
+		for(var a=1; a<=10; a++){
+			ANO_ATUAL = a;
+			TAXAS = $scope.getTaxas();
+			
+			for(var i=0; i<9; i++){
+				ANOS[a-1][i] = $scope.getLinha(a, i+1);
 
-		for(var i=0;i<9;i++){
-			$scope.form = {};
-			$scope.form.id;
-			$scope.form.descricao = ANOS[ano-1][i].descricao;
-			$scope.form.ua = ANOS[ano-1][i].ua;
-			$scope.form.cabi = ANOS[ano-1][i].cabi;
-			$scope.form.cabf = ANOS[ano-1][i].cabf;
-			$scope.form.uaf = ANOS[ano-1][i].uaf;
-			$scope.form.mortes = ANOS[ano-1][i].mortes;
-			$scope.form.compras = ANOS[ano-1][i].compras;
-			$scope.form.vendas = ANOS[ano-1][i].vendas;
-			$scope.form.nasc = ANOS[ano-1][i].nasc;
-			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
-			$scope.form.ano = ano;
-						
-			basel.database.insert("evolucao", $scope.form);
+				$scope.form = {};
+				$scope.form.id;
+				$scope.form.descricao = ANOS[a-1][i].descricao;
+				$scope.form.ua = ANOS[a-1][i].ua;
+				$scope.form.uai = ANOS[a-1][i].uai;
+				$scope.form.cabi = ANOS[a-1][i].cabi;
+				$scope.form.cabf = ANOS[a-1][i].cabf;
+				$scope.form.uaf = ANOS[a-1][i].uaf;
+				$scope.form.mortes = ANOS[a-1][i].mortes;
+				$scope.form.compras = ANOS[a-1][i].compras;
+				$scope.form.vendas = ANOS[a-1][i].vendas;
+				$scope.form.nasc = ANOS[a-1][i].nasc;
+				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.ano = a;
+							
+				basel.database.insert("evolucao", $scope.form);
+			}
 		}
+
+			/*
+			ANOS[ano-1] = [
+				$scope.getLinha(ano, 1),
+				$scope.getLinha(ano, 2),
+				$scope.getLinha(ano, 3),
+				$scope.getLinha(ano, 4),
+				$scope.getLinha(ano, 5),
+				$scope.getLinha(ano, 6),
+				$scope.getLinha(ano, 7),
+				$scope.getLinha(ano, 8),
+				$scope.getLinha(ano, 9)
+			];
+
+			for(var i=0;i<9;i++){
+				
+
+				$scope.form = {};
+				$scope.form.id;
+				$scope.form.descricao = ANOS[ano-1][i].descricao;
+				$scope.form.ua = ANOS[ano-1][i].ua;
+				$scope.form.cabi = ANOS[ano-1][i].cabi;
+				$scope.form.cabf = ANOS[ano-1][i].cabf;
+				$scope.form.uaf = ANOS[ano-1][i].uaf;
+				$scope.form.mortes = ANOS[ano-1][i].mortes;
+				$scope.form.compras = ANOS[ano-1][i].compras;
+				$scope.form.vendas = ANOS[ano-1][i].vendas;
+				$scope.form.nasc = ANOS[ano-1][i].nasc;
+				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.ano = ano;
+							
+				basel.database.insert("evolucao", $scope.form);
+			}
+			*/
 	}
 
 	$scope.cancel = function(){

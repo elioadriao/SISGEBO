@@ -1,4 +1,4 @@
-<div ng-controller="evolucaoController">
+<div ng-controller="evolucaoController" ng-init="initRebanho()"> 
 	<div class="row">
 		<div class="page-header">
 			<h1>Evoluçao <small>Rebanho</small></h1>
@@ -6,7 +6,7 @@
 		</div>
 	</div>
 
-	<div class="row text-center" ng-init="init()">
+	<div class="row text-center">
 		<nav aria-label="Page navigation">
 			<ul class="pagination pagination-sm">
 		    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
