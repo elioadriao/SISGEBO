@@ -1,213 +1,371 @@
 "use strict";
 app.controller("criaController", function($scope, $location, $window){
 
-	//$scope.table_name = "animal";
-	$scope.primary_key = "id";
-	$scope.tipoAnimal = {
-		1 : "Matrizes",
-		2 : "Reprodutores", 
-		3 : "Bezerros", 
-		4 : "Novilhos +1 anos", 
-		5 : "Novilhos +2 anos", 
-		6 : "Bezerras", 
-		7 : "Novilhas +1 anos", 
-		8 : "Novilhas +2 anos",
-		9 : "Novilhos +3 anos"
-		};
+	var TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_DESEMPENHO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_ALIMENTACAO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_RACAO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_PRODUCAO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_OPERACIONAL = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANOS_BALANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var ANO_ATUAL = 1;
+	var TAXAS = { 
+			pvi : 0,
+			gmd : 0,
+			periodo : 0,
+			cms : 0,
+			valor_racao : 0,
+			valor_racao_conc : 0
+			};
+	var TIPO = {
+			3 : "Bezerros",
+			6 : "Bezerras"
+	}
 
 	$scope.getIdPropriedade = function(){
 		return $window.localStorage.getItem("idPropriedade");
 	}
 
-	//DESEMPENHO
-	$scope.createDesempenho = function(){
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerros";
-		$scope.form.qtd = 0;
-		$scope.form.pvi = 0;
-		$scope.form.gmd = 0;
-		$scope.form.periodo = 0;
-		$scope.form.desmame = 0;
-		$scope.form.demamea = 0;
-		$scope.newDesempenho();
+	$scope.initTaxas = function(){			
+		var SQL = "SELECT * FROM cria_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade();
 
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerras";
-		$scope.form.qtd = 0;
-		$scope.form.pvi = 0;
-		$scope.form.gmd = 0;
-		$scope.form.periodo = 0;
-		$scope.form.desmame = 0;
-		$scope.form.demamea = 0;
-		$scope.newDesempenho();
-				
-		$scope.listDesempenho();
-	}
-
-	$scope.listDesempenho = function(){
-		$scope.table_name = "cria_desempenho";
-
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
+		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
-				$scope.itemsDesempenho = data;
-				console.log("existe");
+				for(var i=0;i<10;i++){
+					TAXAS_BANCO[i] = data[i];
+					//console.log(TAXAS_BANCO[i]);
+				}
+				console.log("Carregou Taxas..");
+				$scope.initAnos();
 			}else{
-				console.log("existe nao desempenho");
-				$scope.createDesempenho();
+				console.log("Nao Carregou Taxas..");
+				$('#evolucaonewController').modal('show');
 			}
 		});
+				
 	}
 
-	$scope.saveDesempenho = function(){
-		$scope.table_name = "cria_desempenho";
-
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
-		delete $scope.form.$$hashKey; 
-		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
-		
-		$scope.form = {};
-		$('#desempenhoController').modal('hide');
+	$scope.initAnos = function(){	
+		$scope.initDesempenho();	
+		$scope.initAlimentacao();
+		$scope.initRacao();
+		$scope.initProducao();
+		$scope.initBalanco();
+		$scope.initOperacional();
 	}
 
+	$scope.initDesempenho() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_desempenho WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_DESEMPENHO[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Desempenho..");
+		}else{
+			$scope.newDesempenho();
+			console.log("Gerou Desempenho..");
+		}
+	}
+
+	$scope.initAlimentacao() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_alimentacao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_ALIMENTACAO[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Alimentacao..");
+		}else{
+			$scope.newAlimentacao();
+			console.log("Gerou Alimentacao..");
+		}
+	}
+
+	$scope.initRacao() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_racao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_RACAO[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Racao..");
+		}else{
+			$scope.newRacao();
+			console.log("Gerou Racao..");
+		}
+	}
+
+	$scope.initOperacional() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_operacional WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_OPERACIONAL[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Operacional..");
+		}else{
+			$scope.newOperacional();
+			console.log("Gerou Operacional..");
+		}
+	}
+	
+	$scope.initProducao() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_producao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_PRODUCAO[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Producao..");
+		}else{
+			$scope.newProducao();
+			console.log("Gerou Producao..");
+		}
+	}
+
+	$scope.initBalanco() = function(){
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM cria_balanco WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					ANOS_BALANCO[i-1] = data;
+					res = true;
+					//console.log(ANOS[i-1]);		
+				}else{
+					res = false;			
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Balanco..");
+		}else{
+			$scope.newBalanco();
+			console.log("Gerou Balanco..");
+		}
+	}
+
+	$scope.getTaxas() = function(){
+		return {
+			pvi : TAXAS_BANCO[ANO_ATUAL-1].pvi,
+			gmd : TAXAS_BANCO[ANO_ATUAL-1].gmd,
+			periodo : TAXAS_BANCO[ANO_ATUAL-1].periodo,
+			cms : TAXAS_BANCO[ANO_ATUAL-1].cms,
+			valor_racao : TAXAS_BANCO[ANO_ATUAL-1].valor_racao,
+			valor_racao_conc : TAXAS_BANCO[ANO_ATUAL-1].valor_racao_conc
+		};
+	}
+	
+
+	/* DESEMPENHO */
 	$scope.newDesempenho = function(){
-		$scope.table_name = "cria_desempenho";
+		for(var a=1; a<=10; a++){
+			ANO_ATUAL = a;
+			TAXAS = $scope.getTaxas();
 
-		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
-		$scope.form = {};
-	}
+			for(var i=1; i<3; i++){
+				ANOS_DESEMPENHO[a-1][i] = {
+								id : "",
+								ano : a,
+								descricao : TIPO[i*3],
+								qtd : $scope.getQtd(a, i),
+								pvi : $scope.getPvi(a, i),
+								gmd : $scope.getGmd(a, i),
+								periodo : $scope.getPeriodo(a, i),
+								desmame : $scope.getDesmame(a, i),
+								desmamea : $scope.getDesmamea(a, i),
+								propriedadeId_FK : $scope.getIdPropriedade()
+							}
 
-	$scope.editDesempenho = function(data){
-		$scope.form = data;
-		$('#desempenhoController').modal('show');
-	}
-
-	//ALIMENTAÇÃO
-	$scope.createAlimentacao = function(){
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerros";
-		$scope.form.cms = 0;
-		$scope.form.vol = 0;
-		$scope.form.volf = 0;
-		$scope.form.conc = 0;
-		$scope.form.conf = 0;
-		$scope.newAlimentacao();
-
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerras";
-		$scope.form.cms = 0;
-		$scope.form.vol = 0;
-		$scope.form.volf = 0;
-		$scope.form.conc = 0;
-		$scope.form.conf = 0;
-		$scope.newAlimentacao();
-				
-		$scope.listAlimentacao();
-	}
-
-	$scope.listAlimentacao = function(){
-		$scope.table_name = "cria_alimentacao";
-
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
-			if(data[0] != null){
-				$scope.itemsAlimentacao = data;
-				console.log("existe");
-			}else{
-				console.log("existe nao alimentacao");
-				$scope.createAlimentacao();
+				$scope.form = {};
+				$scope.form = ANOS_DESEMPENHO[a-1][i];
+							
+				basel.database.insert("cria_desempenho", $scope.form);
 			}
-		});
+		}
 	}
 
-	$scope.saveAlimentacao = function(){
-		$scope.table_name = "cria_alimentacao";
-
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
-		delete $scope.form.$$hashKey; 
-		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
-		
-		$scope.form = {};
-		$('#alimentacaoController').modal('hide');
+	$scope.getAnoDesempenho = function(ano){
+		ANO_ATUAL = ano;
+		$scope.anoDesempenho = ANOS_DESEMPENHO[ano-1];
 	}
 
+	$scope.getQtd = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getPvi = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getGmd = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getPeriodo = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getDesmame = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getDesmamea = function(ano, tipo){
+		return 0;
+	}
+
+
+	/* ALIMENTACÃO */
 	$scope.newAlimentacao = function(){
-		$scope.table_name = "cria_alimentacao";
+		for(var a=1; a<=10; a++){
+			ANO_ATUAL = a;
+			TAXAS = $scope.getTaxas();
+			
+			for(var i=1; i<3; i++){
+				ANOS_ALIMENTACAO[a-1][i] = {
+								id : "",
+								descricao : TIPO[i*3],
+								ano : a,
+								cms : $scope.getCms(a, i),
+								vol : $scope.getVol(a, i),
+								volf : $scope.getVolf(a, i),
+								conc : $scope.getConc(a, i),
+								conf : $scope.getConf(a, i),
+								propriedadeId_FK : $scope.getIdPropriedade()
+							}
 
-		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
-		$scope.form = {};
-	}
-
-	$scope.editAlimentacao = function(data){
-		$scope.form = data;
-		$('#alimentacaoController').modal('show');
-	}
-
-	//RACAO
-	$scope.createRacao = function(){
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerros";
-		$scope.form.vol = 0;
-		$scope.form.volt = 0;
-		$scope.form.con = 0;
-		$scope.form.cont = 0;
-		$scope.form.racaot = 0;
-		$scope.newRacao();
-
-		$scope.form = {};
-		$scope.form.id;
-		$scope.form.descricao = "Bezerras";
-		$scope.form.vol = 0;
-		$scope.form.volt = 0;
-		$scope.form.con = 0;
-		$scope.form.cont = 0;
-		$scope.form.racaot = 0;
-		$scope.newRacao();
-				
-		$scope.listRacao();
-	}
-
-	$scope.listRacao = function(){
-		$scope.table_name = "cria_racao";
-
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
-			if(data[0] != null){
-				$scope.itemsRacao = data;
-				console.log("existe");
-			}else{
-				console.log("existe nao racao");
-				$scope.createRacao();
+				$scope.form = {};
+				$scope.form = ANOS_ALIMENTACAO[a-1][i];
+							
+				basel.database.insert("cria_alimentacao", $scope.form);
 			}
-		});
+		}
 	}
 
-	$scope.saveRacao = function(){
-		$scope.table_name = "cria_racao";
-
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
-		delete $scope.form.$$hashKey; 
-		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
-		
-		$scope.form = {};
-		$('#racaoController').modal('hide');
+	$scope.getAnoAlimentacao = function(ano){
+		ANO_ATUAL = ano;
+		$scope.anoAlimentacao = ANOS_ALIMENTACAO[ano-1];
 	}
 
+	$scope.getCms = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getVol = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getVolf = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getConc = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getConf = function(ano, tipo){
+		return 0;
+	}
+
+
+	/* RACAO */
 	$scope.newRacao = function(){
-		$scope.table_name = "cria_racao";
+		for(var a=1; a<=10; a++){
+			ANO_ATUAL = a;
+			TAXAS = $scope.getTaxas();
+			
+			for(var i=1; i<3; i++){
+				ANOS_RACAO[a-1][i] = {
+								id : "",
+								descricao : TIPO[i*3],
+								ano : a,
+								valor : $scope.getValor(a, i),
+								valort : $scope.getValort(a, i),
+								con : $scope.getCon(a, i),
+								cont : $scope.getCont(a, i),
+								propriedadeId_FK : $scope.getIdPropriedade()
+							}
 
-		basel.database.insert($scope.table_name, $scope.form); // entidade, dados
-		$scope.form = {};
+				$scope.form = {};
+				$scope.form = ANOS_RACAO[a-1][i];
+							
+				basel.database.insert("cria_racao", $scope.form);
+			}
+		}
 	}
 
-	$scope.editRacao = function(data){
-		$scope.form = data;
-		$('#racaoController').modal('show');
+	$scope.getAnoRacao = function(ano){
+		ANO_ATUAL = ano;
+		$scope.anoRacao = ANOS_RACAO[ano-1];
+	}
+
+	$scope.getValor = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getValort = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getCon = function(ano, tipo){
+		return 0;
+	}
+
+	$scope.getCont = function(ano, tipo){
+		return 0;
 	}
 
 	//PRODUCAO
@@ -248,8 +406,8 @@ app.controller("criaController", function($scope, $location, $window){
 	$scope.saveProducao = function(){
 		$scope.table_name = "cria_producao";
 
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
+		var id = $scope.form["id"];
+		delete $scope.form["id"];
 		delete $scope.form.$$hashKey; 
 		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
 		
@@ -307,8 +465,8 @@ app.controller("criaController", function($scope, $location, $window){
 	$scope.saveOperacional = function(){
 		$scope.table_name = "cria_operacional";
 
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
+		var id = $scope.form["id"];
+		delete $scope.form["id"];
 		delete $scope.form.$$hashKey; 
 		basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
 		
