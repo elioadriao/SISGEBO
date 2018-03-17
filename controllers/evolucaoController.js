@@ -344,4 +344,11 @@ app.controller("evolucaoController", function($scope, $location, $window){
 		$scope.form = TAXAS_BANCO[ANO_ATUAL];
 		$('#evolucaoController').modal('show');
 	}
+	$scope.delete = function(){
+		if(confirm("Deseja realmente Resetar?")){
+			basel.database.delete("evolucao", {propriedadeId_FK : $scope.getIdPropriedade()});
+			basel.database.delete("evolucao_taxas", {propriedadeId_FK : $scope.getIdPropriedade()});
+			$location.path('/rebanho');			
+		}
+	}
 });

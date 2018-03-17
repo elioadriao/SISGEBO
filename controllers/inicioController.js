@@ -1,25 +1,23 @@
 "use strict";
 app.controller("inicioController", function($scope, $rootScope, $location, $window, AuthenticationService){
-
-	$scope.table_name = "propriedade";
-	$scope.primary_key = "id";
 	
 	//Lista as Propriedades
 	$scope.list = function(){
 		$scope.idPropriedade = $scope.getId();
 
 		if ($scope.idPropriedade == null){
-			basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE usuarioLogin_FK='"+$scope.getUser()+"'", function(data){
+			basel.database.runAsync("SELECT * FROM propriedade WHERE usuarioLogin_FK='"+$scope.getUser()+"'", function(data){
 				if(data[0] != null){
 					$scope.items = data;
 					$('#selectController').modal('show');
 				}else{
+					$('#selectController').modal('hide');
 					$('#inicioController').modal('show');
 					//Não tem propriedades
 				}
 			});
 		} else {
-			basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE id="+$scope.idPropriedade, function(data){
+			basel.database.runAsync("SELECT * FROM propriedade WHERE id="+$scope.idPropriedade, function(data){
 				if(data[0] != null){
 					$scope.atual = data[0];
 				}else{
@@ -66,15 +64,15 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	$scope.save = function(){
 		$scope.form.usuarioLogin_FK = $scope.getUser();
 
-		if($scope.form[$scope.primary_key]){
+		if($scope.form["id"]){
 			//Edit
-			var id = $scope.form[$scope.primary_key];
-			delete $scope.form[$scope.primary_key];
+			var id = $scope.form["id"];
+			delete $scope.form["id"];
 			delete $scope.form.$$hashKey; 
-			basel.database.update($scope.table_name, $scope.form, {id: id}); //entidade, dados, where
+			basel.database.update("propriedade", $scope.form, {id: id}); //entidade, dados, where
 		}else{
 			//new
-			basel.database.insert($scope.table_name, $scope.form); // entidade, dados
+			basel.database.insert("propriedade", $scope.form); // entidade, dados
 		}
 		$scope.form = {};
 		$scope.list();
@@ -94,11 +92,19 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	//Excluindo
 	$scope.delete = function(data){
 		if(confirm("Deseja realmente Deletar?")){
-			basel.database.delete($scope.table_name, {id: data[$scope.primary_key]});
-			basel.database.delete("animal", {propriedadeId_FK: data[$scope.primary_key]});
-			basel.database.delete("benfeitorias", {propriedadeId_FK: data[$scope.primary_key]});
-			basel.database.delete("manutencao", {propriedadeId_FK: data[$scope.primary_key]});
-			basel.database.delete("maquinas", {propriedadeId_FK: data[$scope.primary_key]});
+			basel.database.delete("propriedade", {id: data["id"]});
+			basel.database.delete("animal", {propriedadeId_FK: data["id"]});
+			basel.database.delete("benfeitorias", {propriedadeId_FK: data["id"]});
+			basel.database.delete("manutencao", {propriedadeId_FK: data["id"]});
+			basel.database.delete("maquinas", {propriedadeId_FK: data["id"]});
+			basel.database.delete("evolucao", {propriedadeId_FK: data["id"]});
+			basel.database.delete("evolucao_taxas", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_taxas", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_desempenho", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_alimentacao", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_producao", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_operacional", {propriedadeId_FK: data["id"]});
+			basel.database.delete("cria_balanco", {propriedadeId_FK: data["id"]});
 			$scope.list();
 		}
 	}
