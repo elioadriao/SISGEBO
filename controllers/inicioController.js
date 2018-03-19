@@ -1,9 +1,9 @@
 "use strict";
-app.controller("inicioController", function($scope, $rootScope, $location, $window, AuthenticationService){
+app.controller("inicioController", function($scope, $rootScope, $location, $window, AuthenticationService, Propriedade){
 	
 	//Lista as Propriedades
 	$scope.list = function(){
-		$scope.idPropriedade = $scope.getId();
+		$scope.idPropriedade = Propriedade.getId();
 
 		if ($scope.idPropriedade == null){
 			basel.database.runAsync("SELECT * FROM propriedade WHERE usuarioLogin_FK='"+$scope.getUser()+"'", function(data){
@@ -29,16 +29,12 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	}
 
 	$scope.setId = function(id){
-		$window.localStorage['idPropriedade'] = id;
+		Propriedade.setId(id);
 		$scope.list();
 	}
 
-	$scope.getId = function(){
-		return $window.localStorage.getItem("idPropriedade");
-	}
-
 	$scope.clearId = function(){
-		$window.localStorage.removeItem("idPropriedade");
+		Propriedade.clearId();
 		$scope.list();
 	}
 
@@ -108,4 +104,21 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 			$scope.list();
 		}
 	}
-});
+})
+.factory('Propriedade', ['$window', function ( $window ) {
+    var service = {};
+
+    service.setId = function(id){
+		$window.localStorage['idPropriedade'] = id;
+	};
+
+	service.getId = function(){
+		return $window.localStorage.getItem("idPropriedade");
+	};
+
+	service.clearId = function(){
+		$window.localStorage.removeItem("idPropriedade");
+	};
+
+	return service;
+}]);

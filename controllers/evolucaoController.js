@@ -1,5 +1,5 @@
 "use strict";
-app.controller("evolucaoController", function($scope, $location, $window){
+app.controller("evolucaoController", function($scope, $location, $window, Propriedade){
 
 	var TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var REBANHO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -19,7 +19,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 	/* INICIA O REBANHO NA VARIAVEL */
 	$scope.initRebanho = function(){	
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM rebanho WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM rebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -44,7 +44,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 
 	/* INICIA AS TAXAS NA VARIAVEL */
 	$scope.initTaxas = function(){			
-		var SQL = "SELECT * FROM evolucao_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade();
+		var SQL = "SELECT * FROM evolucao_taxas WHERE propriedadeId_FK="+Propriedade.getId();
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
@@ -65,7 +65,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 	/* INICIA OS ANOS NA VARIAVEL */
 	$scope.initAnos = function(){	
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM evolucao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM evolucao WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -275,12 +275,8 @@ app.controller("evolucaoController", function($scope, $location, $window){
 		return res;
 	}
 
-	$scope.getIdPropriedade = function(){
-		return $window.localStorage.getItem("idPropriedade");
-	}
-
 	$scope.save = function(){
-		$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+		$scope.form.propriedadeId_FK = Propriedade.getId();
 		$scope.form.ano = ANO_ATUAL;
 
 		var id = $scope.form["id"];
@@ -298,7 +294,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 			//$scope.form = {};
 			$scope.form.id;
 			$scope.form.ano=i;
-			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+			$scope.form.propriedadeId_FK = Propriedade.getId();
 			
 			basel.database.insert("evolucao_taxas", $scope.form);
 		}
@@ -326,7 +322,7 @@ app.controller("evolucaoController", function($scope, $location, $window){
 				$scope.form.compras = ANOS[a-1][i].compras;
 				$scope.form.vendas = ANOS[a-1][i].vendas;
 				$scope.form.nasc = ANOS[a-1][i].nasc;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 				$scope.form.ano = a;
 							
 				basel.database.insert("evolucao", $scope.form);
@@ -346,8 +342,8 @@ app.controller("evolucaoController", function($scope, $location, $window){
 	}
 	$scope.delete = function(){
 		if(confirm("Deseja realmente Resetar?")){
-			basel.database.delete("evolucao", {propriedadeId_FK : $scope.getIdPropriedade()});
-			basel.database.delete("evolucao_taxas", {propriedadeId_FK : $scope.getIdPropriedade()});
+			basel.database.delete("evolucao", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("evolucao_taxas", {propriedadeId_FK : Propriedade.getId()});
 			$location.path('/rebanho');			
 		}
 	}

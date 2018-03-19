@@ -1,18 +1,20 @@
 "use strict";
-app.controller("maquinasController", function($scope, $location){
+app.controller("maquinasController", function($scope, $location, Propriedade){
 
 	$scope.table_name = "maquinas";
 	$scope.primary_key = "id";
 
 	//List
 	$scope.list = function(){
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name, function(data){
+		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+Propriedade.getId(), function(data){
 			$scope.items = data;
 		});
 	}
 
 	//Saving
 	$scope.save = function(){
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+		
 		if($scope.form[$scope.primary_key]){
 			//Edit
 			var id = $scope.form[$scope.primary_key];

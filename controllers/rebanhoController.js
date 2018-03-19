@@ -1,5 +1,5 @@
 "use strict";
-app.controller("rebanhoController", function($scope, $location, $window){
+app.controller("rebanhoController", function($scope, $location, $window, Propriedade){
 
 	$scope.table_name = "rebanho";
 	$scope.primary_key = "id";
@@ -15,10 +15,6 @@ app.controller("rebanhoController", function($scope, $location, $window){
 		9 : "Novilhos +3 anos"
 		};
 
-	$scope.getIdPropriedade = function(){
-		return $window.localStorage.getItem("idPropriedade");
-	}
-
 	/* Cria Tabela do Rebanho */
 	$scope.create = function(){
 		for (var a=1; a<=10; a++){
@@ -30,7 +26,7 @@ app.controller("rebanhoController", function($scope, $location, $window){
 				$scope.form.qtd = 0;
 				$scope.form.valor = 0;
 				$scope.form.peso = 0;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 				$scope.new();
 			}
 		}		
@@ -39,7 +35,7 @@ app.controller("rebanhoController", function($scope, $location, $window){
 
 	/* Lista Rebanho da Propriedade x no ano y */
 	$scope.list = function(a){
-		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+a, function(data){
+		basel.database.runAsync("SELECT * FROM "+$scope.table_name+" WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+a, function(data){
 			if(data[0] != null){
 				$scope.items = data;
 				console.log("existe");

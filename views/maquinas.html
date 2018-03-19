@@ -1,33 +1,36 @@
 <div ng-controller="maquinasController">
 	<div class="row">
-		<div class="col-md-4">
-			<h2>Manutenção e Implementos</h2>
-		</div>
-		<div class="col-md-4">
-			<button class="btn btn-primary" data-toggle="modal" data-target="#maquinasController"><span class="glyphicon glyphicon-plus"></span> Cadastrar</button>
-		</div>
-		<div class="col-md-4">
-			<input class="form-control" placeholder="Search" ng-model="search">
+		<div class="page-header">
+			<h1>Maquinas <small>Fixas</small></h1>
 		</div>
 	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-responsive table-hover table-sm table-bordered" ng-init="list()">
-				<thead class="basel-table-head">
 
-				<tr><th>Item</th><th>Valor(R$)</th><th>Ano de Compra</th><th>Vida Util(Anos)</th><th>Depreciacao</th><th></th></tr></thead>
-				<tbody class="basel-table-body">
-
-				<tr dir-paginate="item in items | filter: search | itemsPerPage: 10"><td>{{item.item}}</td><td>{{item.valor | number:2}}</td><td>{{item.ano_compra}}</td><td>{{item.vida_util}}</td><td>{{item.valor/item.vida_util | number:2}}</td><td><button class="btn btn-info btn-sm" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button><button class="btn btn-danger btn-sm" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button></td></tr></tbody>
-			</table>
-		</div>
-	</div>
 	<div class="row">
-		<div class="col-md-12 text-center">
-			<dir-pagination-controls>
-			</dir-pagination-controls>
-		</div>
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="list()">
+			<thead class="thead-inverse">
+				<th>Item</th>
+				<th>Valor(R$)</th>
+				<th>Ano de Compra</th>
+				<th>Vida Util(Anos)</th>
+				<th>Depreciacao</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr ng-repeat="item in items">
+				<td>{{item.item}}</td>
+				<td>{{item.valor | number:2}}</td>
+				<td>{{item.ano_compra}}</td>
+				<td>{{item.vida_util}}</td>
+				<td>{{item.valor/item.vida_util | number:2}}</td>
+				<td style="width: 50px">
+					<button class="btn btn-info btn-block" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button>
+				</td>
+				<td style="width: 50px">
+					<button class="btn btn-danger btn-block" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#maquinasController">Nova Maquina</button>
 	</div>
 
 	<div class="modal fade" id="maquinasController" tabindex="-1" role="dialog">
@@ -38,13 +41,33 @@
 					<h4 class="modal-title" id="myModalLabel">Cadastro de Maquinas/Implementos</h4>
 				</div>
 				<div class="modal-body">
-					<form class="basel-form">
-						
-					<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div><div class="form-group"><label>Item</label><input type="text" class="form-control" ng-model="form.item"></div><div class="form-group"><label>Valor de Compra(R$)</label><input type="text" class="form-control" ng-model="form.valor"></div><div class="form-group"><label>Ano de Compra</label><input type="text" class="form-control" ng-model="form.ano_compra"></div><div class="form-group"><label>Vida Util(Anos)</label><input type="text" class="form-control" ng-model="form.vida_util"></div></form>
+					<form class="basel-form">						
+						<div class="form-group">
+							<input type="hidden" class="form-control" ng-model="form.id">
+						</div>
+						<div class="form-group">
+							<label>Item</label><input type="text" class="form-control" ng-model="form.item">
+						</div>
+						<div class="form-group">
+							<label>Valor de Compra(R$)</label><input type="text" class="form-control" ng-model="form.valor">
+						</div>
+						<div class="form-group">
+							<label>Ano de Compra</label><input type="text" class="form-control" ng-model="form.ano_compra">
+						</div>
+						<div class="form-group">
+							<label>Vida Util(Anos)</label><input type="text" class="form-control" ng-model="form.vida_util">
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default basel-btn-cancel" ng-click="cancel()" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary basel-btn-save" ng-click="save()">Salvar</button>
+					<div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
