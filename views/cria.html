@@ -1,14 +1,15 @@
-<div ng-controller="criaController" ng-init="initTaxas()">
+<div ng-controller="criaController" ng-init="initEvolucao()">
 	<div class="row">
 		<div class="page-header">
 			<h1>Cria <small>Inicial</small></h1>
 			<a href="" ng-click="edit()"><span class="glyphicon glyphicon-cog"></span></a>
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
 		</div>
 	</div>
 	<!-- TABELAS -->
-	<div class="row text-center" ng-init="getAno(1)">
+	<div class="row text-center">
 		<nav aria-label="Page navigation">
-			<ul class="pagination">
+			<ul class="pagination pagination-sm">
 		    	<li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
 		    		<a href="" ng-click="getAno(i)">{{i}}</a>
 	    		</li>
@@ -141,12 +142,30 @@
 				</div>
 				<div class="modal-body">
 					<form class="basel-form">						
-						<div class="form-group"><label>P.V. <small>inicial</small></label><input type="text" class="form-control" ng-model="form.pvi"></div>
-						<div class="form-group"><label>G.M.D.</label><input type="text" class="form-control" ng-model="form.gmd"></div>
-						<div class="form-group"><label>Periodo</label><input type="text" class="form-control" ng-model="form.periodo"></div>
-						<div class="form-group"><label>C.M.S. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.cms"></div>
-						<div class="form-group"><label>Vol. <small>(%)</small></label><input type="text" class="form-control" ng-model="form.valor_racao"></div>
-						<div class="form-group"><label>Vol. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.valor_racao_conc"></div>
+						<div class="form-group">
+							<label>P.V. <small>inicial</small></label><input type="text" class="form-control" ng-model="form.pvi">
+						</div>
+						<div class="form-group">
+							<label>G.M.D.</label><input type="text" class="form-control" ng-model="form.gmd">
+						</div>
+						<div class="form-group">
+							<label>Periodo</label><input type="text" class="form-control" ng-model="form.periodo">
+						</div>
+						<div class="form-group">
+							<label>C.M.S. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.cms">
+						</div>
+						<div class="form-group">
+							<label>Vol. da Alimentacao<small>(%)</small></label><input type="text" class="form-control" ng-model="form.vol">
+						</div>
+						<div class="form-group">
+							<label>Valor da Racao <small>(R$/Kg)</small></label><input type="text" class="form-control" ng-model="form.valor_racao">
+						</div>
+						<div class="form-group">
+							<label>Valor do Concentrado <small>(R$/Kg)</small></label><input type="text" class="form-control" ng-model="form.valor_racao_conc">
+						</div>
+						<div class="form-group">
+							<label>Valor da Arroba <small>(R$/@)</small></label><input type="text" class="form-control" ng-model="form.valor_arroba">
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">

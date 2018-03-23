@@ -1,5 +1,5 @@
 "use strict";
-app.controller("criaController", function($scope, $location, $window){
+app.controller("criaController", function($scope, $location, $window, Propriedade){
 
 	var TAXAS_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var ANOS_DESEMPENHO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -8,26 +8,49 @@ app.controller("criaController", function($scope, $location, $window){
 	var ANOS_PRODUCAO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var ANOS_OPERACIONAL = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var ANOS_BALANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+	var EVOLUCAO_BANCO = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 	var ANO_ATUAL = 1;
 	var TAXAS = { 
 			pvi : 0,
 			gmd : 0,
 			periodo : 0,
 			cms : 0,
+			vol : 0,
 			valor_racao : 0,
-			valor_racao_conc : 0
+			valor_racao_conc : 0,
+			valor_arroba : 0
 			};
 	var TIPO = {
 			3 : "Bezerros",
 			6 : "Bezerras"
 	}
 
-	$scope.getIdPropriedade = function(){
-		return $window.localStorage.getItem("idPropriedade");
+	$scope.initEvolucao = function(){	
+		for(var i=1;i<=10;i++){
+			var SQL = "SELECT * FROM evolucao WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
+			var res = false;
+
+			basel.database.runAsync(SQL, function(data){
+				if(data[0] != null){
+					EVOLUCAO_BANCO[i-1] = data;
+					res =true;
+				}else{
+					res= false;
+				}
+			});
+		}
+
+		if(res){
+			console.log("Carregou Animais..");
+			$scope.initTaxas();
+		}else{
+			console.log("Nao Carregou Animais..");
+			$location.path('/evolucao');
+		}
 	}
 
 	$scope.initTaxas = function(){			
-		var SQL = "SELECT * FROM cria_taxas WHERE propriedadeId_FK="+$scope.getIdPropriedade();
+		var SQL = "SELECT * FROM cria_taxas WHERE propriedadeId_FK="+Propriedade.getId();
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
@@ -50,7 +73,7 @@ app.controller("criaController", function($scope, $location, $window){
 			//$scope.form = {};
 			$scope.form.id;
 			$scope.form.ano=i;
-			$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+			$scope.form.propriedadeId_FK = Propriedade.getId();
 			
 			basel.database.insert("cria_taxas", $scope.form);
 		}
@@ -68,6 +91,7 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAno = function(ano){
+		ANO_ATUAL = ano;
 		$scope.getAnoDesempenho(ano);
 		$scope.getAnoAlimentacao(ano);
 		$scope.getAnoRacao(ano);
@@ -78,7 +102,7 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.initDesempenho = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_desempenho WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_desempenho WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -102,7 +126,7 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.initAlimentacao = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_alimentacao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_alimentacao WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -126,7 +150,7 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.initRacao = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_racao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_racao WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -150,7 +174,7 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.initOperacional = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_operacional WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_operacional WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -174,7 +198,7 @@ app.controller("criaController", function($scope, $location, $window){
 	
 	$scope.initProducao = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_producao WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_producao WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -198,7 +222,7 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.initBalanco = function(){
 		for(var i=1;i<=10;i++){
-			var SQL = "SELECT * FROM cria_balanco WHERE propriedadeId_FK="+$scope.getIdPropriedade()+" AND ano="+i;
+			var SQL = "SELECT * FROM cria_balanco WHERE propriedadeId_FK="+Propriedade.getId()+" AND ano="+i;
 			var res = false;
 
 			basel.database.runAsync(SQL, function(data){
@@ -226,8 +250,10 @@ app.controller("criaController", function($scope, $location, $window){
 			gmd : TAXAS_BANCO[ANO_ATUAL-1].gmd,
 			periodo : TAXAS_BANCO[ANO_ATUAL-1].periodo,
 			cms : TAXAS_BANCO[ANO_ATUAL-1].cms,
-			valor_racao : TAXAS_BANCO[ANO_ATUAL-1].valor_racao,
-			valor_racao_conc : TAXAS_BANCO[ANO_ATUAL-1].valor_racao_conc
+			vol : TAXAS_BANCO[ANO_ATUAL-1].vol,
+			valor_racao : TAXAS_BANCO[ANO_ATUAL-1].valor_racao, 
+			valor_racao_conc : TAXAS_BANCO[ANO_ATUAL-1].valor_racao_conc,
+			valor_arroba : TAXAS_BANCO[ANO_ATUAL-1].valor_arroba
 		};
 	}
 	
@@ -239,28 +265,28 @@ app.controller("criaController", function($scope, $location, $window){
 			TAXAS = $scope.getTaxas();
 
 			for(var i=1; i<3; i++){
-				ANOS_DESEMPENHO[a-1][i] = {
+				ANOS_DESEMPENHO[a-1][i*3] = {
 								ano : a,
 								descricao : TIPO[i*3],
-								qtd : $scope.getQtdDesempenho(a, i),
-								pvi : $scope.getPviDesempenho(a, i),
-								gmd : $scope.getGmdDesempenho(a, i),
-								periodo : $scope.getPeriodoDesempenho(a, i),
-								desmame : $scope.getDesmameDesempenho(a, i),
-								desmamea : $scope.getDesmameaDesempenho(a, i)
+								qtd : $scope.getQtdDesempenho(a, i*3),
+								pvi : $scope.getPviDesempenho(a, i*3),
+								gmd : $scope.getGmdDesempenho(a, i*3),
+								periodo : Math.round($scope.getPeriodoDesempenho(a, i*3)),
+								desmame : Math.round($scope.getDesmameDesempenho(a, i*3)),
+								desmamea : Math.round($scope.getDesmameaDesempenho(a, i*3))
 							}
 
 				$scope.form = {};
 				$scope.form.id;
-				$scope.form.ano = ANOS_DESEMPENHO[a-1][i].ano;
-				$scope.form.descricao = ANOS_DESEMPENHO[a-1][i].descricao;
-				$scope.form.qtd = ANOS_DESEMPENHO[a-1][i].qtd;
-				$scope.form.pvi = ANOS_DESEMPENHO[a-1][i].pvi;
-				$scope.form.gmd = ANOS_DESEMPENHO[a-1][i].gmd;
-				$scope.form.periodo = ANOS_DESEMPENHO[a-1][i].periodo;
-				$scope.form.desmame = ANOS_DESEMPENHO[a-1][i].desmame;
-				$scope.form.desmamea = ANOS_DESEMPENHO[a-1][i].desmamea;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.ano = ANOS_DESEMPENHO[a-1][i*3].ano;
+				$scope.form.descricao = ANOS_DESEMPENHO[a-1][i*3].descricao;
+				$scope.form.qtd = ANOS_DESEMPENHO[a-1][i*3].qtd;
+				$scope.form.pvi = ANOS_DESEMPENHO[a-1][i*3].pvi;
+				$scope.form.gmd = ANOS_DESEMPENHO[a-1][i*3].gmd;
+				$scope.form.periodo = ANOS_DESEMPENHO[a-1][i*3].periodo;
+				$scope.form.desmame = ANOS_DESEMPENHO[a-1][i*3].desmame;
+				$scope.form.desmamea = ANOS_DESEMPENHO[a-1][i*3].desmamea;
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 							
 				basel.database.insert("cria_desempenho", $scope.form);
 			}
@@ -268,32 +294,31 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoDesempenho = function(ano){
-		ANO_ATUAL = ano;
 		$scope.anoDesempenho = ANOS_DESEMPENHO[ano-1];
 	}
 
 	$scope.getQtdDesempenho = function(ano, tipo){
-		return 0;
+		return EVOLUCAO_BANCO[ano-1][tipo-1].cabf;
 	}
 
-	$scope.getPviDesempenho = function(ano, tipo){
-		return 0;
+	$scope.getPviDesempenho = function(ano, tipo){		
+		return TAXAS.pvi;
 	}
 
 	$scope.getGmdDesempenho = function(ano, tipo){
-		return 0;
+		return TAXAS.gmd;
 	}
 
 	$scope.getPeriodoDesempenho = function(ano, tipo){
-		return 0;
+		return TAXAS.periodo;
 	}
 
 	$scope.getDesmameDesempenho = function(ano, tipo){
-		return 0;
+		return ((TAXAS.periodo * 30) * TAXAS.gmd) + TAXAS.pvi;
 	}
 
 	$scope.getDesmameaDesempenho = function(ano, tipo){
-		return 0;
+		return $scope.getDesmameDesempenho(ano, tipo)/30;
 	}
 
 
@@ -309,9 +334,9 @@ app.controller("criaController", function($scope, $location, $window){
 								ano : a,
 								cms : $scope.getCmsAlimentacao(a, i),
 								vol : $scope.getVolAlimentacao(a, i),
-								volf : $scope.getVolfAlimentacao(a, i),
-								conc : $scope.getConcAlimentacao(a, i),
-								conf : $scope.getConfAlimentacao(a, i)
+								volf : Math.round($scope.getVolfAlimentacao(a, i)),
+								conc : Math.round($scope.getConcAlimentacao(a, i)),
+								conf : Math.round($scope.getConfAlimentacao(a, i))
 							}
 
 				$scope.form = {};
@@ -323,7 +348,7 @@ app.controller("criaController", function($scope, $location, $window){
 				$scope.form.volf = ANOS_ALIMENTACAO[a-1][i].volf;
 				$scope.form.conc = ANOS_ALIMENTACAO[a-1][i].conc;
 				$scope.form.conf = ANOS_ALIMENTACAO[a-1][i].conf;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 							
 				basel.database.insert("cria_alimentacao", $scope.form);
 			}
@@ -331,28 +356,28 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoAlimentacao = function(ano){
-		ANO_ATUAL = ano;
+		//ANO_ATUAL = ano;
 		$scope.anoAlimentacao = ANOS_ALIMENTACAO[ano-1];
 	}
 
 	$scope.getCmsAlimentacao = function(ano, tipo){
-		return 0;
+		return TAXAS.cms;
 	}
 
 	$scope.getVolAlimentacao = function(ano, tipo){
-		return 0;
+		return TAXAS.vol;
 	}
 
 	$scope.getVolfAlimentacao = function(ano, tipo){
-		return 0;
+		return ((($scope.getPviDesempenho(ano, tipo) + $scope.getDesmameDesempenho(ano, tipo)) /2) * TAXAS.cms/100) * (TAXAS.vol/100) * $scope.getQtdDesempenho(ano,tipo) * (TAXAS.periodo * 30);
 	}
 
 	$scope.getConcAlimentacao = function(ano, tipo){
-		return 0;
+		return 100-TAXAS.vol;
 	}
 
 	$scope.getConfAlimentacao = function(ano, tipo){
-		return 0;
+		return $scope.getVolfAlimentacao(ano, tipo) * $scope.getConcAlimentacao(ano, tipo) / TAXAS.vol;
 	}
 
 
@@ -382,7 +407,7 @@ app.controller("criaController", function($scope, $location, $window){
 				$scope.form.con = ANOS_RACAO[a-1][i].con;
 				$scope.form.cont = ANOS_RACAO[a-1][i].cont;
 				$scope.form.total = ANOS_RACAO[a-1][i].total;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 							
 				basel.database.insert("cria_racao", $scope.form);
 			}
@@ -390,28 +415,28 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoRacao = function(ano){
-		ANO_ATUAL = ano;
+		//ANO_ATUAL = ano;
 		$scope.anoRacao = ANOS_RACAO[ano-1];
 	}
 
 	$scope.getValorRacao = function(ano, tipo){
-		return 0;
+		return TAXAS.valor_racao;
 	}
 
 	$scope.getValortRacao = function(ano, tipo){
-		return 0;
+		return $scope.getValorRacao(ano, tipo) * $scope.getVolfAlimentacao(ano, tipo);
 	}
 
 	$scope.getConRacao = function(ano, tipo){
-		return 0;
+		return TAXAS.valor_racao_conc;
 	}
 
 	$scope.getContRacao = function(ano, tipo){
-		return 0;
+		return $scope.getConRacao(ano, tipo) * $scope.getConfAlimentacao(ano, tipo);
 	}
 
 	$scope.getTotalRacao = function(ano, tipo){
-		return 0;
+		return $scope.getContRacao(ano,tipo) + $scope.getValortRacao(ano,tipo);
 	}
 
 	/* PRODUCAO */
@@ -434,7 +459,7 @@ app.controller("criaController", function($scope, $location, $window){
 				$scope.form.ano = ANOS_PRODUCAO[a-1][i].ano;
 				$scope.form.valor = ANOS_PRODUCAO[a-1][i].valor;
 				$scope.form.valor_animal = ANOS_PRODUCAO[a-1][i].valor_animal;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 
 							
 				basel.database.insert("cria_producao", $scope.form);
@@ -443,16 +468,16 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoProducao = function(ano){
-		ANO_ATUAL = ano;
+		//ANO_ATUAL = ano;
 		$scope.anoProducao = ANOS_PRODUCAO[ano-1];
 	}
 
 	$scope.getValorProducao = function(ano, tipo){
-		return 0;
+		return TAXAS.valor_arroba;
 	}
 
 	$scope.getValorAnimal = function(ano, tipo){
-		return 0;
+		return TAXAS.valor_arroba * Math.round($scope.getDesmameaDesempenho(ano,tipo));
 	}
 
 	/* OPERACIONAL */
@@ -475,7 +500,7 @@ app.controller("criaController", function($scope, $location, $window){
 				$scope.form.ano = ANOS_OPERACIONAL[a-1][i].ano;
 				$scope.form.qtd = ANOS_OPERACIONAL[a-1][i].qtd;
 				$scope.form.valor = ANOS_OPERACIONAL[a-1][i].valor;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 							
 				basel.database.insert("cria_operacional", $scope.form);
 			}
@@ -483,7 +508,7 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoOperacional = function(ano){
-		ANO_ATUAL = ano;
+		//ANO_ATUAL = ano;
 		$scope.anoOperacional = ANOS_OPERACIONAL[ano-1];
 	}
 
@@ -515,7 +540,7 @@ app.controller("criaController", function($scope, $location, $window){
 				$scope.form.ano = ANOS_BALANCO[a-1][i].ano;
 				$scope.form.animal = ANOS_BALANCO[a-1][i].animal;
 				$scope.form.arroba = ANOS_BALANCO[a-1][i].arroba;
-				$scope.form.propriedadeId_FK = $scope.getIdPropriedade();
+				$scope.form.propriedadeId_FK = Propriedade.getId();
 							
 				basel.database.insert("cria_balanco", $scope.form);
 			}
@@ -523,7 +548,7 @@ app.controller("criaController", function($scope, $location, $window){
 	}
 
 	$scope.getAnoBalanco = function(ano){
-		ANO_ATUAL = ano;
+		//ANO_ATUAL = ano;
 		$scope.anoBalanco = ANOS_BALANCO[ano-1];
 	}
 
@@ -533,6 +558,18 @@ app.controller("criaController", function($scope, $location, $window){
 
 	$scope.getArrobaBalanco = function(ano, tipo){
 		return 0;
+	}
+
+	$scope.delete = function(){
+		if(confirm("Deseja realmente Resetar?")){
+			basel.database.delete("cria_taxas", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("cria_balanco", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("cria_alimentacao", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("cria_desempenho", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("cria_producao", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("cria_operacional", {propriedadeId_FK : Propriedade.getId()});
+			$location.path('/evolucao');			
+		}
 	}
 
 	$scope.cancel = function(){
