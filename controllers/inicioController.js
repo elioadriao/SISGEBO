@@ -1,6 +1,7 @@
 "use strict";
 app.controller("inicioController", function($scope, $rootScope, $location, $window, AuthenticationService, Propriedade){
 	
+	$scope.reserva = {"10%" : 0.1, "15%" : 0.15, "20%" : 0.2, "25%" : 0.25, "30%" : 0.3, "35%" : 0.35, "40%" : 0.4, "45%" : 0.45, "50%" : 0.5};
 	//Lista as Propriedades
 	$scope.list = function(){
 		$scope.idPropriedade = Propriedade.getId();
@@ -59,6 +60,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	//Salva no Banco
 	$scope.save = function(){
 		$scope.form.usuarioLogin_FK = $scope.getUser();
+		$scope.form.reserva = $scope.selectedReserva * $scope.form.area;
 
 		if($scope.form["id"]){
 			//Edit

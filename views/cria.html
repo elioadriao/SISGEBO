@@ -18,7 +18,7 @@
 	<!-- DESEMPENHO -->
 		<div class="col-md-6">
 			<h2 class="text-right">Desempenho Animal</h2>
-			<table class="table table-responsive table-hover table-sm table-bordered">
+			<table class="table table-responsive table-hover table-sm table-bordered" ng-init="getAno(1)">
 				<thead class="basel-table-head"><tr>
 					<th>Descricao</th>
 					<th>Qtd</th>
@@ -53,11 +53,11 @@
 				</tr></thead>
 				<tbody class="basel-table-body"><tr ng-repeat="item in anoRacao">
 					<td>{{item.descricao}}</td>
-					<td>{{item.valor}}</td>
-					<td>{{item.valort}}</td>
-					<td>{{item.con}}</td>
-					<td>{{item.cont}}</td>
-					<td>{{item.total}}</td>
+					<td>{{item.valor | number:2}}</td>
+					<td>{{item.valort | number:2}}</td>
+					<td>{{item.con | number:2}}</td>
+					<td>{{item.cont | number:2}}</td>
+					<td>{{item.total | number:2}}</td>
 				</tr></tbody>
 			</table>
 		</div>
@@ -142,28 +142,28 @@
 				</div>
 				<div class="modal-body">
 					<form class="basel-form">						
-						<div class="form-group">
+						<div class="form-group col-md-4">
 							<label>P.V. <small>inicial</small></label><input type="text" class="form-control" ng-model="form.pvi">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-4">
 							<label>G.M.D.</label><input type="text" class="form-control" ng-model="form.gmd">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-4">
 							<label>Periodo</label><input type="text" class="form-control" ng-model="form.periodo">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-6">
 							<label>C.M.S. <small>(%/PV)</small></label><input type="text" class="form-control" ng-model="form.cms">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-6">
 							<label>Vol. da Alimentacao<small>(%)</small></label><input type="text" class="form-control" ng-model="form.vol">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-6">
 							<label>Valor da Racao <small>(R$/Kg)</small></label><input type="text" class="form-control" ng-model="form.valor_racao">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-6">
 							<label>Valor do Concentrado <small>(R$/Kg)</small></label><input type="text" class="form-control" ng-model="form.valor_racao_conc">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-md-12">
 							<label>Valor da Arroba <small>(R$/@)</small></label><input type="text" class="form-control" ng-model="form.valor_arroba">
 						</div>
 					</form>

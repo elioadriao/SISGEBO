@@ -332,11 +332,11 @@ app.controller("criaController", function($scope, $location, $window, Propriedad
 				ANOS_ALIMENTACAO[a-1][i] = {
 								descricao : TIPO[i*3],
 								ano : a,
-								cms : $scope.getCmsAlimentacao(a, i),
-								vol : $scope.getVolAlimentacao(a, i),
-								volf : Math.round($scope.getVolfAlimentacao(a, i)),
-								conc : Math.round($scope.getConcAlimentacao(a, i)),
-								conf : Math.round($scope.getConfAlimentacao(a, i))
+								cms : $scope.getCmsAlimentacao(a, i*3),
+								vol : $scope.getVolAlimentacao(a, i*3),
+								volf : Math.round($scope.getVolfAlimentacao(a, i*3)),
+								conc : Math.round($scope.getConcAlimentacao(a, i*3)),
+								conf : Math.round($scope.getConfAlimentacao(a, i*3))
 							}
 
 				$scope.form = {};
@@ -369,7 +369,7 @@ app.controller("criaController", function($scope, $location, $window, Propriedad
 	}
 
 	$scope.getVolfAlimentacao = function(ano, tipo){
-		return ((($scope.getPviDesempenho(ano, tipo) + $scope.getDesmameDesempenho(ano, tipo)) /2) * TAXAS.cms/100) * (TAXAS.vol/100) * $scope.getQtdDesempenho(ano,tipo) * (TAXAS.periodo * 30);
+		return ((($scope.getPviDesempenho(ano, tipo) + $scope.getDesmameDesempenho(ano, tipo)) /2) * TAXAS.cms*0.01) * (TAXAS.vol*0.01) * $scope.getQtdDesempenho(ano,tipo) * (TAXAS.periodo * 30);
 	}
 
 	$scope.getConcAlimentacao = function(ano, tipo){
