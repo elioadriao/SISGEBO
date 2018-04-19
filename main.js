@@ -16,7 +16,8 @@ app.on('ready', function() {
   // Cria a janela do browser.
   mainWindow = new BrowserWindow({
     width: 1280,
-    height: 720
+    height: 720,
+    icon: './model/icone.ico'
   });
 
   // Carrega o arquivo html principal.

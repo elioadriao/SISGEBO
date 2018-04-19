@@ -17,6 +17,18 @@ app.controller("rebanhoController", function($scope, $location, $window, Proprie
 
 	/* Cria Tabela do Rebanho */
 	$scope.create = function(){
+		var uaAnimal = {
+			1 : 1.00,
+			2 : 1.25, 
+			3 : 0.4, 
+			4 : 0.6, 
+			5 : 0.8, 
+			6 : 0.4, 
+			7 : 0.6, 
+			8 : 0.8,
+			9 : 1.0
+		};
+
 		for (var a=1; a<=10; a++){
 			for (var i=1; i<=9; i++){
 				$scope.form = {};
@@ -25,7 +37,7 @@ app.controller("rebanhoController", function($scope, $location, $window, Proprie
 				$scope.form.ano = a;
 				$scope.form.qtd = 0;
 				$scope.form.valor = 0;
-				$scope.form.peso = 0;
+				$scope.form.peso = 450*uaAnimal[i];
 				$scope.form.propriedadeId_FK = Propriedade.getId();
 				$scope.new();
 			}

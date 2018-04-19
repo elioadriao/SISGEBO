@@ -18,12 +18,10 @@
         // redirect to login page if not logged in
         if (!$rootScope.globals.currentUser) {
             $('#menubar').hide();
-            $('#menubarb').hide();
             $location.path('/login');
             //$('#loginController').modal('show');
         }else{
             $('#menubar').show();
-            $('#menubarb').show();
         }
     });
 

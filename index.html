@@ -31,30 +31,23 @@
 </head>
 <body>
 	<!-- Menu -->
-	<nav class="navbar navbar-default navbar-fixed-top" id="menubar">
+	<nav class="navbar navbar-default navbar-fixed-bottom" id="menubar">
 		<div class="container-fluid">
 			<!--div class="navbar-header">
 				<a class="navbar-brand" href="#/">SISGEBO</a>
 			</div-->
-			
-			<div>
 			<ul class="nav navbar-nav">
-									
-				<li class="dropdown" role="presentation">
-					<a class="btn btn-success btn-sq-sm" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-ok"></a>
-					<ul class="dropdown-menu">
-			        	<li role="presentation"><a href="#/maquinas">Maquinas</a></li>
-				        <li role="presentation"><a href="#/benfeitorias">Benfeitorias</a></li>
-				        <li role="presentation"><a href="#/manutencao">Manutencao</a></li>
-				        <li role="separator" class="divider"></li>
-				        <li role="presentation"><a href="#/rebanho">Rebanho</a></li>
-				        <li role="presentation"><a href="#/evolucao">Evolucao Rebanho</a></li>
-				        <li role="presentation"><a href="#/null">Terminacao</a></li>
-				        <li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
-					</ul>
-				</li>
+				<li class="dropdown-submenu">
+					<a href="" ng-click="menuPro()"><span class="glyphicon glyphicon-eye-open"> Projecao</a>
+			  	</li>
 
-				<li class="dropdown" role="presentation">
+			  	<li class="dropdown-submenu">
+					<a href="" ng-click="menuAdm()"><span class="glyphicon glyphicon-usd"> Administrativo</a>
+			  	</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<!--li class="dropdown" role="presentation">
 					<a data-toggle="dropdown" href="">Fase de Cria</a>
 					<ul class="dropdown-menu">
 				        <li class="dropdown-submenu">
@@ -88,14 +81,178 @@
 					  	</li>
 					</ul>
 				</li>
-				
+
+				<li class="dropdown" role="presentation">
+					<a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></a>
+					<ul class="dropdown-menu">
+			        	<li role="presentation"><a href="#/maquinas">Maquinas</a></li>
+				        <li role="presentation"><a href="#/benfeitorias">Benfeitorias</a></li>
+				        <li role="presentation"><a href="#/manutencao">Manutencao</a></li>
+				        <li role="separator" class="divider"></li>
+				        <li role="presentation"><a href="#/rebanho">Rebanho</a></li>
+				        <li role="presentation"><a href="#/evolucao">Evolucao Rebanho</a></li>
+				        <li role="presentation"><a href="#/null">Terminacao</a></li>
+				        <li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
+					</ul>
+				</li-->
+
+				<li class="dropdown" role="presentation">
+					<a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></a>
+					<ul class="dropdown-menu">
+			        	<li role="presentation"><a href="" ng-click="logoff()">Deslogar</a></li>
+					</ul>
+				</li>
 			</ul>
-			</div>
 		</div>
 	</nav>
 
 	<!-- Onde será carregada a view -->
 	<div ng-view="" class="container"></div>
 
+	<div class="modal fade" id="projecaoMenu" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                	<h4 class="text-center">MENU PROJECAO</h4>
+                </div>
+                <div class="modal-body col-md-12">
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/maquinas')">Maquinas</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/benfeitorias')">Benfeitorias</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/manutencao')">Manutencao</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/rebanho')">Rebanho</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/evolucao')">Maquinas</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-4">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/cria')">Cria</button>
+                        </div>
+                	</div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="admMenu" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                	<h4 class="text-center">MENU ADMINISTRACAO</h4>
+                </div>
+                <div class="modal-body col-md-12">
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Inventario</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Depreciacoes</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Variacao Rebanho</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Custo Fixo</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Custo Variavel</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Despesas Adm</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Investimentos</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Custo Operacional</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Custo de Oportunidade</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Custo Total</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Receitas</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-3">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Balanco Patrimonial</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-6">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Analise de Resultados</button>
+                        </div>
+                	</div>
+
+                	<div class="col-md-6">
+                		<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Fluxo de Caixa</button>
+                        </div>
+                	</div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

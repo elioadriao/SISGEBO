@@ -6805,12 +6805,13 @@ button.close {
 .btn-sq-lg {
   width: 150px !important;
   height: 150px !important;
+  margin-bottom: 15px;
 }
 
 .btn-sq {
   width: 100px !important;
   height: 100px !important;
-  font-size: 10px;
+  margin-bottom: 10px;
 }
 
 .btn-sq-sm {
@@ -6822,13 +6823,5 @@ button.close {
 .btn-sq-xs {
   width: 25px !important;
   height: 25px !important;
-  padding:2px;
+  padding: 2px;
 }
-
-.navbar {
-   background-color: transparent;
-   background: transparent;
-   border-color: transparent;
-}
-
-.navbar li { color: #000 } 

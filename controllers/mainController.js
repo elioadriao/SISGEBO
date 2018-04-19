@@ -9,12 +9,18 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 		$location.path('/login');
 	}
 
-	$scope.getUser = function(){
-		if($rootScope.globals.currentUser){
-			return $rootScope.globals.currentUser.username	
-		}else{
-			return null;
-		}
+	$scope.menuPro = function (){
+		$('#projecaoMenu').modal('show');
+	}
+
+	$scope.menuAdm = function (){
+		$('#admMenu').modal('show');
+	}
+
+	$scope.redir = function(location){
+		$('#projecaoMenu').modal('hide');
+		$('#admMenu').modal('hide');
+		$location.path(location);	
 	}
 
 });
