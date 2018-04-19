@@ -8,30 +8,30 @@
                 </div>
                 <hr>
                 <div class="container">
-                    <table class="table table-sm table-bordered">
+                    <table class="table table-sm table-borderless">
                         <thead class="thead-inverse"">
                             <th>Propriedade</th>
                             <th>Municipio</th>
-                            <th>Área</th>
-                            <th>Reserva</th>
-                            <th>Rebanho Atual</th>
-                            <th>Rebanho Maximo</th>
-                            <th>Balanço</th>
                         </thead>
-                        <tbody class="basel-table-body">
+                        <tbody>
                             <tr>
                                 <td>{{atual.nome}}</td>
                                 <td>{{atual.municipio}}</td>
-                                <td>{{atual.area}} <small>Hectares</small></td>
-                                <td>{{atual.reserva}} <small>Hectares</small></td>
-                                <td>0</td>
-                                <td>{{atual.area - atual.reserva}} <small>Animais</small></td>
-                                <td>R$ 0,00</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="container">
+                    <div class="text-center" role="group">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="">Projecao</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="">Administrativo</button>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="container">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-warning" ng-click="clearId()" >Deslogar Propriedade</button>
@@ -40,7 +40,7 @@
                             <button type="button" class="btn btn-danger" ng-click="logoff()" >Deslogar Usuario</button>
                         </div>
                     </div>
-                </div>                  
+                </div-->                  
             </div>
         </div>
     </div>
