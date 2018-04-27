@@ -562,7 +562,7 @@ app.controller("criaController", function($scope, $location, $window, Propriedad
 
 	$scope.delete = function(){
 		if(confirm("Deseja realmente Resetar?")){
-			basel.database.delete("cria_taxas", {propriedadeId_FK : Propriedade.getId()});
+			//basel.database.delete("cria_taxas", {propriedadeId_FK : Propriedade.getId()});
 			basel.database.delete("cria_balanco", {propriedadeId_FK : Propriedade.getId()});
 			basel.database.delete("cria_alimentacao", {propriedadeId_FK : Propriedade.getId()});
 			basel.database.delete("cria_desempenho", {propriedadeId_FK : Propriedade.getId()});

@@ -343,7 +343,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 	$scope.delete = function(){
 		if(confirm("Deseja realmente Resetar?")){
 			basel.database.delete("evolucao", {propriedadeId_FK : Propriedade.getId()});
-			basel.database.delete("evolucao_taxas", {propriedadeId_FK : Propriedade.getId()});
+			//basel.database.delete("evolucao_taxas", {propriedadeId_FK : Propriedade.getId()});
 			$location.path('/rebanho');			
 		}
 	}

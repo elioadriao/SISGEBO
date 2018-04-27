@@ -36,17 +36,14 @@
 			<!--div class="navbar-header">
 				<a class="navbar-brand" href="#/">SISGEBO</a>
 			</div-->
-			<ul class="nav navbar-nav">
-				<li class="dropdown-submenu">
+			<ul class="nav nav-pills">
+				<li class="dropdown-submenu" role="presentation">
 					<a href="" ng-click="menuPro()"><span class="glyphicon glyphicon-eye-open"> Projecao</a>
 			  	</li>
 
-			  	<li class="dropdown-submenu">
+			  	<li class="dropdown-submenu" role="presentation">
 					<a href="" ng-click="menuAdm()"><span class="glyphicon glyphicon-usd"> Administrativo</a>
 			  	</li>
-			</ul>
-
-			<ul class="nav navbar-nav navbar-right">
 				<!--li class="dropdown" role="presentation">
 					<a data-toggle="dropdown" href="">Fase de Cria</a>
 					<ul class="dropdown-menu">
@@ -95,12 +92,19 @@
 				        <li role="presentation"><a href="#/null">Matrizes e Reprodutores</a></li>
 					</ul>
 				</li-->
-
-				<li class="dropdown" role="presentation">
+				<li class="dropdown navbar-right" role="presentation">
 					<a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></a>
 					<ul class="dropdown-menu">
 			        	<li role="presentation"><a href="" ng-click="logoff()">Deslogar</a></li>
 					</ul>
+				</li>
+
+				<li class="navbar-right" role="presentation">
+					<a href="" ng-click="next()"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				</li>
+
+				<li class="navbar-right" role="presentation">
+					<a href="" ng-click="prev()"><span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 			</ul>
 		</div>
