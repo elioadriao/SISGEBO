@@ -39,6 +39,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/inventario',{
+        controller: 'inventarioController',
+        templateUrl: 'views/inventario.html'
+        });
     $routeProviderReference.when('/cria',{
         controller: 'criaController',
         templateUrl: 'views/cria.html'
