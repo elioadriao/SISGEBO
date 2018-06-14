@@ -1,0 +1,77 @@
+<div ng-controller="depreciacoesController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Depreciacões <small>Gerais</small></h1>
+
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+			<a href="" data-toggle="modal" data-target="#depreciacoesModal"><span class="glyphicon glyphicon-paperclip"></span></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
+			<thead class="thead-inverse">
+				<th>Bens de Capital</th>
+				<th>Valor Inicial(R$)</th>
+				<th>Valor de Sucata</th>
+				<th>Capital Medio</th>
+				<th>Depreciação Anual</th>
+				<th>Remuneracão de Capital</th>
+				<th>Custo Fixo</th>
+				<th>Amortização Anual</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr ng-repeat="item in inventario">
+				<td>{{item.descricao}}</td>
+				<td>{{item.valor_inicial | number:2}}</td>
+				<td>{{item.valor_final | number:2}}</td>
+				<td>{{item.medio | number:2}}</td>
+				<td>{{item.anual | number:2}}</td>
+				<td>{{item.remuneracao | number:2}}</td>
+				<td>{{item.fixo | number:2}}</td>
+				<td>{{item.percent | number:1}} %</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="depreciacoesModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Taxas de Amortização</h4>
+				</div>
+
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group">
+							<input type="hidden" class="form-control" ng-model="form.id">
+						</div>
+						<div class="form-group">
+							<label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao">
+						</div>
+						<div ng-repeat="item in preInventario">
+							<div class="form-group">
+								<label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao">
+							</div>
+							<div class="form-group">
+								<label>Valor de Mercado</label><input type="text" class="form-control" ng-model="form.valor_inicial">
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -55,7 +55,7 @@ app.controller("inventarioController", function($scope, $location, Propriedade){
 			if(CAPITAL_TOTAL == 0 || INVENTARIO_BANCO[i].medio == 0){
 				INVENTARIO_BANCO[i].percent = 0;
 			}else{
-				INVENTARIO_BANCO[i].percent = (CAPITAL_TOTAL - INVENTARIO_BANCO[i].medio) / CAPITAL_TOTAL;
+				INVENTARIO_BANCO[i].percent = (INVENTARIO_BANCO[i].medio*100) / CAPITAL_TOTAL;
 			}
 		}
 
