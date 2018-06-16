@@ -22,7 +22,6 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 
 		if(res){
 			console.log("Carregou Inventario..");
-			$scope.preInventario = INVENTARIO_BD;
 			$scope.initDepreciacoes();
 		}else{
 			console.log("Nao Carregou Inventario..");
@@ -50,7 +49,8 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 			$scope.tratarDepreciacoes();
 		}else{
 			console.log("Nao Carregou Depreciacoes..");
-			$('#depreciacoesModal').modal('show');
+			$scope.createDepreciacoes();
+			//$('#depreciacoesModal').modal('show');
 		}
 	}
 
@@ -65,12 +65,14 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 			INVENTARIO_BD[i].percent = 100 / INVENTARIO_BD[i].amortizacao;
 		}
 
+		$scope.depreciacoes = DEPRECIACOES_BD;
 		$scope.inventario = INVENTARIO_BD;
 	}
 
 	$scope.sincAmortizacao = function(){
 		for(i in INVENTARIO_BD){
-			for(d in INVENTARIO_BD){
+			var d;
+			for(d in DEPRECIACOES_BD){
 				if(INVENTARIO_BD[i].descricao == DEPRECIACOES_BD[d].descricao){
 					INVENTARIO_BD[i].amortizacao = DEPRECIACOES_BD[d].amortizacao;
 				}
@@ -78,23 +80,34 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 		}
 	}
 
+	$scope.createDepreciacoes = function(){
+		for(i in INVENTARIO_BD){
+			$scope.form = {}
+			$scope.form.id;
+			$scope.form.descricao = INVENTARIO_BD[i].descricao;
+			$scope.form.juros = 0.0;
+			$scope.form.amortizacao = 1.0;
+			$scope.form.propriedadeId_FK = Propriedade.getId();
+			$scope.new();
+		}
+		$scope.initDepreciacoes();
+	}
+
 	//Saving
 	$scope.save = function(){
 		$scope.form.propriedadeId_FK = Propriedade.getId();
 		$('#depreciacoesModal').modal('hide');
+		
+		var d;
+		for(d in $scope.depreciacoes){
+			$scope.form.descricao = $scope.depreciacoes[d].descricao;
+			$scope.form.amortizacao = $scope.depreciacoes[d].amortizacao;
 
-		if(ISEDIT){
-			var id = $scope.form["id"];
-			delete $scope.form["id"];
-			delete $scope.form.$$hashKey; //Apaga elemento $$hashKey do objeto
-			basel.database.update("adm_depreciacoes", $scope.form, {id: id}); //entidade, dados, where
-
-			$scope.initInventario();
-			ISEDIT = false;
-		}else{			
-			$scope.new();
+			basel.database.update("adm_depreciacoes", $scope.form, {"descricao" : $scope.form.descricao}); //entidade, dados, where
 		}
-		//$location.path('/inventario');
+
+		$scope.initDepreciacoes();
+		//$location.path('/inventario');*/
 	}
 
 	// Cancel form

@@ -47,15 +47,18 @@
 						<div class="form-group">
 							<input type="hidden" class="form-control" ng-model="form.id">
 						</div>
-						<div class="form-group">
-							<label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao">
+						<div class="form-group col-md-12">
+							<label>Juros de Remuneração</label><input type="text" class="form-control" ng-model="form.juros">
 						</div>
-						<div ng-repeat="item in preInventario">
-							<div class="form-group">
-								<label>Descricao</label><input type="text" class="form-control" ng-model="form.descricao">
+
+						<div ng-repeat="d in depreciacoes">
+							<div class="form-group col-md-6">
+								<label>Descricao</label>
+								<input type="text" class="form-control" ng-value="d.descricao" readonly>
 							</div>
-							<div class="form-group">
-								<label>Valor de Mercado</label><input type="text" class="form-control" ng-model="form.valor_inicial">
+							<div class="form-group col-md-6">
+								<label>Amortização</label>
+								<input type="text" class="form-control" ng-value="d.amortizacao" ng-model="d.amortizacao">
 							</div>
 						</div>
 					</form>

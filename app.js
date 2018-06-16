@@ -40,7 +40,7 @@
     *
     */
     $routeProviderReference.when('/depreciacoes',{
-        controller: 'idepreciacoesController',
+        controller: 'depreciacoesController',
         templateUrl: 'views/depreciacoes.html'
         });
     $routeProviderReference.when('/inventario',{
