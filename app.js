@@ -39,6 +39,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/vrebanho',{
+        controller: 'vrebanhoController',
+        templateUrl: 'views/vrebanho.html'
+        });
     $routeProviderReference.when('/depreciacoes',{
         controller: 'depreciacoesController',
         templateUrl: 'views/depreciacoes.html'

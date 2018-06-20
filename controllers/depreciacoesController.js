@@ -29,6 +29,7 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 		}
 	}
 
+	/* INICIA AS DEPRECIACOES */
 	$scope.initDepreciacoes = function(){	
 		
 		var SQL = "SELECT * FROM adm_depreciacoes WHERE propriedadeId_FK="+Propriedade.getId();
