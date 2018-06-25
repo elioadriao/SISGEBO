@@ -2,6 +2,7 @@
 app.controller("vrebanhoController", function($scope, $location, $window, Propriedade){
 
 	var VREBANHO_BD = [];
+	var TOTALAREA = 1;
 	var TOTALCABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var PESOMES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var ESTOQUE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -81,13 +82,17 @@ app.controller("vrebanhoController", function($scope, $location, $window, Propri
 
 	/* Salvando no Banco */
 	$scope.save = function(){
-		var id = $scope.form[$scope.primary_key];
-		delete $scope.form[$scope.primary_key];
-		delete $scope.form.$$hashKey; 
-		basel.database.update("adm_vrebanho", $scope.form, {id: id}); //entidade, dados, where
+		$('#vrebanhoModal').modal('hide');
+
+		for(i=0; i<12; i++){
+			//console.log($scope.form[i]);
+			//basel.database.update("adm_vrebanho", $scope.form[i], {"descricao": $scope.form[i].descricao, "propriedadeId_FK": Propriedade.getId()}); //entidade, dados, where
+			var SQL = "UPDATE adm_vrebanho SET qtd = "+$scope.form[i].qtd+", peso = "+$scope.form[i].peso+" WHERE propriedadeId_FK = "+Propriedade.getId()+" AND descricao = '"+$scope.form[i].descricao+"' AND mes = "+$scope.form[i].mes;
+			basel.database.runAsync(SQL, function(data){});
+		}
 		
 		$scope.form = {};
-		$('#vrebanhoModal').modal('hide');
+		$scope.initRebanho();
 	}
 
 	/* Inserindo no Banco */

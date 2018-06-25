@@ -31,7 +31,7 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 			ATUAL.key = ADM_PAGES[location];
 			ATUAL.value = location;
 		}
-		console.log(ATUAL);
+		console.log("Redirecionando.. "+ATUAL.value);
 		$('#projecaoMenu').modal('hide');
 		$('#admMenu').modal('hide');
 		$location.path(location);	

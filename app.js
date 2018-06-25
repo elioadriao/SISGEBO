@@ -19,7 +19,6 @@
         if (!$rootScope.globals.currentUser) {
             $('#menubar').hide();
             $location.path('/login');
-            //$('#loginController').modal('show');
         }else{
             $('#menubar').show();
         }
