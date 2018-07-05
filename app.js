@@ -38,6 +38,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/custofixo',{
+        controller: 'custofixoController',
+        templateUrl: 'views/custofixo.html'
+        });
     $routeProviderReference.when('/vrebanho',{
         controller: 'vrebanhoController',
         templateUrl: 'views/vrebanho.html'

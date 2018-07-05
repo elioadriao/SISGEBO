@@ -1,0 +1,116 @@
+<div ng-controller="custofixoController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Custo Fixo</h1>
+
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
+			<thead class="thead-inverse">
+				<th>Descrição</th>
+				<th>Janeiro</th>				
+				<th>Fevereiro</th>
+				<th>Março</th>
+				<th>Abril</th>
+				<th>Maio</th>
+				<th>Junho</th>
+				<th>Julho</th>
+				<th>Agosto</th>
+				<th>Setembro</th>
+				<th>Outubro</th>
+				<th>Novembro</th>
+				<th>Dezembro</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr ng-repeat="item in custofixo">
+				<td>{{item.descricao}}</td>
+				<td>{{item.jan | number:2}}</td>
+				<td>{{item.fev | number:2}}</td>
+				<td>{{item.mar | number:2}}</td>
+				<td>{{item.abr | number:2}}</td>
+				<td>{{item.mai | number:2}}</td>
+				<td>{{item.jun | number:2}}</td>
+				<td>{{item.jul | number:2}}</td>
+				<td>{{item.ago | number:2}}</td>
+				<td>{{item.sem | number:2}}</td>
+				<td>{{item.out | number:2}}</td>
+				<td>{{item.nov | number:2}}</td>
+				<td>{{item.dez | number:2}}</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
+			<thead class="thead-inverse">
+				<th></th>
+				<th>Janeiro</th>				
+				<th>Fevereiro</th>
+				<th>Março</th>
+				<th>Abril</th>
+				<th>Maio</th>
+				<th>Junho</th>
+				<th>Julho</th>
+				<th>Agosto</th>
+				<th>Setembro</th>
+				<th>Outubro</th>
+				<th>Novembro</th>
+				<th>Dezembro</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<td>Custo Total</td>
+				<td ng-repeat="mes in fixopormes">{{mes | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Custo p/ Cabeca</td>
+				<td ng-repeat="cab in fixoporcab">{{cab | number:2}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="custofixoModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Cadastro de Taxas de Amortização</h4>
+				</div>
+
+				<div class="modal-body">
+					<form class="basel-form">						
+						<div class="form-group">
+							<input type="hidden" class="form-control" ng-model="form.id">
+						</div>
+						<div class="form-group col-md-12">
+							<label>Juros de Remuneração</label><input type="text" class="form-control" ng-model="form.juros">
+						</div>
+
+						<div ng-repeat="d in depreciacoes">
+							<div class="form-group col-md-6">
+								<label>Descricao</label>
+								<input type="text" class="form-control" ng-value="d.descricao" readonly>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Amortização</label>
+								<input type="text" class="form-control" ng-value="d.amortizacao" ng-model="d.amortizacao">
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

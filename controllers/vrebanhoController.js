@@ -29,7 +29,6 @@ app.controller("vrebanhoController", function($scope, $location, $window, Propri
 
 		if(res){
 			console.log("Carregou Rebanho..");
-			console.log(VREBANHO_BD);
 			$scope.tratarRebanho();
 		}else{
 			console.log("Nao Carregou Rebanho..");
