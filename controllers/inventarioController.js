@@ -14,7 +14,7 @@ app.controller("inventarioController", function($scope, $location, Propriedade){
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
 				INVENTARIO_BANCO = data;
-				console.log(INVENTARIO_BANCO);
+				//console.log(INVENTARIO_BANCO);
 				res = true;
 			}else{
 				res = false;
@@ -110,7 +110,7 @@ app.controller("inventarioController", function($scope, $location, Propriedade){
 	}
 
 	//Excluindo
-	$scope.delete = function(data){
+	$scope.delete = function(){
 		if(confirm("Deseja Resetar Inventario?")){
 			basel.database.delete("adm_inventario", {propriedadeId_FK : Propriedade.getId()});
 		}

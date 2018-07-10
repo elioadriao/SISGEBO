@@ -45,7 +45,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
 				DEPRECIACOES_BD = data;
-				console.log(DEPRECIACOES_BD);
+				//console.log(DEPRECIACOES_BD);
 				res = true;
 			}else{
 				res = false;
@@ -149,7 +149,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 			TOTALFIXOMES[5] += CUSTOFIXO_BD[i].jun;
 			TOTALFIXOMES[6] += CUSTOFIXO_BD[i].jul;
 			TOTALFIXOMES[7] += CUSTOFIXO_BD[i].ago;
-			TOTALFIXOMES[8] += CUSTOFIXO_BD[i].set;
+			TOTALFIXOMES[8] += CUSTOFIXO_BD[i].sem;
 			TOTALFIXOMES[9] += CUSTOFIXO_BD[i].out;
 			TOTALFIXOMES[10] += CUSTOFIXO_BD[i].nov;
 			TOTALFIXOMES[11] += CUSTOFIXO_BD[i].dez;
@@ -191,21 +191,15 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 		$scope.initCustoFixo();
 	}
 
-	/*  */
 	$scope.save = function(){
+		$scope.form.id;
 		$scope.form.propriedadeId_FK = Propriedade.getId();
-		$('#depreciacoesModal').modal('hide');
+		$('#custofixoModal').modal('hide');
 		
-		var d;
-		for(d in $scope.depreciacoes){
-			$scope.form.descricao = $scope.depreciacoes[d].descricao;
-			$scope.form.amortizacao = $scope.depreciacoes[d].amortizacao;
+		$scope.new();
 
-			basel.database.update("adm_custofixo", $scope.form, {"descricao" : $scope.form.descricao}); //entidade, dados, where
-		}
-
-		$scope.initDepreciacoes();
-		//$location.path('/inventario');*/
+		$scope.initCustoFixo();
+		//$location.path('/inventario');
 	}
 
 	// Cancel form
@@ -218,7 +212,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 		$scope.form = {};
 	}
 
-	//Abrindo para editar
+	/*Abrindo para editar
 	$scope.edit = function(data){
 		$scope.form = {}
 		$scope.form.id = data.id;
@@ -228,6 +222,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 		ISEDIT = true;
 		$('#depreciacoesModal').modal('show');
 	}
+	*/
 
 	//Excluindo
 	$scope.delete = function(data){

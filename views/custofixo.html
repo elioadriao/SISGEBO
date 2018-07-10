@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="page-header">
 			<h1>Custo Fixo</h1>
-
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+			<a href="" data-toggle="modal" data-target="#custofixoModal"><span class="glyphicon glyphicon-plus"></span></a>
 		</div>
 	</div>
 
@@ -42,6 +42,7 @@
 			</tr>
 			</tbody>
 		</table>
+
 		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
 			<thead class="thead-inverse">
 				<th></th>
@@ -61,11 +62,33 @@
 			<tbody class="basel-table-body">
 			<tr>
 				<td>Custo Total</td>
-				<td ng-repeat="mes in fixopormes">{{mes | number:2}}</td>
+				<td>{{fixopormes[0] | number:2}}</td>
+				<td>{{fixopormes[1] | number:2}}</td>
+				<td>{{fixopormes[2] | number:2}}</td>
+				<td>{{fixopormes[3] | number:2}}</td>
+				<td>{{fixopormes[4] | number:2}}</td>
+				<td>{{fixopormes[5] | number:2}}</td>
+				<td>{{fixopormes[6] | number:2}}</td>
+				<td>{{fixopormes[7] | number:2}}</td>
+				<td>{{fixopormes[8] | number:2}}</td>
+				<td>{{fixopormes[9] | number:2}}</td>
+				<td>{{fixopormes[10] | number:2}}</td>
+				<td>{{fixopormes[11] | number:2}}</td>
 			</tr>
 			<tr>
 				<td>Custo p/ Cabeca</td>
-				<td ng-repeat="cab in fixoporcab">{{cab | number:2}}</td>
+				<td>{{fixoporcab[0] | number:2}}</td>
+				<td>{{fixoporcab[1] | number:2}}</td>
+				<td>{{fixoporcab[2] | number:2}}</td>
+				<td>{{fixoporcab[3] | number:2}}</td>
+				<td>{{fixoporcab[4] | number:2}}</td>
+				<td>{{fixoporcab[5] | number:2}}</td>
+				<td>{{fixoporcab[6] | number:2}}</td>
+				<td>{{fixoporcab[7] | number:2}}</td>
+				<td>{{fixoporcab[8] | number:2}}</td>
+				<td>{{fixoporcab[9] | number:2}}</td>
+				<td>{{fixoporcab[10] | number:2}}</td>
+				<td>{{fixoporcab[11] | number:2}}</td>
 			</tr>
 			</tbody>
 		</table>
@@ -80,22 +103,56 @@
 
 				<div class="modal-body">
 					<form class="basel-form">						
-						<div class="form-group">
-							<input type="hidden" class="form-control" ng-model="form.id">
-						</div>
 						<div class="form-group col-md-12">
-							<label>Juros de Remuneração</label><input type="text" class="form-control" ng-model="form.juros">
+							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao">
 						</div>
 
-						<div ng-repeat="d in depreciacoes">
-							<div class="form-group col-md-6">
-								<label>Descricao</label>
-								<input type="text" class="form-control" ng-value="d.descricao" readonly>
-							</div>
-							<div class="form-group col-md-6">
-								<label>Amortização</label>
-								<input type="text" class="form-control" ng-value="d.amortizacao" ng-model="d.amortizacao">
-							</div>
+						<div class="form-group col-md-3">
+							<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
 						</div>
 					</form>
 				</div>
