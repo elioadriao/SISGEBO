@@ -1,20 +1,25 @@
 "use strict";
 app.controller("custovariavelController", function($scope, $location, Propriedade){
 
-	var CUSTOVARIAVEL_BD = [];
+	var CUSTO_VARIAVEL_BD = [];
 	var VREBANHO_BD = [];
-	var TOTALCABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var ESPECIFICACAO = ["Suplementação", "Linha Branca (Sal mineral)", "Carrapaticidas", "Mosca do chifre", "Vermífugo", "Vacina de aftosa",
-	 "Vacina clostridiose", "Outras vacinas", "Outros medicamentos", "Mão de obra temporária", "Materiais p/Fazenda", "Curral",
-	  "Frete Carretas", "Casas", "Tratores", "Máquinas", "Combustível", "Celular", "Encargos Bancos", "Elabor.Projeto Pecuario",
-	   "Energia elétrica", "Aquisição de animais"];
+	var TOTAL_CABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var AQUISICAO = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var TOTAL_VARIAVEL_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var TOTAL_VARIAVEL_C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var TOTAL_VARIAVEL_S = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var DESC_ANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
+					 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
+	var ESPECIFICACAO = ["Suplementacao", "Sal mineral", "Carrapaticidas", "Mosca do chifre", "Vermífugo", "Vacina de aftosa",
+	 "Vacina clostridiose", "Outras vacinas", "Outros medicamentos", "Mao de obra", "Materiais", "Curral", "Frete Carretas",
+	  "Casas", "Tratores", "Máquinas", "Combustível", "Celular", "Encargos Bancarios", "Projeto Pecuario", "Energia elétrica", "Aquisicao de animais"];
 
 	/*   */
 	$scope.initRebanho = function(){
-		for (i in DESCANIMAL){
-			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESCANIMAL[i]+"'";
+		for (i in DESC_ANIMAL){
+			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESC_ANIMAL[i]+"'";
 			var res = false;
-			//console.log(DESCANIMAL[i]);
+			//console.log(DESC_ANIMAL[i]);
 
 			basel.database.runAsync(SQL, function(data){
 				if(data[0] != null){
@@ -42,7 +47,7 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
-				CUSTOVARIAVEL_BD = data;
+				CUSTO_VARIAVEL_BD = data;
 				res = true;
 			}else{
 				res = false;
@@ -62,37 +67,74 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 	$scope.tratarRebanho = function(){
 		for(i in VREBANHO_BD){			
 			for(var m=0; m<12; m++){
-				TOTALCABECAS[m] += VREBANHO_BD[i][m].qtd;
+				TOTAL_CABECAS[m] += VREBANHO_BD[i][m].qtd;
+			}
+		}
+
+		for(i in CUSTO_VARIAVEL_BD){
+			if(CUSTO_VARIAVEL_BD[i].descricao == "Aquisicao de animais"){
+				AQUISICAO[0] = CUSTO_VARIAVEL_BD[i].jan;
+				AQUISICAO[1] = CUSTO_VARIAVEL_BD[i].fev;
+				AQUISICAO[2] = CUSTO_VARIAVEL_BD[i].mar;
+				AQUISICAO[3] = CUSTO_VARIAVEL_BD[i].abr;
+				AQUISICAO[4] = CUSTO_VARIAVEL_BD[i].mai;
+				AQUISICAO[5] = CUSTO_VARIAVEL_BD[i].jun;
+				AQUISICAO[6] = CUSTO_VARIAVEL_BD[i].jul;
+				AQUISICAO[7] = CUSTO_VARIAVEL_BD[i].ago;
+				AQUISICAO[8] = CUSTO_VARIAVEL_BD[i].sem;
+				AQUISICAO[9] = CUSTO_VARIAVEL_BD[i].out;
+				AQUISICAO[10] = CUSTO_VARIAVEL_BD[i].nov;
+				AQUISICAO[11] = CUSTO_VARIAVEL_BD[i].dez;
 			}
 		}
 	}
 
 	$scope.tratarCustoVariavel = function(){
 		$scope.tratarRebanho();
-		
+
+		for(i in CUSTO_VARIAVEL_BD){
+			TOTAL_VARIAVEL_MES[0] += CUSTO_VARIAVEL_BD[i].jan;
+			TOTAL_VARIAVEL_MES[1] += CUSTO_VARIAVEL_BD[i].fev;
+			TOTAL_VARIAVEL_MES[2] += CUSTO_VARIAVEL_BD[i].mar;
+			TOTAL_VARIAVEL_MES[3] += CUSTO_VARIAVEL_BD[i].abr;
+			TOTAL_VARIAVEL_MES[4] += CUSTO_VARIAVEL_BD[i].mai;
+			TOTAL_VARIAVEL_MES[5] += CUSTO_VARIAVEL_BD[i].jun;
+			TOTAL_VARIAVEL_MES[6] += CUSTO_VARIAVEL_BD[i].jul;
+			TOTAL_VARIAVEL_MES[7] += CUSTO_VARIAVEL_BD[i].ago;
+			TOTAL_VARIAVEL_MES[8] += CUSTO_VARIAVEL_BD[i].sem;
+			TOTAL_VARIAVEL_MES[9] += CUSTO_VARIAVEL_BD[i].out;
+			TOTAL_VARIAVEL_MES[10] += CUSTO_VARIAVEL_BD[i].nov;
+			TOTAL_VARIAVEL_MES[11] += CUSTO_VARIAVEL_BD[i].dez;
+		}
+
+		for(i=0; i<12; i++){
+			TOTAL_VARIAVEL_C[i] = TOTAL_VARIAVEL_MES[i] / TOTAL_CABECAS[i];
+			TOTAL_VARIAVEL_S[i] = (TOTAL_VARIAVEL_MES[i] - AQUISICAO[i]) / TOTAL_CABECAS[i];
+		}
+
+		$scope.custo_variavel = CUSTO_VARIAVEL_BD;
+		$scope.total_variavel_mes = TOTAL_VARIAVEL_MES;
+		$scope.total_variavel_c = TOTAL_VARIAVEL_C;
+		$scope.total_variavel_s = TOTAL_VARIAVEL_S;
 	}
 
 	/*  */
 	$scope.createCustoVariavel = function(){
-		$scope.tratarDepreciacoes();
-
-		for(i in INVENTARIO_BD){
+		for(i in ESPECIFICACAO){
 			$scope.form = {};
-			$scope.form.id;
-			$scope.form.propriedadeId_FK = Propriedade.getId();
-			$scope.form.descricao = INVENTARIO_BD[i].descricao;
-			$scope.form.jan = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.fev = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.mar = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.abr = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.mai = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.jun = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.jul = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.ago = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.sem = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.out = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.nov = INVENTARIO_BD[i].fixo / 12;
-			$scope.form.dez = INVENTARIO_BD[i].fixo / 12;
+			$scope.form.descricao = ESPECIFICACAO[i];
+			$scope.form.jan = 0;
+			$scope.form.fev = 0;
+			$scope.form.mar = 0;
+			$scope.form.abr = 0;
+			$scope.form.mai = 0;
+			$scope.form.jun = 0;
+			$scope.form.jul = 0;
+			$scope.form.ago = 0;
+			$scope.form.sem = 0;
+			$scope.form.out = 0;
+			$scope.form.nov = 0;
+			$scope.form.dez = 0;
 			$scope.new();
 		}
 
@@ -100,11 +142,15 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 	}
 
 	$scope.save = function(){
-		$scope.form.id;
-		$scope.form.propriedadeId_FK = Propriedade.getId();
-		$('#custofixoModal').modal('hide');
+		//$scope.form.id;
+		//$scope.form.propriedadeId_FK = Propriedade.getId();
+		var id = $scope.form["id"];
+		delete $scope.form["id"];
+		delete $scope.form.$$hashKey;
+		$('#custoVariavelModal').modal('hide');
 		
-		$scope.new();
+		basel.database.update("adm_custovariavel", $scope.form, {id: id});
+		//$scope.new();
 
 		$scope.initCustoVariavel();
 		//$location.path('/inventario');
@@ -112,7 +158,9 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 
 	// Cancel form
 	$scope.new = function(){
-		basel.database.insert("adm_custofixo", $scope.form);
+		$scope.form.id;
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+		basel.database.insert("adm_custovariavel", $scope.form);
 	}
 
 	// Cancel form
@@ -120,22 +168,15 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 		$scope.form = {};
 	}
 
-	/*Abrindo para editar
 	$scope.edit = function(data){
-		$scope.form = {}
-		$scope.form.id = data.id;
-		$scope.form.descricao = data.descricao;
-		$scope.form.valor_final = data.valor_final;
-		$scope.form.valor_inicial = data.valor_inicial;
-		ISEDIT = true;
-		$('#depreciacoesModal').modal('show');
+		$scope.form = data;
+		$('#custoVariavelModal').modal('show');
 	}
-	*/
 
 	//Excluindo
 	$scope.delete = function(data){
 		if(confirm("Deseja Resetar Inventario?")){
-			basel.database.delete("adm_custofixo", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("adm_custovariavel", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}
