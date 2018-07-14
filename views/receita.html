@@ -1,14 +1,14 @@
-<div ng-controller="investimentoController">
+<div ng-controller="receitaController">
 	<div class="row">
 		<div class="page-header">
-			<h1>Investimentos</h1>
+			<h1>Receitas</h1>
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
-			<a href="" data-toggle="modal" data-target="#investimentoModalNew"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="" data-toggle="modal" data-target="#receitaModalNew"><span class="glyphicon glyphicon-plus"></span></a>
 		</div>
 	</div>
 
 	<div class="row">
-		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInvestimento()">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initReceita()">
 			<thead class="thead-inverse">
 				<th>Descrição</th>
 				<th>Janeiro</th>				
@@ -26,7 +26,7 @@
 				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
-			<tr ng-repeat="item in investimento">
+			<tr ng-repeat="item in receita">
 				<td>{{item.descricao}}</td>
 				<td>{{item.jan | number:2}}</td>
 				<td>{{item.fev | number:2}}</td>
@@ -63,29 +63,29 @@
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>Despesa Total</td>
-				<td>{{investimento_mes[0] | number:2}}</td>
-				<td>{{investimento_mes[1] | number:2}}</td>
-				<td>{{investimento_mes[2] | number:2}}</td>
-				<td>{{investimento_mes[3] | number:2}}</td>
-				<td>{{investimento_mes[4] | number:2}}</td>
-				<td>{{investimento_mes[5] | number:2}}</td>
-				<td>{{investimento_mes[6] | number:2}}</td>
-				<td>{{investimento_mes[7] | number:2}}</td>
-				<td>{{investimento_mes[8] | number:2}}</td>
-				<td>{{investimento_mes[9] | number:2}}</td>
-				<td>{{investimento_mes[10] | number:2}}</td>
-				<td>{{investimento_mes[11] | number:2}}</td>
+				<td>Receita Total</td>
+				<td>{{receita_mes[0] | number:2}}</td>
+				<td>{{receita_mes[1] | number:2}}</td>
+				<td>{{receita_mes[2] | number:2}}</td>
+				<td>{{receita_mes[3] | number:2}}</td>
+				<td>{{receita_mes[4] | number:2}}</td>
+				<td>{{receita_mes[5] | number:2}}</td>
+				<td>{{receita_mes[6] | number:2}}</td>
+				<td>{{receita_mes[7] | number:2}}</td>
+				<td>{{receita_mes[8] | number:2}}</td>
+				<td>{{receita_mes[9] | number:2}}</td>
+				<td>{{receita_mes[10] | number:2}}</td>
+				<td>{{receita_mes[11] | number:2}}</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<div class="modal fade" id="investimentoModal" role="dialog">
+	<div class="modal fade" id="receitaModal" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Investimento</h4>
+					<h4 class="modal-title" id="myModalLabel">Componente de Receita</h4>
 				</div>
 
 				<div class="modal-body">
@@ -160,11 +160,11 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="investimentoModalNew" role="dialog">
+	<div class="modal fade" id="receitaModalNew" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Investimento</h4>
+					<h4 class="modal-title" id="myModalLabel">Componente de Receita</h4>
 				</div>
 
 				<div class="modal-body">

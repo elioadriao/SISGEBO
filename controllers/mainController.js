@@ -4,7 +4,7 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 	$scope.menus = basel.menu();
 
 	var ADM_PAGES = {"/inventario" : 0, "/depreciacoes" : 1, "/vrebanho" : 2, "/custoFixo" : 3, "/custoVariavel" : 4,
-		"/custoAdm" : 5, "/investimento" : 6, "/custoOperacional" : 7};
+		"/custoAdm" : 5, "/investimento" : 6, "/custoOperacional" : 7, "/custoOportunidade" : 8, "/custoTotal" : 9, "/receita" : 10};
 	var PRO_PAGES = {"/maquinas" : 0, "/benfeitorias" : 1, "manutencao" : 2, "/rebanho" : 3, "evolucao" : 4, "cria" : 5};
 	var ATUAL = { key : -1, value : "", selected : -1};
 	

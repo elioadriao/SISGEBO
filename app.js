@@ -38,6 +38,18 @@
     *   })
     *
     */
+    $routeProviderReference.when('/receita',{
+        controller: 'receitaController',
+        templateUrl: 'views/receita.html'
+        });
+    $routeProviderReference.when('/custoTotal',{
+        controller: 'custoTotalController',
+        templateUrl: 'views/custoTotal.html'
+        });
+    $routeProviderReference.when('/custoOportunidade',{
+        controller: 'custoOportunidadeController',
+        templateUrl: 'views/custoOportunidade.html'
+        });
     $routeProviderReference.when('/custoOperacional',{
         controller: 'custoOperacionalController',
         templateUrl: 'views/custoOperacional.html'
