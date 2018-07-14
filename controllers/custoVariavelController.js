@@ -114,6 +114,8 @@ app.controller("custoVariavelController", function($scope, $location, Propriedad
 		$scope.total_variavel_mes = TOTAL_VARIAVEL_MES;
 		$scope.total_variavel_c = TOTAL_VARIAVEL_C;
 		$scope.total_variavel_s = TOTAL_VARIAVEL_S;
+
+		$scope.insertOperacional();
 	}
 
 	/*  */
@@ -142,6 +144,47 @@ app.controller("custoVariavelController", function($scope, $location, Propriedad
 		}
 
 		$scope.initCustoVariavel();
+	}
+
+	$scope.insertOperacional = function(){
+		var SQL = "SELECT * FROM custo_operacional WHERE descricao='Variavel' AND propriedadeId_FK="+Propriedade.getId();
+		var res = false;
+
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				$scope.form = data[0];
+				res = true;
+			}else{
+				$scope.form = {};
+				$scope.form.id;
+				res = false;
+			}
+		});
+
+		$scope.form.jan = TOTAL_VARIAVEL_MES[0];
+		$scope.form.fev = TOTAL_VARIAVEL_MES[1];
+		$scope.form.mar = TOTAL_VARIAVEL_MES[2];
+		$scope.form.abr = TOTAL_VARIAVEL_MES[3];
+		$scope.form.mai = TOTAL_VARIAVEL_MES[4];
+		$scope.form.jun = TOTAL_VARIAVEL_MES[5];
+		$scope.form.jul = TOTAL_VARIAVEL_MES[6];
+		$scope.form.ago = TOTAL_VARIAVEL_MES[7];
+		$scope.form.sem = TOTAL_VARIAVEL_MES[8];
+		$scope.form.out = TOTAL_VARIAVEL_MES[9];
+		$scope.form.nov = TOTAL_VARIAVEL_MES[10];
+		$scope.form.dez = TOTAL_VARIAVEL_MES[11];
+		$scope.form.descricao = "Variavel";
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+
+		if(res){
+			var id = $scope.form["id"];
+			delete $scope.form["id"];
+			delete $scope.form.$$hashKey;
+			
+			basel.database.update("custo_operacional", $scope.form, {id: id});
+		}else{
+			basel.database.insert("custo_operacional", $scope.form);
+		}	
 	}
 
 	$scope.save = function(){
@@ -180,6 +223,7 @@ app.controller("custoVariavelController", function($scope, $location, Propriedad
 	$scope.delete = function(data){
 		if(confirm("Deseja Resetar Custo Variavel?")){
 			basel.database.delete("custo_variavel", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("custo_operacional", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}

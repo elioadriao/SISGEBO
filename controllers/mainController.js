@@ -3,7 +3,8 @@ app.controller("mainController", function($scope, $rootScope, $location, Authent
 	$scope.app = basel.config;
 	$scope.menus = basel.menu();
 
-	var ADM_PAGES = {"/inventario" : 0, "/depreciacoes" : 1, "/vrebanho" : 2, "/custofixo" : 3, "/custovariavel" : 4,"/custoadm" : 5, "/investimento" : 6};
+	var ADM_PAGES = {"/inventario" : 0, "/depreciacoes" : 1, "/vrebanho" : 2, "/custoFixo" : 3, "/custoVariavel" : 4,
+		"/custoAdm" : 5, "/investimento" : 6, "/custoOperacional" : 7};
 	var PRO_PAGES = {"/maquinas" : 0, "/benfeitorias" : 1, "manutencao" : 2, "/rebanho" : 3, "evolucao" : 4, "cria" : 5};
 	var ATUAL = { key : -1, value : "", selected : -1};
 	

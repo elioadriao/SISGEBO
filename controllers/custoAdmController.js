@@ -93,6 +93,8 @@ app.controller("custoAdmController", function($scope, $location, Propriedade){
 		$scope.custo_adm = CUSTO_ADM_BD;
 		$scope.total_adm_mes = TOTAL_ADM_MES;
 		$scope.total_adm_pcabeca = TOTAL_ADM_PCABECA;
+
+		$scope.insertOperacional();
 	}
 
 	/*  */
@@ -119,6 +121,47 @@ app.controller("custoAdmController", function($scope, $location, Propriedade){
 		}
 
 		$scope.initCustoVariavel();
+	}
+
+	$scope.insertOperacional = function(){
+		var SQL = "SELECT * FROM custo_operacional WHERE descricao='Administrativo' AND propriedadeId_FK="+Propriedade.getId();
+		var res = false;
+
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				$scope.form = data[0];
+				res = true;
+			}else{
+				$scope.form = {};
+				$scope.form.id;
+				res = false;
+			}
+		});
+
+		$scope.form.jan = TOTAL_ADM_MES[0];
+		$scope.form.fev = TOTAL_ADM_MES[1];
+		$scope.form.mar = TOTAL_ADM_MES[2];
+		$scope.form.abr = TOTAL_ADM_MES[3];
+		$scope.form.mai = TOTAL_ADM_MES[4];
+		$scope.form.jun = TOTAL_ADM_MES[5];
+		$scope.form.jul = TOTAL_ADM_MES[6];
+		$scope.form.ago = TOTAL_ADM_MES[7];
+		$scope.form.sem = TOTAL_ADM_MES[8];
+		$scope.form.out = TOTAL_ADM_MES[9];
+		$scope.form.nov = TOTAL_ADM_MES[10];
+		$scope.form.dez = TOTAL_ADM_MES[11];
+		$scope.form.descricao = "Administrativo";
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+
+		if(res){
+			var id = $scope.form["id"];
+			delete $scope.form["id"];
+			delete $scope.form.$$hashKey;
+			
+			basel.database.update("custo_operacional", $scope.form, {id: id});
+		}else{
+			basel.database.insert("custo_operacional", $scope.form);
+		}
 	}
 
 	$scope.save = function(){
@@ -157,6 +200,7 @@ app.controller("custoAdmController", function($scope, $location, Propriedade){
 	$scope.delete = function(data){
 		if(confirm("Deseja Resetar Custo ADM?")){
 			basel.database.delete("custo_adm", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("custo_operacional", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}

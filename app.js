@@ -38,6 +38,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/custoOperacional',{
+        controller: 'custoOperacionalController',
+        templateUrl: 'views/custoOperacional.html'
+        });
     $routeProviderReference.when('/investimento',{
         controller: 'investimentoController',
         templateUrl: 'views/investimento.html'

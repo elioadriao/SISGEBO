@@ -3,13 +3,11 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 	var INVENTARIO_BD = [];
 	var DEPRECIACOES_BD = [];
-	var CUSTOFIXO_BD = [];
+	var CUSTO_FIXO_BD = [];
 	var VREBANHO_BD = [];
-	var TOTALCABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var TOTALFIXOMES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var FIXOPORCABECA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var DESCANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
-					 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
+	var TOTAL_CABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var TOTAL_FIXO_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var TOTAL_FIXO_PCABECA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		
 	/* INICIA O INVENTARIO */
 	$scope.initInventario = function(){	
@@ -63,6 +61,9 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 	/*   */
 	$scope.initRebanho = function(){
+		var DESCANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
+			 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
+					 
 		for (i in DESCANIMAL){
 			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESCANIMAL[i]+"'";
 			var res = false;
@@ -94,7 +95,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
-				CUSTOFIXO_BD = data;
+				CUSTO_FIXO_BD = data;
 				res = true;
 			}else{
 				res = false;
@@ -132,7 +133,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	$scope.tratarRebanho = function(){
 		for(i in VREBANHO_BD){			
 			for(var m=0; m<12; m++){
-				TOTALCABECAS[m] += VREBANHO_BD[i][m].qtd;
+				TOTAL_CABECAS[m] += VREBANHO_BD[i][m].qtd;
 			}
 		}
 	}
@@ -140,28 +141,30 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	$scope.tratarCustoFixo = function(){
 		$scope.tratarRebanho();
 
-		for(i in CUSTOFIXO_BD){
-			TOTALFIXOMES[0] += CUSTOFIXO_BD[i].jan;
-			TOTALFIXOMES[1] += CUSTOFIXO_BD[i].fev;
-			TOTALFIXOMES[2] += CUSTOFIXO_BD[i].mar;
-			TOTALFIXOMES[3] += CUSTOFIXO_BD[i].abr;
-			TOTALFIXOMES[4] += CUSTOFIXO_BD[i].mai;
-			TOTALFIXOMES[5] += CUSTOFIXO_BD[i].jun;
-			TOTALFIXOMES[6] += CUSTOFIXO_BD[i].jul;
-			TOTALFIXOMES[7] += CUSTOFIXO_BD[i].ago;
-			TOTALFIXOMES[8] += CUSTOFIXO_BD[i].sem;
-			TOTALFIXOMES[9] += CUSTOFIXO_BD[i].out;
-			TOTALFIXOMES[10] += CUSTOFIXO_BD[i].nov;
-			TOTALFIXOMES[11] += CUSTOFIXO_BD[i].dez;
+		for(i in CUSTO_FIXO_BD){
+			TOTAL_FIXO_MES[0] += CUSTO_FIXO_BD[i].jan;
+			TOTAL_FIXO_MES[1] += CUSTO_FIXO_BD[i].fev;
+			TOTAL_FIXO_MES[2] += CUSTO_FIXO_BD[i].mar;
+			TOTAL_FIXO_MES[3] += CUSTO_FIXO_BD[i].abr;
+			TOTAL_FIXO_MES[4] += CUSTO_FIXO_BD[i].mai;
+			TOTAL_FIXO_MES[5] += CUSTO_FIXO_BD[i].jun;
+			TOTAL_FIXO_MES[6] += CUSTO_FIXO_BD[i].jul;
+			TOTAL_FIXO_MES[7] += CUSTO_FIXO_BD[i].ago;
+			TOTAL_FIXO_MES[8] += CUSTO_FIXO_BD[i].sem;
+			TOTAL_FIXO_MES[9] += CUSTO_FIXO_BD[i].out;
+			TOTAL_FIXO_MES[10] += CUSTO_FIXO_BD[i].nov;
+			TOTAL_FIXO_MES[11] += CUSTO_FIXO_BD[i].dez;
 		}
 
-		for(i in FIXOPORCABECA){
-			FIXOPORCABECA[i] = TOTALFIXOMES[i]/TOTALCABECAS[i];
+		for(i in TOTAL_FIXO_PCABECA){
+			TOTAL_FIXO_PCABECA[i] = TOTAL_FIXO_MES[i]/TOTAL_CABECAS[i];
 		}
 
-		$scope.custofixo = CUSTOFIXO_BD;
-		$scope.fixopormes = TOTALFIXOMES;
-		$scope.fixoporcab = TOTALCABECAS;
+		$scope.custo_fixo = CUSTO_FIXO_BD;
+		$scope.total_fixo_mes = TOTAL_FIXO_MES;
+		$scope.total_fixo_pcabeca = TOTAL_FIXO_PCABECA;
+
+		$scope.insertOperacional();
 	}
 
 	/*  */
@@ -189,6 +192,47 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 		}
 
 		$scope.initCustoFixo();
+	}
+
+	$scope.insertOperacional = function(){
+		var SQL = "SELECT * FROM custo_operacional WHERE descricao='Fixo' AND propriedadeId_FK="+Propriedade.getId();
+		var res = false;
+
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				$scope.form = data[0];
+				res = true;
+			}else{
+				$scope.form = {};
+				$scope.form.id;
+				res = false;
+			}
+		});
+
+		$scope.form.jan = TOTAL_FIXO_MES[0];
+		$scope.form.fev = TOTAL_FIXO_MES[1];
+		$scope.form.mar = TOTAL_FIXO_MES[2];
+		$scope.form.abr = TOTAL_FIXO_MES[3];
+		$scope.form.mai = TOTAL_FIXO_MES[4];
+		$scope.form.jun = TOTAL_FIXO_MES[5];
+		$scope.form.jul = TOTAL_FIXO_MES[6];
+		$scope.form.ago = TOTAL_FIXO_MES[7];
+		$scope.form.sem = TOTAL_FIXO_MES[8];
+		$scope.form.out = TOTAL_FIXO_MES[9];
+		$scope.form.nov = TOTAL_FIXO_MES[10];
+		$scope.form.dez = TOTAL_FIXO_MES[11];
+		$scope.form.descricao = "Fixo";
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+
+		if(res){
+			var id = $scope.form["id"];
+			delete $scope.form["id"];
+			delete $scope.form.$$hashKey;
+			
+			basel.database.update("custo_operacional", $scope.form, {id: id});
+		}else{
+			basel.database.insert("custo_operacional", $scope.form);
+		}
 	}
 
 	$scope.save = function(){
@@ -228,6 +272,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	$scope.delete = function(data){
 		if(confirm("Deseja Resetar Custo Fixo?")){
 			basel.database.delete("custo_fixo", {propriedadeId_FK : Propriedade.getId()});
+			basel.database.delete("custo_operacional", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}
