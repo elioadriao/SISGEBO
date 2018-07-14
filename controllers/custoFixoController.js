@@ -1,5 +1,5 @@
 "use strict";
-app.controller("custofixoController", function($scope, $location, Propriedade){
+app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 	var INVENTARIO_BD = [];
 	var DEPRECIACOES_BD = [];
@@ -89,7 +89,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 
 	/* INICIA O CUSTO FIXO */
 	$scope.initCustoFixo = function(){
-		var SQL = "SELECT * FROM adm_custofixo WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM custo_fixo WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
@@ -194,7 +194,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 	$scope.save = function(){
 		$scope.form.id;
 		$scope.form.propriedadeId_FK = Propriedade.getId();
-		$('#custofixoModal').modal('hide');
+		$('#custoFixoModal').modal('hide');
 		
 		$scope.new();
 
@@ -204,7 +204,7 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 
 	// Cancel form
 	$scope.new = function(){
-		basel.database.insert("adm_custofixo", $scope.form);
+		basel.database.insert("custo_fixo", $scope.form);
 	}
 
 	// Cancel form
@@ -226,8 +226,8 @@ app.controller("custofixoController", function($scope, $location, Propriedade){
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Deseja Resetar Inventario?")){
-			basel.database.delete("adm_custofixo", {propriedadeId_FK : Propriedade.getId()});
+		if(confirm("Deseja Resetar Custo Fixo?")){
+			basel.database.delete("custo_fixo", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}

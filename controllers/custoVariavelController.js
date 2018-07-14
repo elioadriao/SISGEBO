@@ -1,5 +1,5 @@
 "use strict";
-app.controller("custovariavelController", function($scope, $location, Propriedade){
+app.controller("custoVariavelController", function($scope, $location, Propriedade){
 
 	var CUSTO_VARIAVEL_BD = [];
 	var VREBANHO_BD = [];
@@ -8,14 +8,12 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 	var TOTAL_VARIAVEL_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var TOTAL_VARIAVEL_C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var TOTAL_VARIAVEL_S = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var DESC_ANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
-					 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
-	var ESPECIFICACAO = ["Suplementacao", "Sal mineral", "Carrapaticidas", "Mosca do chifre", "Vermífugo", "Vacina de aftosa",
-	 "Vacina clostridiose", "Outras vacinas", "Outros medicamentos", "Mao de obra", "Materiais", "Curral", "Frete Carretas",
-	  "Casas", "Tratores", "Máquinas", "Combustível", "Celular", "Encargos Bancarios", "Projeto Pecuario", "Energia elétrica", "Aquisicao de animais"];
 
 	/*   */
 	$scope.initRebanho = function(){
+		var DESC_ANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@", 
+			 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
+
 		for (i in DESC_ANIMAL){
 			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESC_ANIMAL[i]+"'";
 			var res = false;
@@ -40,9 +38,9 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 		}
 	}
 
-	/* INICIA O CUSTO FIXO */
+	/* INICIA O CUSTO VARIAVEL */
 	$scope.initCustoVariavel = function(){
-		var SQL = "SELECT * FROM adm_custovariavel WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM custo_variavel WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
@@ -120,6 +118,11 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 
 	/*  */
 	$scope.createCustoVariavel = function(){
+		var ESPECIFICACAO = ["Suplementacao", "Sal mineral", "Carrapaticidas", "Mosca do chifre", "Vermífugo", "Vacina de aftosa",
+			 "Vacina clostridiose", "Outras vacinas", "Outros medicamentos", "Mao de obra", "Materiais", "Curral", "Frete Carretas",
+			 "Casas", "Tratores", "Máquinas", "Combustível", "Celular", "Encargos Bancarios", "Projeto Pecuario", "Energia elétrica",
+			 "Aquisicao de animais"];
+
 		for(i in ESPECIFICACAO){
 			$scope.form = {};
 			$scope.form.descricao = ESPECIFICACAO[i];
@@ -149,7 +152,7 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 		delete $scope.form.$$hashKey;
 		$('#custoVariavelModal').modal('hide');
 		
-		basel.database.update("adm_custovariavel", $scope.form, {id: id});
+		basel.database.update("custo_variavel", $scope.form, {id: id});
 		//$scope.new();
 
 		$scope.initCustoVariavel();
@@ -160,7 +163,7 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 	$scope.new = function(){
 		$scope.form.id;
 		$scope.form.propriedadeId_FK = Propriedade.getId();
-		basel.database.insert("adm_custovariavel", $scope.form);
+		basel.database.insert("custo_variavel", $scope.form);
 	}
 
 	// Cancel form
@@ -175,8 +178,8 @@ app.controller("custovariavelController", function($scope, $location, Propriedad
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Deseja Resetar Inventario?")){
-			basel.database.delete("adm_custovariavel", {propriedadeId_FK : Propriedade.getId()});
+		if(confirm("Deseja Resetar Custo Variavel?")){
+			basel.database.delete("custo_variavel", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}

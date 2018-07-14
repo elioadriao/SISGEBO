@@ -32,8 +32,10 @@
     <script src="controllers/inventarioController.js"></script>
     <script src="controllers/depreciacoesController.js"></script>
     <script src="controllers/vrebanhoController.js"></script>
-    <script src="controllers/custofixoController.js"></script>
-    <script src="controllers/custovariavelController.js"></script>
+    <script src="controllers/custoFixoController.js"></script>
+    <script src="controllers/custoVariavelController.js"></script>
+    <script src="controllers/custoAdmController.js"></script>
+    <script src="controllers/investimentoController.js"></script>
 </head>
 <body>
 	<!-- Menu -->
@@ -148,25 +150,25 @@
 
                 	<div class="col-md-3">
                 		<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/custofixo')">Custo Fixo</button>
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/custoFixo')">Custo Fixo</button>
                         </div>
                 	</div>
 
                 	<div class="col-md-3">
                 		<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/custovariavel')">Custo Variavel</button>
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/custoVariavel')">Custo Variavel</button>
                         </div>
                 	</div>
 
                 	<div class="col-md-3">
                 		<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Despesas Adm</button>
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/custoAdm')">Despesas Administrativas</button>
                         </div>
                 	</div>
 
                 	<div class="col-md-3">
                 		<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Investimentos</button>
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/investimento')">Investimentos</button>
                         </div>
                 	</div>
 

@@ -1,9 +1,9 @@
-<div ng-controller="custofixoController">
+<div ng-controller="custoFixoController">
 	<div class="row">
 		<div class="page-header">
 			<h1>Custo Fixo</h1>
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
-			<a href="" data-toggle="modal" data-target="#custofixoModal"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="" data-toggle="modal" data-target="#custoFixoModal"><span class="glyphicon glyphicon-plus"></span></a>
 		</div>
 	</div>
 
@@ -23,6 +23,7 @@
 				<th>Outubro</th>
 				<th>Novembro</th>
 				<th>Dezembro</th>
+				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
 			<tr ng-repeat="item in custofixo">
@@ -43,9 +44,9 @@
 			</tbody>
 		</table>
 
-		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
+		<table class="table table-responsive table-hover table-sm table-bordered">
 			<thead class="thead-inverse">
-				<th></th>
+				<th class="text-center">R$</th>
 				<th>Janeiro</th>				
 				<th>Fevereiro</th>
 				<th>Março</th>
@@ -94,7 +95,7 @@
 		</table>
 	</div>
 
-	<div class="modal fade" id="custofixoModal" role="dialog">
+	<div class="modal fade" id="custoFixoModal" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

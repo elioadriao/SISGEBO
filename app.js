@@ -38,13 +38,21 @@
     *   })
     *
     */
-    $routeProviderReference.when('/custovariavel',{
-        controller: 'custovariavelController',
-        templateUrl: 'views/custovariavel.html'
+    $routeProviderReference.when('/investimento',{
+        controller: 'investimentoController',
+        templateUrl: 'views/investimento.html'
         });
-    $routeProviderReference.when('/custofixo',{
-        controller: 'custofixoController',
-        templateUrl: 'views/custofixo.html'
+    $routeProviderReference.when('/custoAdm',{
+        controller: 'custoAdmController',
+        templateUrl: 'views/custoAdm.html'
+        });
+    $routeProviderReference.when('/custoVariavel',{
+        controller: 'custoVariavelController',
+        templateUrl: 'views/custoVariavel.html'
+        });
+    $routeProviderReference.when('/custoFixo',{
+        controller: 'custoFixoController',
+        templateUrl: 'views/custoFixo.html'
         });
     $routeProviderReference.when('/vrebanho',{
         controller: 'vrebanhoController',

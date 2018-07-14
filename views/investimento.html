@@ -1,9 +1,9 @@
-<div ng-controller="custovariavelController">
+<div ng-controller="investimentoController">
 	<div class="row">
 		<div class="page-header">
-			<h1>Custo Variavel</h1>
+			<h1>Investimentos</h1>
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
-			<a href="" data-toggle="modal" data-target="#custoVariavelModalNew"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="" data-toggle="modal" data-target="#investimentoModalNew"><span class="glyphicon glyphicon-plus"></span></a>
 		</div>
 	</div>
 
@@ -23,9 +23,10 @@
 				<th>Outubro</th>
 				<th>Novembro</th>
 				<th>Dezembro</th>
+				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
-			<tr ng-repeat="item in custo_variavel">
+			<tr ng-repeat="item in investimento">
 				<td>{{item.descricao}}</td>
 				<td>{{item.jan | number:2}}</td>
 				<td>{{item.fev | number:2}}</td>
@@ -44,9 +45,9 @@
 			</tbody>
 		</table>
 
-		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initInventario()">
+		<table class="table table-responsive table-hover table-sm table-bordered">
 			<thead class="thead-inverse">
-				<th></th>
+				<th class="text-center">R$</th>
 				<th>Janeiro</th>				
 				<th>Fevereiro</th>
 				<th>Março</th>
@@ -62,59 +63,44 @@
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>Custo Total</td>
-				<td>{{total_variavel_mes[0] | number:2}}</td>
-				<td>{{total_variavel_mes[1] | number:2}}</td>
-				<td>{{total_variavel_mes[2] | number:2}}</td>
-				<td>{{total_variavel_mes[3] | number:2}}</td>
-				<td>{{total_variavel_mes[4] | number:2}}</td>
-				<td>{{total_variavel_mes[5] | number:2}}</td>
-				<td>{{total_variavel_mes[6] | number:2}}</td>
-				<td>{{total_variavel_mes[7] | number:2}}</td>
-				<td>{{total_variavel_mes[8] | number:2}}</td>
-				<td>{{total_variavel_mes[9] | number:2}}</td>
-				<td>{{total_variavel_mes[10] | number:2}}</td>
-				<td>{{total_variavel_mes[11] | number:2}}</td>
+				<td>Despesa Total</td>
+				<td>{{investimento_mes[0] | number:2}}</td>
+				<td>{{investimento_mes[1] | number:2}}</td>
+				<td>{{investimento_mes[2] | number:2}}</td>
+				<td>{{investimento_mes[3] | number:2}}</td>
+				<td>{{investimento_mes[4] | number:2}}</td>
+				<td>{{investimento_mes[5] | number:2}}</td>
+				<td>{{investimento_mes[6] | number:2}}</td>
+				<td>{{investimento_mes[7] | number:2}}</td>
+				<td>{{investimento_mes[8] | number:2}}</td>
+				<td>{{investimento_mes[9] | number:2}}</td>
+				<td>{{investimento_mes[10] | number:2}}</td>
+				<td>{{investimento_mes[11] | number:2}}</td>
 			</tr>
 			<tr>
-				<td>Custo Total/Cabeca Com Reposição</td>
-				<td>{{total_variavel_c[0] | number:2}}</td>
-				<td>{{total_variavel_c[1] | number:2}}</td>
-				<td>{{total_variavel_c[2] | number:2}}</td>
-				<td>{{total_variavel_c[3] | number:2}}</td>
-				<td>{{total_variavel_c[4] | number:2}}</td>
-				<td>{{total_variavel_c[5] | number:2}}</td>
-				<td>{{total_variavel_c[6] | number:2}}</td>
-				<td>{{total_variavel_c[7] | number:2}}</td>
-				<td>{{total_variavel_c[8] | number:2}}</td>
-				<td>{{total_variavel_c[9] | number:2}}</td>
-				<td>{{total_variavel_c[10] | number:2}}</td>
-				<td>{{total_variavel_c[11] | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Custo Total/Cabeca Sem Reposição</td>
-				<td>{{total_variavel_s[0] | number:2}}</td>
-				<td>{{total_variavel_s[1] | number:2}}</td>
-				<td>{{total_variavel_s[2] | number:2}}</td>
-				<td>{{total_variavel_s[3] | number:2}}</td>
-				<td>{{total_variavel_s[4] | number:2}}</td>
-				<td>{{total_variavel_s[5] | number:2}}</td>
-				<td>{{total_variavel_s[6] | number:2}}</td>
-				<td>{{total_variavel_s[7] | number:2}}</td>
-				<td>{{total_variavel_s[8] | number:2}}</td>
-				<td>{{total_variavel_s[9] | number:2}}</td>
-				<td>{{total_variavel_s[10] | number:2}}</td>
-				<td>{{total_variavel_s[11] | number:2}}</td>
+				<td>Despesa Total/Cabeca</td>
+				<td>{{investimento_pcabeca[0] | number:2}}</td>
+				<td>{{investimento_pcabeca[1] | number:2}}</td>
+				<td>{{investimento_pcabeca[2] | number:2}}</td>
+				<td>{{investimento_pcabeca[3] | number:2}}</td>
+				<td>{{investimento_pcabeca[4] | number:2}}</td>
+				<td>{{investimento_pcabeca[5] | number:2}}</td>
+				<td>{{investimento_pcabeca[6] | number:2}}</td>
+				<td>{{investimento_pcabeca[7] | number:2}}</td>
+				<td>{{investimento_pcabeca[8] | number:2}}</td>
+				<td>{{investimento_pcabeca[9] | number:2}}</td>
+				<td>{{investimento_pcabeca[10] | number:2}}</td>
+				<td>{{investimento_pcabeca[11] | number:2}}</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<div class="modal fade" id="custoVariavelModal" role="dialog">
+	<div class="modal fade" id="investimentoModal" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Custo Variavel</h4>
+					<h4 class="modal-title" id="myModalLabel">Componente de Investimento</h4>
 				</div>
 
 				<div class="modal-body">
@@ -189,11 +175,11 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="custoVariavelModalNew" role="dialog">
+	<div class="modal fade" id="investimentoModalNew" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Custo Variavel</h4>
+					<h4 class="modal-title" id="myModalLabel">Componente de Investimento</h4>
 				</div>
 
 				<div class="modal-body">

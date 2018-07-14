@@ -6763,6 +6763,8 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+/* NEW LAYER */
+
 .dropdown-submenu {
     position:relative;
 }
@@ -6807,7 +6809,7 @@ button.close {
 
 .btn-sq-lg {
   width: 150px !important;
-  height: 150px !important;
+  height: 100px !important;
   margin-bottom: 15px;
 }
 
