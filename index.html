@@ -40,6 +40,7 @@
     <script src="controllers/custoOportunidadeController.js"></script>
     <script src="controllers/custoTotalController.js"></script>
     <script src="controllers/receitaController.js"></script>
+    <script src="controllers/balancoController.js"></script>
 </head>
 <body>
 	<!-- Menu -->
@@ -202,21 +203,33 @@
 
                 	<div class="col-md-3">
                 		<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/null')">Balanco Patrimonial</button>
+                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="redir('/balanco')">Balanco Patrimonial</button>
                         </div>
                 	</div>
 
-                	<div class="col-md-6">
+                	<div class="col-md-3">
                 		<div class="btn-group" role="group">
                             <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Analise de Resultados</button>
                         </div>
                 	</div>
 
-                	<div class="col-md-6">
+                	<div class="col-md-3">
                 		<div class="btn-group" role="group">
                             <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Fluxo de Caixa</button>
                         </div>
                 	</div>
+
+                    <div class="col-md-3">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">V.P.L.</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="redir('/null')">Ponto de Equilibrio</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                 </div>

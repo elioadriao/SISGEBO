@@ -38,6 +38,10 @@
     *   })
     *
     */
+    $routeProviderReference.when('/balanco',{
+        controller: 'balancoController',
+        templateUrl: 'views/balanco.html'
+        });
     $routeProviderReference.when('/receita',{
         controller: 'receitaController',
         templateUrl: 'views/receita.html'
