@@ -74,9 +74,9 @@
         controller: 'custoFixoController',
         templateUrl: 'views/custoFixo.html'
         });
-    $routeProviderReference.when('/vrebanho',{
-        controller: 'vrebanhoController',
-        templateUrl: 'views/vrebanho.html'
+    $routeProviderReference.when('/variacaoRebanho',{
+        controller: 'variacaoRebanhoController',
+        templateUrl: 'views/variacaoRebanho.html'
         });
     $routeProviderReference.when('/depreciacoes',{
         controller: 'depreciacoesController',

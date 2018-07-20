@@ -1,4 +1,4 @@
-<div ng-controller="vrebanhoController">
+<div ng-controller="variacaoRebanhoController">
 	<div class="row">
 		<div class="page-header">
 			<h1>Variação do Rebanho</h1>
@@ -67,7 +67,7 @@
 				</thead>
 
 				<tbody class="table-body">
-				<tr ng-repeat="animal in vrebanho">
+				<tr ng-repeat="animal in variacao_rebanho">
 					<td>{{animal[0].descricao}}</td>
 
 					<td>{{animal[0].peso}}</td>
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="vrebanhoModal" tabindex="-1" role="dialog">
+	<div class="modal fade" id="variacaoRebanhoModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

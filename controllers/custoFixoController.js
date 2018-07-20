@@ -12,7 +12,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	/* INICIA O INVENTARIO */
 	$scope.initInventario = function(){	
 		
-		var SQL = "SELECT * FROM adm_inventario WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM inventario WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
@@ -37,7 +37,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	/* INICIA AS DEPRECIACOES */
 	$scope.initDepreciacoes = function(){	
 		
-		var SQL = "SELECT * FROM adm_depreciacoes WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM depreciacoes WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
@@ -65,7 +65,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 			 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
 					 
 		for (i in DESCANIMAL){
-			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESCANIMAL[i]+"'";
+			var SQL = "SELECT * FROM variacao_rebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESCANIMAL[i]+"'";
 			var res = false;
 			//console.log(DESCANIMAL[i]);
 
@@ -170,12 +170,15 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	/*  */
 	$scope.createCustoFixo = function(){
 		$scope.tratarDepreciacoes();
+		var ESPECIFICACAO = ["Máquinas e Implementos", "Tratores", "Veículos", "Equipamentos Manuais",
+			 "Reprodutores Machos", "Reprodutores Femeas", "Animais de Trabalho", "Canavial ou Volumosos",
+		 	 "Benfeitorias", "Edificações", "Pastagem"];
 
-		for(i in INVENTARIO_BD){
+		for(i in ESPECIFICACAO){
 			$scope.form = {};
 			$scope.form.id;
 			$scope.form.propriedadeId_FK = Propriedade.getId();
-			$scope.form.descricao = INVENTARIO_BD[i].descricao;
+			$scope.form.descricao = ESPECIFICACAO[i];
 			$scope.form.jan = INVENTARIO_BD[i].fixo / 12;
 			$scope.form.fev = INVENTARIO_BD[i].fixo / 12;
 			$scope.form.mar = INVENTARIO_BD[i].fixo / 12;

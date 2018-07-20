@@ -16,7 +16,7 @@ app.controller("custoOperacionalController", function($scope, $location, Proprie
 			 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
 
 		for (i in DESC_ANIMAL){
-			var SQL = "SELECT * FROM adm_vrebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESC_ANIMAL[i]+"'";
+			var SQL = "SELECT * FROM variacao_rebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESC_ANIMAL[i]+"'";
 			var res = false;
 			//console.log(DESC_ANIMAL[i]);
 

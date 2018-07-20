@@ -7,13 +7,13 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 	/* INICIA O INVENTARIO */
 	$scope.initInventario = function(){	
 		
-		var SQL = "SELECT * FROM adm_inventario WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM inventario WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
 				INVENTARIO_BD = data;
-				console.log(INVENTARIO_BD);
+				//console.log(INVENTARIO_BD);
 				res = true;
 			}else{
 				res = false;
@@ -32,13 +32,13 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 	/* INICIA AS DEPRECIACOES */
 	$scope.initDepreciacoes = function(){	
 		
-		var SQL = "SELECT * FROM adm_depreciacoes WHERE propriedadeId_FK="+Propriedade.getId();
+		var SQL = "SELECT * FROM depreciacoes WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
 
 		basel.database.runAsync(SQL, function(data){
 			if(data[0] != null){
 				DEPRECIACOES_BD = data;
-				console.log(DEPRECIACOES_BD);
+				//console.log(DEPRECIACOES_BD);
 				res = true;
 			}else{
 				res = false;
@@ -104,7 +104,7 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 			$scope.form.descricao = $scope.depreciacoes[d].descricao;
 			$scope.form.amortizacao = $scope.depreciacoes[d].amortizacao;
 
-			basel.database.update("adm_depreciacoes", $scope.form, {"descricao" : $scope.form.descricao}); //entidade, dados, where
+			basel.database.update("depreciacoes", $scope.form, {"descricao" : $scope.form.descricao}); //entidade, dados, where
 		}
 
 		$scope.initDepreciacoes();
@@ -113,7 +113,7 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 
 	// Cancel form
 	$scope.new = function(){
-		basel.database.insert("adm_depreciacoes", $scope.form);
+		basel.database.insert("depreciacoes", $scope.form);
 	}
 
 	// Cancel form
@@ -134,8 +134,8 @@ app.controller("depreciacoesController", function($scope, $location, Propriedade
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Deseja Resetar Inventario?")){
-			basel.database.delete("adm_depreciacoes", {propriedadeId_FK : Propriedade.getId()});
+		if(confirm("Deseja Resetar Depreciacoes?")){
+			basel.database.delete("depreciacoes", {propriedadeId_FK : Propriedade.getId()});
 		}
 		$location.path('/');
 	}
