@@ -89,20 +89,14 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 
 	//Excluindo
 	$scope.delete = function(data){
-		if(confirm("Deseja realmente Deletar?")){
-			basel.database.delete("propriedade", {id: data["id"]});
-			basel.database.delete("animal", {propriedadeId_FK: data["id"]});
-			basel.database.delete("benfeitorias", {propriedadeId_FK: data["id"]});
-			basel.database.delete("manutencao", {propriedadeId_FK: data["id"]});
-			basel.database.delete("maquinas", {propriedadeId_FK: data["id"]});
-			basel.database.delete("evolucao", {propriedadeId_FK: data["id"]});
-			basel.database.delete("evolucao_taxas", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_taxas", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_desempenho", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_alimentacao", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_producao", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_operacional", {propriedadeId_FK: data["id"]});
-			basel.database.delete("cria_balanco", {propriedadeId_FK: data["id"]});
+		var Tables = ["propriedade", "inventario", "depreciacoes", "variacao_rebanho_area", "variacao_rebanho_qtd",
+			 "variacao_rebanho_peso", "custo_fixo", "custo_variavel", "custo_adm", "investimento", "custo_operacional",
+			 "receita", "balanco", "custo_oportunidade"];
+		if(confirm("Deseja realmente Deletar Propriedade?")){
+			for(i in Tables){
+				basel.database.delete(Tables[i], {id: data["id"]});
+			}
+
 			$scope.list();
 		}
 	}

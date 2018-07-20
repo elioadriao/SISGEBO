@@ -4,7 +4,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	var INVENTARIO_BD = [];
 	var DEPRECIACOES_BD = [];
 	var CUSTO_FIXO_BD = [];
-	var VREBANHO_BD = [];
+	var VARIACAO_REBANHO_BD = [];
 	var TOTAL_CABECAS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var TOTAL_FIXO_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var TOTAL_FIXO_PCABECA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -52,7 +52,7 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 		if(res){
 			console.log("Carregou Depreciacoes..");
-			$scope.initRebanho();
+			$scope.initRebanhoQtd();
 		}else{
 			console.log("Nao Carregou Depreciacoes..");
 			$location.path("/depreciacoes");
@@ -60,31 +60,25 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 	}
 
 	/*   */
-	$scope.initRebanho = function(){
-		var DESCANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
-			 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
-					 
-		for (i in DESCANIMAL){
-			var SQL = "SELECT * FROM variacao_rebanho WHERE propriedadeId_FK="+Propriedade.getId()+" AND descricao='"+DESCANIMAL[i]+"'";
-			var res = false;
-			//console.log(DESCANIMAL[i]);
+	$scope.initRebanhoQtd = function(){
+		var SQL = "SELECT * FROM variacao_rebanho_qtd WHERE propriedadeId_FK="+Propriedade.getId();
+		var res = false;
 
-			basel.database.runAsync(SQL, function(data){
-				if(data[0] != null){
-					VREBANHO_BD[i] = data;	
-					res = true;
-				}else{
-					res = false;
-				}
-			});
-		}		
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				VARIACAO_REBANHO_BD = data;	
+				res = true;
+			}else{
+				res = false;
+			}
+		});			
 
 		if(res){
-			console.log("Carregou Rebanho..");
+			console.log("Carregou Qtd do Rebanho..");
 			$scope.initCustoFixo();
 		}else{
-			console.log("Nao Carregou Rebanho..");
-			$location.path("/vrebanho");
+			console.log("Nao Carregou Qtd do Rebanho..");
+			$location.path("/variacaoRebanho");
 		}
 	}
 
@@ -131,10 +125,19 @@ app.controller("custoFixoController", function($scope, $location, Propriedade){
 
 	/*  */
 	$scope.tratarRebanho = function(){
-		for(i in VREBANHO_BD){			
-			for(var m=0; m<12; m++){
-				TOTAL_CABECAS[m] += VREBANHO_BD[i][m].qtd;
-			}
+		for(i in VARIACAO_REBANHO_BD){			
+			TOTAL_CABECAS[0] += VARIACAO_REBANHO_BD[i].jan;			
+			TOTAL_CABECAS[1] += VARIACAO_REBANHO_BD[i].fev;			
+			TOTAL_CABECAS[2] += VARIACAO_REBANHO_BD[i].mar;			
+			TOTAL_CABECAS[3] += VARIACAO_REBANHO_BD[i].abr;			
+			TOTAL_CABECAS[4] += VARIACAO_REBANHO_BD[i].mai;			
+			TOTAL_CABECAS[5] += VARIACAO_REBANHO_BD[i].jun;			
+			TOTAL_CABECAS[6] += VARIACAO_REBANHO_BD[i].jul;			
+			TOTAL_CABECAS[7] += VARIACAO_REBANHO_BD[i].ago;			
+			TOTAL_CABECAS[8] += VARIACAO_REBANHO_BD[i].sem;			
+			TOTAL_CABECAS[9] += VARIACAO_REBANHO_BD[i].out;			
+			TOTAL_CABECAS[10] += VARIACAO_REBANHO_BD[i].nov;			
+			TOTAL_CABECAS[11] += VARIACAO_REBANHO_BD[i].dez;
 		}
 	}
 
