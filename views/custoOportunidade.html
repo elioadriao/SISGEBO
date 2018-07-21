@@ -1,9 +1,9 @@
-<div ng-controller="receitaController">
+<div ng-controller="custoOportunidadeController">
 	<div class="row">
 		<div class="page-header">
-			<h1>Receitas</h1>
+			<h1>Custo de Oportunidade</h1>
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
-			<a href="" data-toggle="modal" data-target="#receitaModalNew"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="" data-toggle="modal" data-target="#custoOportunidade"><span class="glyphicon glyphicon-plus"></span></a>
 		</div>
 	</div>
 
@@ -11,35 +11,13 @@
 		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initReceita()">
 			<thead class="thead-inverse">
 				<th>Descrição</th>
-				<th>Janeiro</th>				
-				<th>Fevereiro</th>
-				<th>Março</th>
-				<th>Abril</th>
-				<th>Maio</th>
-				<th>Junho</th>
-				<th>Julho</th>
-				<th>Agosto</th>
-				<th>Setembro</th>
-				<th>Outubro</th>
-				<th>Novembro</th>
-				<th>Dezembro</th>
+				<th>Valores</th>				
 				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
-			<tr ng-repeat="item in receita">
+			<tr>
 				<td>{{item.descricao}}</td>
 				<td>{{item.jan | number:2}}</td>
-				<td>{{item.fev | number:2}}</td>
-				<td>{{item.mar | number:2}}</td>
-				<td>{{item.abr | number:2}}</td>
-				<td>{{item.mai | number:2}}</td>
-				<td>{{item.jun | number:2}}</td>
-				<td>{{item.jul | number:2}}</td>
-				<td>{{item.ago | number:2}}</td>
-				<td>{{item.sem | number:2}}</td>
-				<td>{{item.out | number:2}}</td>
-				<td>{{item.nov | number:2}}</td>
-				<td>{{item.dez | number:2}}</td>
 				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 			</tr>
 			</tbody>
@@ -81,67 +59,44 @@
 		</table>
 	</div>
 
-	<div class="modal fade" id="receitaModal" role="dialog">
+	<div class="modal fade" id="custoOportunidadeModal" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Receita</h4>
+					<h4 class="modal-title" id="myModalLabel">Componentes de Calculo Custo de Oportunidade</h4>
 				</div>
 
 				<div class="modal-body">
 					<form class="basel-form">
 						<input type="hidden" class="form-control" ng-model="form.id">
+						<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
 
-						<div class="form-group col-md-12">
-							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
+						<div class="form-group col-md-3">
+							<label>Area de Reserva P.A.A.</label><input type="text" class="form-control" ng-model="form.area_reserva">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
+							<label>Ganho Arroba/Ano</label><input type="text" class="form-control" ng-model="form.ganho_arroba">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
+							<label>Tempo de Aluguel</label><input type="text" class="form-control" ng-model="form.aluguel_tempo">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
+							<label>Valor de Aluguel</label><input type="text" class="form-control" ng-model="form.aluguel_valor">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
+							<label>Taxa SELIC</label><input type="text" class="form-control" ng-model="form.selic">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
+							<label>Imposto Bancario</label><input type="text" class="form-control" ng-model="form.imposto">
 						</div>
 
 						<div class="form-group col-md-3">
-							<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
+							<label>Inflação</label><input type="text" class="form-control" ng-model="form.inflacao">
 						</div>
 					</form>
 				</div>
@@ -150,83 +105,6 @@
 					<div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
                             <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
-                        </div>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="receitaModalNew" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Receita</h4>
-				</div>
-
-				<div class="modal-body">
-					<form class="basel-form">
-						<div class="form-group col-md-12">
-							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
-						</div>
-					</form>
-				</div>
-
-				<div class="modal-footer">
-					<div class="btn-group btn-group-justified" role="group">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-success" ng-click="new()"><span class="glyphicon glyphicon-ok"></button>
                         </div>
                         <div class="btn-group" role="group">
                             <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
