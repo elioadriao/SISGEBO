@@ -351,6 +351,8 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		$scope.custoOp.operacional = VALOR_DESEMBOLSO;
 		$scope.custoOp.valor_total_desembolsos = $scope.custoOp.operacional * $scope.custoOp.inflacao;
 		$scope.custoOp.somatoria = $scope.custoOp.valor_total_desembolsos + $scope.custoOp.valor_total_animais + $scope.custoOp.valor_total_terra;
+
+		$scope.insertTotal();
 	}
 
 	/*  */
@@ -400,6 +402,40 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 			default:
 				return 0;
 		}
+	}
+
+	$scope.insertTotal = function(){
+		var SQL = "SELECT * FROM custo_total WHERE propriedadeId_FK="+Propriedade.getId();
+
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				basel.database.delete("custo_total", {propriedadeId_FK : Propriedade.getId()});
+			}
+		});
+
+		for(i in CUSTO_OPERACIONAL_BD){
+			$scope.form = CUSTO_OPERACIONAL_BD[i];
+			basel.database.insert("custo_total", $scope.form);
+		}
+
+		$scope.form = {};
+		$scope.id;
+		$scope.form.jan = $scope.custoOp.somatoria/12;
+		$scope.form.fev = $scope.custoOp.somatoria/12;
+		$scope.form.mar = $scope.custoOp.somatoria/12;
+		$scope.form.abr = $scope.custoOp.somatoria/12;
+		$scope.form.mai = $scope.custoOp.somatoria/12;
+		$scope.form.jun = $scope.custoOp.somatoria/12;
+		$scope.form.jul = $scope.custoOp.somatoria/12;
+		$scope.form.ago = $scope.custoOp.somatoria/12;
+		$scope.form.sem = $scope.custoOp.somatoria/12;
+		$scope.form.out = $scope.custoOp.somatoria/12;
+		$scope.form.nov = $scope.custoOp.somatoria/12;
+		$scope.form.dez = $scope.custoOp.somatoria/12;
+		$scope.form.descricao = "Oportunidade";
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+
+		basel.database.insert("custo_total", $scope.form);
 	}
 
 	$scope.save = function(){

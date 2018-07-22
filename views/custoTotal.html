@@ -1,0 +1,111 @@
+<div ng-controller="custoTotalController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Custo Total</h1>
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initRebanhoQtd()">
+			<thead class="thead-inverse">
+				<th>Descrição</th>
+				<th>Janeiro</th>				
+				<th>Fevereiro</th>
+				<th>Março</th>
+				<th>Abril</th>
+				<th>Maio</th>
+				<th>Junho</th>
+				<th>Julho</th>
+				<th>Agosto</th>
+				<th>Setembro</th>
+				<th>Outubro</th>
+				<th>Novembro</th>
+				<th>Dezembro</th>
+				<th class="text-center">R$</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr ng-repeat="item in custo_total">
+				<td>{{item.descricao}}</td>
+				<td>{{item.jan | number:2}}</td>
+				<td>{{item.fev | number:2}}</td>
+				<td>{{item.mar | number:2}}</td>
+				<td>{{item.abr | number:2}}</td>
+				<td>{{item.mai | number:2}}</td>
+				<td>{{item.jun | number:2}}</td>
+				<td>{{item.jul | number:2}}</td>
+				<td>{{item.ago | number:2}}</td>
+				<td>{{item.sem | number:2}}</td>
+				<td>{{item.out | number:2}}</td>
+				<td>{{item.nov | number:2}}</td>
+				<td>{{item.dez | number:2}}</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th class="text-center">R$</th>
+				<th>Janeiro</th>				
+				<th>Fevereiro</th>
+				<th>Março</th>
+				<th>Abril</th>
+				<th>Maio</th>
+				<th>Junho</th>
+				<th>Julho</th>
+				<th>Agosto</th>
+				<th>Setembro</th>
+				<th>Outubro</th>
+				<th>Novembro</th>
+				<th>Dezembro</th>
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<td>Custo Total</td>
+				<td>{{total_mes[0] | number:2}}</td>
+				<td>{{total_mes[1] | number:2}}</td>
+				<td>{{total_mes[2] | number:2}}</td>
+				<td>{{total_mes[3] | number:2}}</td>
+				<td>{{total_mes[4] | number:2}}</td>
+				<td>{{total_mes[5] | number:2}}</td>
+				<td>{{total_mes[6] | number:2}}</td>
+				<td>{{total_mes[7] | number:2}}</td>
+				<td>{{total_mes[8] | number:2}}</td>
+				<td>{{total_mes[9] | number:2}}</td>
+				<td>{{total_mes[10] | number:2}}</td>
+				<td>{{total_mes[11] | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Custo Total/Cabeca Com Reposição</td>
+				<td>{{total_c[0] | number:2}}</td>
+				<td>{{total_c[1] | number:2}}</td>
+				<td>{{total_c[2] | number:2}}</td>
+				<td>{{total_c[3] | number:2}}</td>
+				<td>{{total_c[4] | number:2}}</td>
+				<td>{{total_c[5] | number:2}}</td>
+				<td>{{total_c[6] | number:2}}</td>
+				<td>{{total_c[7] | number:2}}</td>
+				<td>{{total_c[8] | number:2}}</td>
+				<td>{{total_c[9] | number:2}}</td>
+				<td>{{total_c[10] | number:2}}</td>
+				<td>{{total_c[11] | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Custo Total/Cabeca Sem Reposição</td>
+				<td>{{total_s[0] | number:2}}</td>
+				<td>{{total_s[1] | number:2}}</td>
+				<td>{{total_s[2] | number:2}}</td>
+				<td>{{total_s[3] | number:2}}</td>
+				<td>{{total_s[4] | number:2}}</td>
+				<td>{{total_s[5] | number:2}}</td>
+				<td>{{total_s[6] | number:2}}</td>
+				<td>{{total_s[7] | number:2}}</td>
+				<td>{{total_s[8] | number:2}}</td>
+				<td>{{total_s[9] | number:2}}</td>
+				<td>{{total_s[10] | number:2}}</td>
+				<td>{{total_s[11] | number:2}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
