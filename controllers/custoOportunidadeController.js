@@ -228,11 +228,15 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		}
 
 		for(i=0; i<12; i++){
-			MEDIA_AREA += $scope.getArea[i];
+			MEDIA_AREA += $scope.getArea(i);
 			MEDIA_CABECA += TOTAL_CABECAS[i];
 			MEDIA_DENSIDADE += DENSIDADE_MES[i];
 			MEDIA_PESO += PESO_MEDIO_MES[i];
 		}
+		MEDIA_CABECA /= 12;
+		MEDIA_PESO /= 12;
+		MEDIA_DENSIDADE /= 12;
+		MEDIA_AREA /= 12;
 	}
 
 	$scope.tratarInventario = function(){
@@ -336,15 +340,17 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		$scope.custoOp.valor_terra = VALOR_TERRA;
 		$scope.custoOp.valor_animais = VALOR_ANIMAIS;
 		$scope.custoOp.valor_desembolso = VALOR_DESEMBOLSO;
+		$scope.custoOp.valor_economico = VALOR_TERRA + VALOR_ANIMAIS + VALOR_DESEMBOLSO;
 		$scope.custoOp.densidade = MEDIA_DENSIDADE;
-		$scope.custoOp.valor_total_receita = $scope.custoOp.aluguel_valor * $scope.custoOp.aluguel_tempo * $scope.custoOp.area;
-		$scope.custoOp.receita = $scope.custoOp.valor_total_receita / $scope.custoOp.area;
+		$scope.custoOp.valor_total_terra = $scope.custoOp.aluguel_valor * $scope.custoOp.aluguel_tempo * $scope.custoOp.area;
+		$scope.custoOp.receita = $scope.custoOp.valor_total_terra / $scope.custoOp.area;
 		$scope.custoOp.valor_terra_ha = $scope.custoOp.valor_terra / ($scope.custoOp.area + $scope.custoOp.area_reserva);
 		$scope.custoOp.imobilizado = VALOR_IMOBILIZADO;
 		$scope.custoOp.oportunidade = ($scope.custoOp.selic - ($scope.custoOp.selic * $scope.custoOp.imposto) - $scope.custoOp.inflacao);
-		$scope.custoOp.valor_total_imobilizado = $scope.custoOp.oportunidade * $scope.custoOp.imobilizado;
+		$scope.custoOp.valor_total_animais = $scope.custoOp.oportunidade * $scope.custoOp.imobilizado;
 		$scope.custoOp.operacional = VALOR_DESEMBOLSO;
-		$scope.custoOp.valor_total_operacional = $scope.custoOp.operacional * $scope.custoOp.inflacao;
+		$scope.custoOp.valor_total_desembolsos = $scope.custoOp.operacional * $scope.custoOp.inflacao;
+		$scope.custoOp.somatoria = $scope.custoOp.valor_total_desembolsos + $scope.custoOp.valor_total_animais + $scope.custoOp.valor_total_terra;
 	}
 
 	/*  */

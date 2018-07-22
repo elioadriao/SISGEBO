@@ -3,57 +3,189 @@
 		<div class="page-header">
 			<h1>Custo de Oportunidade</h1>
 			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
-			<a href="" data-toggle="modal" data-target="#custoOportunidade"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="" data-toggle="modal" data-target="#custoOportunidadeModal"><span class="glyphicon glyphicon-pencil"></span></a>
 		</div>
 	</div>
 
-	<div class="row">
-		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initReceita()">
+	<div class="row" ng-init="initRebanhoPeso()">
+		<table class="table table-responsive table-hover table-sm table-bordered">
 			<thead class="thead-inverse">
-				<th>Descrição</th>
+				<th>Indices Produtivos</th>
 				<th>Valores</th>				
-				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>{{item.descricao}}</td>
-				<td>{{item.jan | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<td>Rebanho</td>
+				<td>{{custoOp.rebanho | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Peso Medio</td>
+				<td>{{custoOp.peso | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Area Reserva</td>
+				<td>{{custoOp.area_reserva | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Area Util</td>
+				<td>{{custoOp.area | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Ganho @/ano</td>
+				<td>{{custoOp.ganho_arroba | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Lotação</td>
+				<td>{{custoOp.lotacao | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Produtividade</td>
+				<td>{{custoOp.produtividade | number:1}}</td>
+			</tr>
+			<tr>
+				<th>Total @</th>
+				<th>{{custoOp.total_arroba | number:1}}</th>
 			</tr>
 			</tbody>
 		</table>
 
 		<table class="table table-responsive table-hover table-sm table-bordered">
 			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Janeiro</th>				
-				<th>Fevereiro</th>
-				<th>Março</th>
-				<th>Abril</th>
-				<th>Maio</th>
-				<th>Junho</th>
-				<th>Julho</th>
-				<th>Agosto</th>
-				<th>Setembro</th>
-				<th>Outubro</th>
-				<th>Novembro</th>
-				<th>Dezembro</th>
+				<th>Indices Economicos</th>
+				<th>Valores</th>				
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>Receita Total</td>
-				<td>{{receita_mes[0] | number:2}}</td>
-				<td>{{receita_mes[1] | number:2}}</td>
-				<td>{{receita_mes[2] | number:2}}</td>
-				<td>{{receita_mes[3] | number:2}}</td>
-				<td>{{receita_mes[4] | number:2}}</td>
-				<td>{{receita_mes[5] | number:2}}</td>
-				<td>{{receita_mes[6] | number:2}}</td>
-				<td>{{receita_mes[7] | number:2}}</td>
-				<td>{{receita_mes[8] | number:2}}</td>
-				<td>{{receita_mes[9] | number:2}}</td>
-				<td>{{receita_mes[10] | number:2}}</td>
-				<td>{{receita_mes[11] | number:2}}</td>
+				<td>Em Terra</td>
+				<td>{{custoOp.valor_terra | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Em Animais</td>
+				<td>{{custoOp.valor_animais | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Desembolsos</td>
+				<td>{{custoOp.valor_desembolso | number:2}}</td>
+			</tr>
+			<tr>
+				<th>Total</th>
+				<th>{{custoOp.valor_economico | number:2}}</th>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th>1º Da Terra</th>
+				<th>Valores</th>				
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<td>Aluguel</td>
+				<td>{{custoOp.aluguel_valor | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Tempo de Aluguel</td>
+				<td>{{custoOp.aluguel_tempo | number:1}}</td>
+			</tr>
+			<tr>
+				<td>Densidade de Lotção</td>
+				<td>{{custoOp.densidade | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Receita</td>
+				<td>{{custoOp.receita | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Valor Terra (ha)</td>
+				<td>{{custoOp.valor_terra_ha | number:2}}</td>
+			</tr>
+			<tr>
+				<th>Receita na Area Util</th>
+				<th>{{custoOp.valor_total_terra | number:2}}</th>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th>2º Dos Animais</th>
+				<th>Valores</th>				
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<th>Imobilizado</th>
+				<th>{{custoOp.imobilizado | number:2}}</th>
+			</tr>
+			<tr>
+				<td>Custo Oportunidade</td>
+				<td>{{custoOp.oportunidade*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<td>Taxa SELIC</td>
+				<td>{{custoOp.selic*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<td>Imposto Bancario</td>
+				<td>{{custoOp.imposto*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<td>Inflação</td>
+				<td>{{custoOp.inflacao*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<th>Total</th>
+				<th>{{custoOp.valor_total_animais | number:2}}</th>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th>3º Dos Desembolsos</th>
+				<th>Valores</th>				
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<th>Operacional</th>
+				<th>{{custoOp.operacional | number:2}}</th>
+			</tr>
+			<tr>
+				<td>Custo Oportunidade</td>
+				<td>{{custoOp.oportunidade*50 | number:2}} %</td>
+			</tr>
+			<tr>
+				<td>Taxa SELIC</td>
+				<td>{{custoOp.selic*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<td>Imposto Bancario</td>
+				<td>{{custoOp.imposto*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<td>Inflação</td>
+				<td>{{custoOp.inflacao*100 | number:1}} %</td>
+			</tr>
+			<tr>
+				<th>Total</th>
+				<th>{{custoOp.valor_total_desembolsos | number:2}}</th>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th>Capital na Atividade</th>
+				<th>Valores</th>				
+			</thead>
+			<tbody class="basel-table-body">
+			<tr>
+				<td>Somatoria Total (1º+2º+3º)</td>
+				<td>{{custoOp.somatoria | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Remuneração</td>
+				<td>{{custoOp.somatoria/custoOp.valor_economico | number:1}}%</td>
 			</tr>
 			</tbody>
 		</table>
@@ -71,31 +203,31 @@
 						<input type="hidden" class="form-control" ng-model="form.id">
 						<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Area de Reserva P.A.A.</label><input type="text" class="form-control" ng-model="form.area_reserva">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Ganho Arroba/Ano</label><input type="text" class="form-control" ng-model="form.ganho_arroba">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Tempo de Aluguel</label><input type="text" class="form-control" ng-model="form.aluguel_tempo">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Valor de Aluguel</label><input type="text" class="form-control" ng-model="form.aluguel_valor">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Taxa SELIC</label><input type="text" class="form-control" ng-model="form.selic">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Imposto Bancario</label><input type="text" class="form-control" ng-model="form.imposto">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-4">
 							<label>Inflação</label><input type="text" class="form-control" ng-model="form.inflacao">
 						</div>
 					</form>
