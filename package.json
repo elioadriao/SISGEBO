@@ -1,6 +1,6 @@
 {
-    "name": "SISGEBO",
-    "version": "0.1.0",
+    "name": "sisgebo",
+    "version": "1.0.0",
     "main": "main.js",
     "repository": {
         "type": "git",
@@ -40,8 +40,8 @@
         "asar": true,
         "mac": { "category": "public.app-category.tools" }
     },
-    "titel": "SISGEBO",
+    "titel": "sisgebo",
     "database": "database",
-    "title": "SISGEBO",
+    "title": "sisgebo",
     "type": "simple"
 }

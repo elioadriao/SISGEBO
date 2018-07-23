@@ -1,4 +1,4 @@
-<div ng-controller="receitaController">
+<div ng-controller="balancoController">
 	<div class="row">
 		<div class="page-header">
 			<h1>Balanço Patrimonial</h1>
@@ -7,164 +7,136 @@
 	</div>
 
 	<div class="row">
-		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initBalanco1()">
-			<thead class="thead-inverse">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initBalanco()">
+		<thead class="thead-inverse">
+			<tr>
 				<th>Descrição</th>
 				<th>Inicial</th>				
 				<th>Final</th>
-				<a href="" data-toggle="modal" data-target="#balancoModalNew" ng-click="num=1"><span class="glyphicon glyphicon-plus"></span></a>
-			</thead>
-			<tbody class="basel-table-body">
-			<tr ng-repeat="item in balanco_1">
-				<td>{{item.descricao}}</td>
-				<td>{{item.inicial | number:2}}</td>
-				<td>{{item.final | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item, 1)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 			</tr>
-			</tbody>
-		</table>
-		<!--BALANCO 1-->
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-			</thead>
-			<tbody class="basel-table-body">
+		</thead>
+		<tbody class="table-body">
 			<tr>
-				<td>Total</td>
-				<td>{{balanco_total_1[0] | number:2}}</td>
-				<td>{{balanco_total_1[1] | number:2}}</td>
+				<th class="text-center" colspan="3"> ATIVO</th>
 			</tr>
-			</tbody>
-		</table>
 
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Descrição</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-				<a href="" data-toggle="modal" data-target="#balancoModalNew" ng-click="num=2"><span class="glyphicon glyphicon-plus"></span></a>
-			</thead>
-			<tbody class="basel-table-body">
-			<tr ng-repeat="item in balanco_2">
+			<!--  -->
+			<tr>
+				<th class="text-center" colspan="3">1º CIRCULANTE</th>
+			</tr>
+			<tr ng-repeat="item in balanco[0]">
 				<td>{{item.descricao}}</td>
 				<td>{{item.inicial | number:2}}</td>
 				<td>{{item.final | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item, 2)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 			</tr>
-			</tbody>
-		</table>
-		<!--BALANCO 2-->
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-			</thead>
-			<tbody class="basel-table-body">
 			<tr>
-				<td>Total</td>
-				<td>{{balanco_total_2[0] | number:2}}</td>
-				<td>{{balanco_total_2[1] | number:2}}</td>
+				<th>Total 1º</th>
+				<td>{{balanco_total[0][0] | number:2}}</td>
+				<td>{{balanco_total[0][1] | number:2}}</td>
 			</tr>
-			</tbody>
-		</table>
+			
+			<!--  -->
+			<tr>
+				<th class="text-center" colspan="3">2º REALIZÁVEL A LONGO PRAZO</th>
+			</tr>
+			<tr ng-repeat="item in balanco[1]">
+				<td>{{item.descricao}}</td>
+				<td>{{item.inicial | number:2}}</td>
+				<td>{{item.final | number:2}}</td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+			</tr>
+			<tr>
+				<th>Total 2º</th>
+				<td>{{balanco_total[1][0] | number:2}}</td>
+				<td>{{balanco_total[1][1] | number:2}}</td>
+			</tr>
 
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Descrição</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-				<a href="" data-toggle="modal" data-target="#balancoModalNew" ng-click="num=3"><span class="glyphicon glyphicon-plus"></span></a>
-			</thead>
-			<tbody class="basel-table-body">
-			<tr ng-repeat="item in balanco_3">
+			<!--  -->
+			<tr>
+				<th class="text-center" colspan="3">3º PERMANENTE</th>
+			</tr>
+			<tr ng-repeat="item in balanco[2]">
 				<td>{{item.descricao}}</td>
 				<td>{{item.inicial | number:2}}</td>
 				<td>{{item.final | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item, 3)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 			</tr>
-			</tbody>
-		</table>
-		<!--BALANCO 3-->
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-			</thead>
-			<tbody class="basel-table-body">
 			<tr>
-				<td>Total</td>
-				<td>{{balanco_total_3[0] | number:2}}</td>
-				<td>{{balanco_total_3[1] | number:2}}</td>
+				<th>Total 3º</th>
+				<td>{{balanco_total[2][0] | number:2}}</td>
+				<td>{{balanco_total[2][1] | number:2}}</td>
 			</tr>
-			</tbody>
-		</table>
 
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Descrição</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-				<a href="" data-toggle="modal" data-target="#balancoModalNew" ng-click="num=4"><span class="glyphicon glyphicon-plus"></span></a>
-			</thead>
-			<tbody class="basel-table-body">
-			<tr ng-repeat="item in balanco_4">
-				<td>{{item.descricao}}</td>
-				<td>{{item.inicial | number:2}}</td>
-				<td>{{item.final | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item, 4)"><span class="glyphicon glyphicon-pencil"></span></button></td>
-			</tr>
-			</tbody>
-		</table>
-		<!--BALANCO 4-->
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-			</thead>
-			<tbody class="basel-table-body">
+			<!--  -->
 			<tr>
-				<td>Total</td>
-				<td>{{balanco_total_4[0] | number:2}}</td>
-				<td>{{balanco_total_4[1] | number:2}}</td>
+				<th class="text-center" colspan="3"> PASSIVO</th>
 			</tr>
-			</tbody>
-		</table>
 
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Descrição</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-				<a href="" data-toggle="modal" data-target="#balancoModalNew" ng-click="num=5"><span class="glyphicon glyphicon-plus"></span></a>
-			</thead>
-			<tbody class="basel-table-body">
-			<tr ng-repeat="item in balanco_5">
+			<!--  -->
+			<tr>
+				<th class="text-center" colspan="3">4º CIRCULANTE</th>
+			</tr>
+			<tr ng-repeat="item in balanco[3]">
 				<td>{{item.descricao}}</td>
 				<td>{{item.inicial | number:2}}</td>
 				<td>{{item.final | number:2}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item, 5)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 			</tr>
-			</tbody>
-		</table>
-		<!--BALANCO 5-->
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th class="text-center">R$</th>
-				<th>Inicial</th>				
-				<th>Final</th>
-			</thead>
-			<tbody class="basel-table-body">
 			<tr>
-				<td>Total</td>
-				<td>{{balanco_total_5[0] | number:2}}</td>
-				<td>{{balanco_total_5[1] | number:2}}</td>
+				<th>Total 4º</th>
+				<td>{{balanco_total[3][0] | number:2}}</td>
+				<td>{{balanco_total[3][1] | number:2}}</td>
 			</tr>
-			</tbody>
+
+			<!--  -->
+			<tr>
+				<th class="text-center" colspan="3">5º EXIGÍVEL A LONGO PRAZO</th>
+			</tr>
+			<tr ng-repeat="item in balanco[4]">
+				<td>{{item.descricao}}</td>
+				<td>{{item.inicial | number:2}}</td>
+				<td>{{item.final | number:2}}</td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+			</tr>
+			<tr>
+				<th>Total 5º</th>
+				<td>{{balanco_total[4][0] | number:2}}</td>
+				<td>{{balanco_total[4][1] | number:2}}</td>
+			</tr>
+
+			<!--  -->
+			<tr>
+				<td colspan="3"></td>
+			</tr>
+
+			<!--  -->
+			<tr>
+				<th>TOTAL LIQUIDO</th>
+				<th>{{balanco_liquido[0] | number:2}}</th>
+				<th>{{balanco_liquido[1] | number:2}}</th>
+			</tr>
+
+			<!--  -->
+			<tr>
+				<th>TOTAL ATIVO (1º+2º+3º)</th>
+				<th>{{balanco_ativo[0] | number:2}}</th>
+				<th>{{balanco_ativo[1] | number:2}}</th>
+			</tr>
+
+			<!--  -->
+			<tr>
+				<th>TOTAL PASSIVO(4º+5º+Liquido)</th>
+				<th>{{balanco_passivo[0] | number:2}}</th>
+				<th>{{balanco_passivo[1] | number:2}}</th>
+			</tr>
+
+			<!--  -->
+			<tr>
+				<th>VALORIZAÇÃO DO PATRIMÔNIO</th>
+				<th colspan="2">{{balanco_liquido[1] - balanco_liquido[0] | number:2}}</th>
+			</tr>
+		</tbody>
 		</table>
 	</div>
 
@@ -178,16 +150,18 @@
 				<div class="modal-body">
 					<form class="basel-form">
 						<input type="hidden" class="form-control" ng-model="form.id">
+						<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
+						<input type="hidden" class="form-control" ng-model="form.var">
 
 						<div class="form-group col-md-12">
 							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-6">
 							<label>Inicial</label><input type="text" class="form-control" ng-model="form.inicial">
 						</div>
 
-						<div class="form-group col-md-3">
+						<div class="form-group col-md-6">
 							<label>Final</label><input type="text" class="form-control" ng-model="form.final">
 						</div>
 
@@ -198,43 +172,6 @@
 					<div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
                             <button class="btn btn-success" ng-click="save(num)"><span class="glyphicon glyphicon-ok"></button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
-                        </div>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="balancoModalNew" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Componente de Balanço</h4>
-				</div>
-
-				<div class="modal-body">
-					<form class="basel-form">
-						<div class="form-group col-md-12">
-							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Inicial</label><input type="text" class="form-control" ng-model="form.inicial">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label>Final</label><input type="text" class="form-control" ng-model="form.final">
-						</div>
-					</form>
-				</div>
-
-				<div class="modal-footer">
-					<div class="btn-group btn-group-justified" role="group">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-success" ng-click="new()"><span class="glyphicon glyphicon-ok"></button>
                         </div>
                         <div class="btn-group" role="group">
                             <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
