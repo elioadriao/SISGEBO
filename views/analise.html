@@ -15,33 +15,33 @@
 			<tbody class="table-body">
 			<tr>
 				<td>Fixo Total</td>
-				<td>{{total.fixo | number:2}}</td>
-				<td>{{total.fixo/total.total*100 | number:1}} %</td>
+				<td>{{total_fixo | number:2}}</td>
+				<td>{{total_fixo/total_total*100 | number:1}} %</td>
 			</tr>
 			<tr>
 				<td>Variavel Total</td>
-				<td>{{total.variavel | number:2}}</td>
-				<td>{{total.variavel/total.total*100 | number:1}} %</td>
+				<td>{{total_variavel | number:2}}</td>
+				<td>{{total_variavel/total_total*100 | number:1}} %</td>
 			</tr>
 			<tr>
 				<td>Administrativo Total</td>
-				<td>{{total.adm | number:2}}</td>
-				<td>{{total.adm/total.total*100 | number:1}} %</td>
+				<td>{{total_adm | number:2}}</td>
+				<td>{{total_adm/total_total*100 | number:1}} %</td>
 			</tr>
 			<tr>
 				<td>Operacional Total</td>
-				<td>{{total.operacional | number:2}}</td>
-				<td>{{total.operacional/total.total*100 | number:1}} %</td>
+				<td>{{total_operacional | number:2}}</td>
+				<td>{{total_operacional/total_total*100 | number:1}} %</td>
 			</tr>
 			<tr>
 				<td>Oportunidade Total</td>
-				<td>{{total.oportunidade | number:2}}</td>
-				<td>{{total.oportunidade/total.total*100 | number:1}} %</td>
+				<td>{{total_oportunidade | number:2}}</td>
+				<td>{{total_oportunidade/total_total*100 | number:1}} %</td>
 			</tr>
 			<tr>
 				<th>Total</th>
-				<th>{{total.total | number:2}}</th>
-				<th>{{total.total/total.total*100 | number:1}} %</th>
+				<th>{{total_total | number:2}}</th>
+				<th>{{total_total/total_total*100 | number:1}} %</th>
 			</tr>
 			</tbody>
 		</table>
@@ -54,50 +54,50 @@
 			<tbody class="table-body">
 			<tr>
 				<td>Capital Medio do Inventario</td>
-				<td>{{total.inventario | number:2}}</td>
+				<td>{{total_inventario | number:2}}</td>
 			</tr>
 			<tr>
 				<th>Receita Total</th>
-				<th>{{total.receita | number:2}}</th>
+				<th>{{total_receita | number:2}}</th>
 			</tr>
 			<tr>
 				<td>Resultado Caixa</td>
-				<td>{{total.caixa | number:2}}</td>
+				<td>{{total_caixa | number:2}}</td>
 			</tr>
 			<tr>
 				<td>Lucro Operacional</td>
-				<td>{{total.lucro_o | number:2}}</td>
+				<td>{{total_lucro_o | number:2}}</td>
 			</tr>
 			<tr>
 				<td>Lucro Economico</td>
-				<td>{{total.lucro_e | number:2}}</td>
+				<td>{{total_lucro_e | number:2}}</td>
 			</tr>
 			<tr>
 				<td>Lucro Operacional/ha</td>
-				<td>{{total.lucro_o_ha | number:2}}</td>
+				<td>{{total_lucro_o_ha | number:2}}</td>
 			</tr>
 			<tr>
 				<td colspan="2"></td>
 			</tr>
 			<tr>
 				<th>Lucratividade</th>
-				<th>{{total.operacional/total.receita*100 | number:1}} %</th>
+				<th>{{total_operacional/total_receita*100 | number:1}} %</th>
 			</tr>
 			<tr>
 				<th>Rentabilidade</th>
-				<th>{{total.operacional/total.inventario*100 | number:1}} %</th>
+				<th>{{total_operacional/total_inventario*100 | number:1}} %</th>
 			</tr>
 			<tr>
 				<th>Pay Back</th>
-				<th>{{total.inventario/total.caixa | number:1}}</th>
+				<th>{{total_inventario/total_caixa | number:1}}</th>
 			</tr>
 			<tr>
 				<th>T.I.R.</th>
-				<th>{{100/(total.inventario/total.caixa) | number:1}} %</th>
+				<th>{{100/(total_inventario/total_caixa) | number:1}} %</th>
 			</tr>
 			<tr>
 				<th>Relação Beneficio/Custo</th>
-				<th>{{total.caixa/(total.adm + total.variavel) | number:1}}</th>
+				<th>{{total_caixa/(total_adm + total_variavel) | number:1}}</th>
 			</tr>
 			</tbody>
 		</table>

@@ -10,7 +10,7 @@ app.controller("analiseController", function($scope, $location, Propriedade){
 	var TOTAL_AREA = 0;
 	var TOTAL_CUSTO_TOTAL = [0, 0, 0, 0];
 
-	/* INICIA A ANALISE */
+	/* INICIA A AREA */
 	$scope.initRebanhoArea = function(){
 		var SQL = "SELECT * FROM variacao_rebanho_area WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
@@ -131,7 +131,7 @@ app.controller("analiseController", function($scope, $location, Propriedade){
 
 	$scope.tratarArea = function(){
 		for(i=0; i<12; i++){
-			TOTAL_AREA += getArea(i);
+			TOTAL_AREA += $scope.getArea(i);
 		}
 
 		TOTAL_AREA /= 12;
@@ -176,18 +176,18 @@ app.controller("analiseController", function($scope, $location, Propriedade){
 		$scope.tratarReceita();
 		$scope.tratarArea();
 
-		$scope.total.fixo = TOTAL_CUSTO_TOTAL[0];
-		$scope.total.variavel = TOTAL_CUSTO_TOTAL[1];
-		$scope.total.adm = TOTAL_CUSTO_TOTAL[2];
-		$scope.total.oportunidade = TOTAL_CUSTO_TOTAL[3];
-		$scope.total.inventario = TOTAL_INVENTARIO;
-		$scope.total.operacional = $scope.total.fixo + $scope.total.variavel + $scope.total.adm;
-		$scope.total.total = $scope.total.operacional + $scope.total.oportunidade;
-		$scope.total.receita = TOTAL_RECEITA;
-		$scope.total.caixa = $scope.total.receita - ($scope.total.variavel + $scope.total.adm);
-		$scope.total.lucro_o = $scope.total.caixa - $scope.total.fixo;
-		$scope.total.lucro_e = $scope.total.lucro_o - $scope.total.oportunidade;
-		$scope.total.lucro_o_ha = $scope.total.lucro_o / TOTAL_AREA;
+		$scope.total_fixo = TOTAL_CUSTO_TOTAL[0];
+		$scope.total_variavel = TOTAL_CUSTO_TOTAL[1];
+		$scope.total_adm = TOTAL_CUSTO_TOTAL[2];
+		$scope.total_oportunidade = TOTAL_CUSTO_TOTAL[3];
+		$scope.total_inventario = TOTAL_INVENTARIO;
+		$scope.total_operacional = $scope.total_fixo + $scope.total_variavel + $scope.total_adm;
+		$scope.total_total = $scope.total_operacional + $scope.total_oportunidade;
+		$scope.total_receita = TOTAL_RECEITA;
+		$scope.total_caixa = $scope.total_receita - ($scope.total_variavel + $scope.total_adm);
+		$scope.total_lucro_o = $scope.total_caixa - $scope.total_fixo;
+		$scope.total_lucro_e = $scope.total_lucro_o - $scope.total_oportunidade;
+		$scope.total_lucro_o_ha = $scope.total_lucro_o / TOTAL_AREA;
 	}
 
 	/* */

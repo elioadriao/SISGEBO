@@ -1,0 +1,301 @@
+<div ng-controller="fluxoCaixaController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Fluxo de Caixa</h1>
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initReceita()">
+			<thead class="thead-inverse">
+				<th>Descrição</th>
+				<th>Janeiro</th>				
+				<th>Fevereiro</th>
+				<th>Março</th>
+				<th>Abril</th>
+				<th>Maio</th>
+				<th>Junho</th>
+				<th>Julho</th>
+				<th>Agosto</th>
+				<th>Setembro</th>
+				<th>Outubro</th>
+				<th>Novembro</th>
+				<th>Dezembro</th>
+				<th class="text-center">R$</th>
+			</thead>
+			<tbody class="table-body">
+			<tr>
+				<td>Receita Fazenda</td>
+				<td>{{total_receita[0] | number:2}}</td>
+				<td>{{total_receita[1] | number:2}}</td>
+				<td>{{total_receita[2] | number:2}}</td>
+				<td>{{total_receita[3] | number:2}}</td>
+				<td>{{total_receita[4] | number:2}}</td>
+				<td>{{total_receita[5] | number:2}}</td>
+				<td>{{total_receita[6] | number:2}}</td>
+				<td>{{total_receita[7] | number:2}}</td>
+				<td>{{total_receita[8] | number:2}}</td>
+				<td>{{total_receita[9] | number:2}}</td>
+				<td>{{total_receita[10] | number:2}}</td>
+				<td>{{total_receita[11] | number:2}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Receita Emprestimo</td>
+				<td>{{total_emp_r[0] | number:2}}</td>
+				<td>{{total_emp_r[1] | number:2}}</td>
+				<td>{{total_emp_r[2] | number:2}}</td>
+				<td>{{total_emp_r[3] | number:2}}</td>
+				<td>{{total_emp_r[4] | number:2}}</td>
+				<td>{{total_emp_r[5] | number:2}}</td>
+				<td>{{total_emp_r[6] | number:2}}</td>
+				<td>{{total_emp_r[7] | number:2}}</td>
+				<td>{{total_emp_r[8] | number:2}}</td>
+				<td>{{total_emp_r[9] | number:2}}</td>
+				<td>{{total_emp_r[10] | number:2}}</td>
+				<td>{{total_emp_r[11] | number:2}}</td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(0)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+			</tr>
+
+			<tr>
+				<td>Custo Fixo</td>
+				<td>{{total_fixo[0] | number:2}}</td>
+				<td>{{total_fixo[1] | number:2}}</td>
+				<td>{{total_fixo[2] | number:2}}</td>
+				<td>{{total_fixo[3] | number:2}}</td>
+				<td>{{total_fixo[4] | number:2}}</td>
+				<td>{{total_fixo[5] | number:2}}</td>
+				<td>{{total_fixo[6] | number:2}}</td>
+				<td>{{total_fixo[7] | number:2}}</td>
+				<td>{{total_fixo[8] | number:2}}</td>
+				<td>{{total_fixo[9] | number:2}}</td>
+				<td>{{total_fixo[10] | number:2}}</td>
+				<td>{{total_fixo[11] | number:2}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Custo Variavel</td>
+				<td>{{total_variavel[0] | number:2}}</td>
+				<td>{{total_variavel[1] | number:2}}</td>
+				<td>{{total_variavel[2] | number:2}}</td>
+				<td>{{total_variavel[3] | number:2}}</td>
+				<td>{{total_variavel[4] | number:2}}</td>
+				<td>{{total_variavel[5] | number:2}}</td>
+				<td>{{total_variavel[6] | number:2}}</td>
+				<td>{{total_variavel[7] | number:2}}</td>
+				<td>{{total_variavel[8] | number:2}}</td>
+				<td>{{total_variavel[9] | number:2}}</td>
+				<td>{{total_variavel[10] | number:2}}</td>
+				<td>{{total_variavel[11] | number:2}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Custo Administrativo</td>
+				<td>{{total_adm[0] | number:2}}</td>
+				<td>{{total_adm[1] | number:2}}</td>
+				<td>{{total_adm[2] | number:2}}</td>
+				<td>{{total_adm[3] | number:2}}</td>
+				<td>{{total_adm[4] | number:2}}</td>
+				<td>{{total_adm[5] | number:2}}</td>
+				<td>{{total_adm[6] | number:2}}</td>
+				<td>{{total_adm[7] | number:2}}</td>
+				<td>{{total_adm[8] | number:2}}</td>
+				<td>{{total_adm[9] | number:2}}</td>
+				<td>{{total_adm[10] | number:2}}</td>
+				<td>{{total_adm[11] | number:2}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Pagamento Emprestimo</td>
+				<td>{{total_emp_p[0] | number:2}}</td>
+				<td>{{total_emp_p[1] | number:2}}</td>
+				<td>{{total_emp_p[2] | number:2}}</td>
+				<td>{{total_emp_p[3] | number:2}}</td>
+				<td>{{total_emp_p[4] | number:2}}</td>
+				<td>{{total_emp_p[5] | number:2}}</td>
+				<td>{{total_emp_p[6] | number:2}}</td>
+				<td>{{total_emp_p[7] | number:2}}</td>
+				<td>{{total_emp_p[8] | number:2}}</td>
+				<td>{{total_emp_p[9] | number:2}}</td>
+				<td>{{total_emp_p[10] | number:2}}</td>
+				<td>{{total_emp_p[11] | number:2}}</td>
+				<td><button class="btn btn-info btn-sq-xs" ng-click="edit(1)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+			</tr>
+
+			<tr>
+				<td>Investimentos</td>
+				<td>{{total_investimento[0] | number:2}}</td>
+				<td>{{total_investimento[1] | number:2}}</td>
+				<td>{{total_investimento[2] | number:2}}</td>
+				<td>{{total_investimento[3] | number:2}}</td>
+				<td>{{total_investimento[4] | number:2}}</td>
+				<td>{{total_investimento[5] | number:2}}</td>
+				<td>{{total_investimento[6] | number:2}}</td>
+				<td>{{total_investimento[7] | number:2}}</td>
+				<td>{{total_investimento[8] | number:2}}</td>
+				<td>{{total_investimento[9] | number:2}}</td>
+				<td>{{total_investimento[10] | number:2}}</td>
+				<td>{{total_investimento[11] | number:2}}</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td colspan="14"></td>
+			</tr>
+
+			<tr>
+				<th>Total Saidas</th>
+				<th>{{total_saida[0] | number:2}}</th>
+				<th>{{total_saida[1] | number:2}}</th>
+				<th>{{total_saida[2] | number:2}}</th>
+				<th>{{total_saida[3] | number:2}}</th>
+				<th>{{total_saida[4] | number:2}}</th>
+				<th>{{total_saida[5] | number:2}}</th>
+				<th>{{total_saida[6] | number:2}}</th>
+				<th>{{total_saida[7] | number:2}}</th>
+				<th>{{total_saida[8] | number:2}}</th>
+				<th>{{total_saida[9] | number:2}}</th>
+				<th>{{total_saida[10] | number:2}}</th>
+				<th>{{total_saida[11] | number:2}}</th>
+				<th></th>
+			</tr>
+
+			<tr>
+				<th>Total Entradas</th>
+				<th>{{total_entrada[0] | number:2}}</th>
+				<th>{{total_entrada[1] | number:2}}</th>
+				<th>{{total_entrada[2] | number:2}}</th>
+				<th>{{total_entrada[3] | number:2}}</th>
+				<th>{{total_entrada[4] | number:2}}</th>
+				<th>{{total_entrada[5] | number:2}}</th>
+				<th>{{total_entrada[6] | number:2}}</th>
+				<th>{{total_entrada[7] | number:2}}</th>
+				<th>{{total_entrada[8] | number:2}}</th>
+				<th>{{total_entrada[9] | number:2}}</th>
+				<th>{{total_entrada[10] | number:2}}</th>
+				<th>{{total_entrada[11] | number:2}}</th>
+				<th></th>
+			</tr>
+
+			<tr>
+				<th>Fluxo de Caixa</th>
+				<th>{{total_fluxo[0] | number:2}}</th>
+				<th>{{total_fluxo[1] | number:2}}</th>
+				<th>{{total_fluxo[2] | number:2}}</th>
+				<th>{{total_fluxo[3] | number:2}}</th>
+				<th>{{total_fluxo[4] | number:2}}</th>
+				<th>{{total_fluxo[5] | number:2}}</th>
+				<th>{{total_fluxo[6] | number:2}}</th>
+				<th>{{total_fluxo[7] | number:2}}</th>
+				<th>{{total_fluxo[8] | number:2}}</th>
+				<th>{{total_fluxo[9] | number:2}}</th>
+				<th>{{total_fluxo[10] | number:2}}</th>
+				<th>{{total_fluxo[11] | number:2}}</th>
+				<th></th>
+			</tr>
+
+			<tr>
+				<th>Fluxo Acumulativo</th>
+				<th>{{total_acumulativo[0] | number:2}}</th>
+				<th>{{total_acumulativo[1] | number:2}}</th>
+				<th>{{total_acumulativo[2] | number:2}}</th>
+				<th>{{total_acumulativo[3] | number:2}}</th>
+				<th>{{total_acumulativo[4] | number:2}}</th>
+				<th>{{total_acumulativo[5] | number:2}}</th>
+				<th>{{total_acumulativo[6] | number:2}}</th>
+				<th>{{total_acumulativo[7] | number:2}}</th>
+				<th>{{total_acumulativo[8] | number:2}}</th>
+				<th>{{total_acumulativo[9] | number:2}}</th>
+				<th>{{total_acumulativo[10] | number:2}}</th>
+				<th>{{total_acumulativo[11] | number:2}}</th>
+				<th></th>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="fluxoCaixaModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Componente de Fluxo de Caixa</h4>
+				</div>
+
+				<div class="modal-body">
+					<form class="basel-form">
+						<input type="hidden" class="form-control" ng-model="form.id">
+						<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
+
+						<div class="form-group col-md-12">
+							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
+						</div>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

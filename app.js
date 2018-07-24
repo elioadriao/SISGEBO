@@ -38,6 +38,18 @@
     *   })
     *
     */
+    $routeProviderReference.when('/equilibrio',{
+        controller: 'equilibrioController',
+        templateUrl: 'views/equilibrio.html'
+        });
+    $routeProviderReference.when('/vpl',{
+        controller: 'vplController',
+        templateUrl: 'views/vpl.html'
+        });
+    $routeProviderReference.when('/fluxoCaixa',{
+        controller: 'fluxoCaixaController',
+        templateUrl: 'views/fluxoCaixa.html'
+        });
     $routeProviderReference.when('/analise',{
         controller: 'analiseController',
         templateUrl: 'views/analise.html'

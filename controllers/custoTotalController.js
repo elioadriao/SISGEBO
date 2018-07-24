@@ -56,7 +56,7 @@ app.controller("custoTotalController", function($scope, $location, Propriedade){
 		}
 	}
 
-	/* INICIA O CUSTO OPERACIONAL */
+	/* INICIA O CUSTO TOTAL */
 	$scope.initCustoTotal = function(){
 		var SQL = "SELECT * FROM custo_total WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
