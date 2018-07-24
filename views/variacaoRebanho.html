@@ -27,7 +27,10 @@
 				</tr>
 				<tbody class="table-body" ng-repeat="item in repeatData">
 				<tr >
-					<td>{{item.qtd.descricao}}</td>
+					<th colspan="14" class="text-center"><span class="glyphicon glyphicon-chevron-down"></span>	&nbsp; {{item.qtd.descricao}} &nbsp; <span class="glyphicon glyphicon-chevron-down"></span></th>
+				</tr>
+				<tr>
+					<th>Quantidade</th>
 					<td>{{item.qtd.jan | number:1}}</td>
 					<td>{{item.qtd.fev | number:1}}</td>
 					<td>{{item.qtd.mar | number:1}}</td>
@@ -43,7 +46,7 @@
 					<td><button class="btn btn-info btn-sq-xs" ng-click="editQtd(item.qtd)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 				</tr>
 				<tr>
-					<td>&emsp;Peso Medio Kg</td>
+					<th>Peso Medio <small>Kg</small>></th>
 					<td>{{item.peso.jan | number:1}}</td>
 					<td>{{item.peso.fev | number:1}}</td>
 					<td>{{item.peso.mar | number:1}}</td>
@@ -79,100 +82,100 @@
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>Total Cabeças</td>
-				<td>{{total_cabecas[0] | number:1}}</td>
-				<td>{{total_cabecas[1] | number:1}}</td>
-				<td>{{total_cabecas[2] | number:1}}</td>
-				<td>{{total_cabecas[3] | number:1}}</td>
-				<td>{{total_cabecas[4] | number:1}}</td>
-				<td>{{total_cabecas[5] | number:1}}</td>
-				<td>{{total_cabecas[6] | number:1}}</td>
-				<td>{{total_cabecas[7] | number:1}}</td>
-				<td>{{total_cabecas[8] | number:1}}</td>
-				<td>{{total_cabecas[9] | number:1}}</td>
-				<td>{{total_cabecas[10] | number:1}}</td>
-				<td>{{total_cabecas[11] | number:1}}</td>
-				<td class="text-center">R$</td>
+				<th>Total Cabeças</th>
+				<th>{{total_cabecas[0] | number:1}}</th>
+				<th>{{total_cabecas[1] | number:1}}</th>
+				<th>{{total_cabecas[2] | number:1}}</th>
+				<th>{{total_cabecas[3] | number:1}}</th>
+				<th>{{total_cabecas[4] | number:1}}</th>
+				<th>{{total_cabecas[5] | number:1}}</th>
+				<th>{{total_cabecas[6] | number:1}}</th>
+				<th>{{total_cabecas[7] | number:1}}</th>
+				<th>{{total_cabecas[8] | number:1}}</th>
+				<th>{{total_cabecas[9] | number:1}}</th>
+				<th>{{total_cabecas[10] | number:1}}</th>
+				<th>{{total_cabecas[11] | number:1}}</th>
+				<th></td>
 			</tr>
 			<tr>
-				<td>Peso Medio</td>
-				<td>{{peso_medio_mes[0] | number:1}}</td>
-				<td>{{peso_medio_mes[1] | number:1}}</td>
-				<td>{{peso_medio_mes[2] | number:1}}</td>
-				<td>{{peso_medio_mes[3] | number:1}}</td>
-				<td>{{peso_medio_mes[4] | number:1}}</td>
-				<td>{{peso_medio_mes[5] | number:1}}</td>
-				<td>{{peso_medio_mes[6] | number:1}}</td>
-				<td>{{peso_medio_mes[7] | number:1}}</td>
-				<td>{{peso_medio_mes[8] | number:1}}</td>
-				<td>{{peso_medio_mes[9] | number:1}}</td>
-				<td>{{peso_medio_mes[10] | number:1}}</td>
-				<td>{{peso_medio_mes[11] | number:1}}</td>
-				<td class="text-center">R$</td>
+				<th>Peso Medio</th>
+				<th>{{peso_medio_mes[0] | number:1}}</th>
+				<th>{{peso_medio_mes[1] | number:1}}</th>
+				<th>{{peso_medio_mes[2] | number:1}}</th>
+				<th>{{peso_medio_mes[3] | number:1}}</th>
+				<th>{{peso_medio_mes[4] | number:1}}</th>
+				<th>{{peso_medio_mes[5] | number:1}}</th>
+				<th>{{peso_medio_mes[6] | number:1}}</th>
+				<th>{{peso_medio_mes[7] | number:1}}</th>
+				<th>{{peso_medio_mes[8] | number:1}}</th>
+				<th>{{peso_medio_mes[9] | number:1}}</th>
+				<th>{{peso_medio_mes[10] | number:1}}</th>
+				<th>{{peso_medio_mes[11] | number:1}}</th>
+				<th></th>
 			</tr>
 			<tr>
-				<td>Estoque em @</td>
-				<td>{{estoque_mes[0] | number:1}}</td>
-				<td>{{estoque_mes[1] | number:1}}</td>
-				<td>{{estoque_mes[2] | number:1}}</td>
-				<td>{{estoque_mes[3] | number:1}}</td>
-				<td>{{estoque_mes[4] | number:1}}</td>
-				<td>{{estoque_mes[5] | number:1}}</td>
-				<td>{{estoque_mes[6] | number:1}}</td>
-				<td>{{estoque_mes[7] | number:1}}</td>
-				<td>{{estoque_mes[8] | number:1}}</td>
-				<td>{{estoque_mes[9] | number:1}}</td>
-				<td>{{estoque_mes[10] | number:1}}</td>
-				<td>{{estoque_mes[11] | number:1}}</td>
-				<td class="text-center">R$</td>
+				<th>Estoque em @</th>
+				<th>{{estoque_mes[0] | number:1}}</th>
+				<th>{{estoque_mes[1] | number:1}}</th>
+				<th>{{estoque_mes[2] | number:1}}</th>
+				<th>{{estoque_mes[3] | number:1}}</th>
+				<th>{{estoque_mes[4] | number:1}}</th>
+				<th>{{estoque_mes[5] | number:1}}</th>
+				<th>{{estoque_mes[6] | number:1}}</th>
+				<th>{{estoque_mes[7] | number:1}}</th>
+				<th>{{estoque_mes[8] | number:1}}</th>
+				<th>{{estoque_mes[9] | number:1}}</th>
+				<th>{{estoque_mes[10] | number:1}}</th>
+				<th>{{estoque_mes[11] | number:1}}</th>
+				<th></th>
 			</tr>
 			<tr>
-				<td>Area Util</td>
-				<td>{{area_util_mes.jan | number:1}}</td>
-				<td>{{area_util_mes.fev | number:1}}</td>
-				<td>{{area_util_mes.mar | number:1}}</td>
-				<td>{{area_util_mes.abr | number:1}}</td>
-				<td>{{area_util_mes.mai | number:1}}</td>
-				<td>{{area_util_mes.jun | number:1}}</td>
-				<td>{{area_util_mes.jul | number:1}}</td>
-				<td>{{area_util_mes.ago | number:1}}</td>
-				<td>{{area_util_mes.sem | number:1}}</td>
-				<td>{{area_util_mes.out | number:1}}</td>
-				<td>{{area_util_mes.nov | number:1}}</td>
-				<td>{{area_util_mes.dez | number:1}}</td>
-				<td><button class="btn btn-info btn-sq-xs" ng-click="editArea(area_util_mes)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+				<th>Area Util</th>
+				<th>{{area_util_mes.jan | number:1}}</th>
+				<th>{{area_util_mes.fev | number:1}}</th>
+				<th>{{area_util_mes.mar | number:1}}</th>
+				<th>{{area_util_mes.abr | number:1}}</th>
+				<th>{{area_util_mes.mai | number:1}}</th>
+				<th>{{area_util_mes.jun | number:1}}</th>
+				<th>{{area_util_mes.jul | number:1}}</th>
+				<th>{{area_util_mes.ago | number:1}}</th>
+				<th>{{area_util_mes.sem | number:1}}</th>
+				<th>{{area_util_mes.out | number:1}}</th>
+				<th>{{area_util_mes.nov | number:1}}</th>
+				<th>{{area_util_mes.dez | number:1}}</th>
+				<th><button class="btn btn-info btn-sq-xs" ng-click="editArea(area_util_mes)"><span class="glyphicon glyphicon-pencil"></span></button></th>
 			</tr>
 			<tr>
-				<td>Densidade de Lotação</td>
-				<td>{{densidade_mes[0] | number:1}}</td>
-				<td>{{densidade_mes[1] | number:1}}</td>
-				<td>{{densidade_mes[2] | number:1}}</td>
-				<td>{{densidade_mes[3] | number:1}}</td>
-				<td>{{densidade_mes[4] | number:1}}</td>
-				<td>{{densidade_mes[5] | number:1}}</td>
-				<td>{{densidade_mes[6] | number:1}}</td>
-				<td>{{densidade_mes[7] | number:1}}</td>
-				<td>{{densidade_mes[8] | number:1}}</td>
-				<td>{{densidade_mes[9] | number:1}}</td>
-				<td>{{densidade_mes[10] | number:1}}</td>
-				<td>{{densidade_mes[11] | number:1}}</td>
-				<td class="text-center">R$</td>
+				<th>Densidade de Lotação</th>
+				<th>{{densidade_mes[0] | number:1}}</th>
+				<th>{{densidade_mes[1] | number:1}}</th>
+				<th>{{densidade_mes[2] | number:1}}</th>
+				<th>{{densidade_mes[3] | number:1}}</th>
+				<th>{{densidade_mes[4] | number:1}}</th>
+				<th>{{densidade_mes[5] | number:1}}</th>
+				<th>{{densidade_mes[6] | number:1}}</th>
+				<th>{{densidade_mes[7] | number:1}}</th>
+				<th>{{densidade_mes[8] | number:1}}</th>
+				<th>{{densidade_mes[9] | number:1}}</th>
+				<th>{{densidade_mes[10] | number:1}}</th>
+				<th>{{densidade_mes[11] | number:1}}</th>
+				<th></th>
 			</tr>
 			<tr>
-				<td>Taxa de Lotação</td>
-				<td>{{lotacao_mes[0] | number:1}}</td>
-				<td>{{lotacao_mes[1] | number:1}}</td>
-				<td>{{lotacao_mes[2] | number:1}}</td>
-				<td>{{lotacao_mes[3] | number:1}}</td>
-				<td>{{lotacao_mes[4] | number:1}}</td>
-				<td>{{lotacao_mes[5] | number:1}}</td>
-				<td>{{lotacao_mes[6] | number:1}}</td>
-				<td>{{lotacao_mes[7] | number:1}}</td>
-				<td>{{lotacao_mes[8] | number:1}}</td>
-				<td>{{lotacao_mes[9] | number:1}}</td>
-				<td>{{lotacao_mes[10] | number:1}}</td>
-				<td>{{lotacao_mes[11] | number:1}}</td>
-				<td class="text-center">R$</td>
+				<th>Taxa de Lotação</th>
+				<th>{{lotacao_mes[0] | number:1}}</th>
+				<th>{{lotacao_mes[1] | number:1}}</th>
+				<th>{{lotacao_mes[2] | number:1}}</th>
+				<th>{{lotacao_mes[3] | number:1}}</th>
+				<th>{{lotacao_mes[4] | number:1}}</th>
+				<th>{{lotacao_mes[5] | number:1}}</th>
+				<th>{{lotacao_mes[6] | number:1}}</th>
+				<th>{{lotacao_mes[7] | number:1}}</th>
+				<th>{{lotacao_mes[8] | number:1}}</th>
+				<th>{{lotacao_mes[9] | number:1}}</th>
+				<th>{{lotacao_mes[10] | number:1}}</th>
+				<th>{{lotacao_mes[11] | number:1}}</th>
+				<th></th>
 			</tr>
 			</tbody>
 		</table>
@@ -182,62 +185,59 @@
 	<div class="modal fade" id="variacaoRebanhoPesoModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title text-center" id="myModalLabel">Atualização de Pesos</h4>
-				</div>
 				<div class="modal-body">
 					<input type="hidden" class="form-control" ng-model="form.id">
 					<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
 
 					<div class="form-group col-md-12">
-						<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
+						<label>Pesos da Categoria</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
 					</div>
 				</div>
@@ -258,62 +258,59 @@
 	<div class="modal fade" id="variacaoRebanhoQtdModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title text-center" id="myModalLabel">Atualização de Quantidades</h4>
-				</div>
 				<div class="modal-body">
 					<input type="hidden" class="form-control" ng-model="form.id">
 					<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
 					
 					<div class="form-group col-md-12">
-						<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
+						<label>Quantidade da Categoria</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Janeiro</label><input type="text" class="form-control" ng-model="form.jan">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Fevereiro</label><input type="text" class="form-control" ng-model="form.fev">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Março</label><input type="text" class="form-control" ng-model="form.mar">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Abril</label><input type="text" class="form-control" ng-model="form.abr">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Maio</label><input type="text" class="form-control" ng-model="form.mai">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Junho</label><input type="text" class="form-control" ng-model="form.jun">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Julho</label><input type="text" class="form-control" ng-model="form.jul">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Agosto</label><input type="text" class="form-control" ng-model="form.ago">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Setembro</label><input type="text" class="form-control" ng-model="form.sem">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Outubro</label><input type="text" class="form-control" ng-model="form.out">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Novembro</label><input type="text" class="form-control" ng-model="form.nov">
 					</div>
 
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label>Dezembro</label><input type="text" class="form-control" ng-model="form.dez">
 					</div>
 				</div>

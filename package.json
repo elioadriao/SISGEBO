@@ -35,10 +35,15 @@
         "electron-builder": "^13.8.2"
     },
     "build": {
-        "appId": "sisgebo.helio",
-        "files": [ "./node_modules/**/*" ,"**/*" ],
+        "appId": "sisgebo.pibic",
+        "files": [
+            "./node_modules/**/*",
+            "**/*"
+        ],
         "asar": true,
-        "mac": { "category": "public.app-category.tools" }
+        "mac": {
+            "category": "public.app-category.tools"
+        }
     },
     "titel": "sisgebo",
     "database": "database",
