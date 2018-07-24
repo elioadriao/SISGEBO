@@ -21,7 +21,7 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 	var VALOR_IMOBILIZADO = 0;
 	var VALOR_DESEMBOLSO = 0;
 
-	/* INICIA A RECEITA */
+	/* INICIA O CUSTO DE OPORTUNIDADE */
 	$scope.initRebanhoPeso = function(){
 		var SQL = "SELECT * FROM variacao_rebanho_peso WHERE propriedadeId_FK="+Propriedade.getId();
 		var res = false;
