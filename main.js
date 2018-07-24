@@ -15,9 +15,10 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Cria a janela do browser.
   mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 1280,
     height: 720,
-    icon: './model/icone.ico'
+    icon: __dirname + '/model/icone.ico'
   });
 
   // Carrega o arquivo html principal.

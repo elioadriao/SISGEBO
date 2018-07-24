@@ -353,6 +353,7 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		$scope.custoOp.somatoria = $scope.custoOp.valor_total_desembolsos + $scope.custoOp.valor_total_animais + $scope.custoOp.valor_total_terra;
 
 		$scope.insertTotal();
+		$scope.insertEquilibrio();
 	}
 
 	/*  */
@@ -436,6 +437,30 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		$scope.form.propriedadeId_FK = Propriedade.getId();
 
 		basel.database.insert("custo_total", $scope.form);
+	}
+
+	$scope.insertEquilibrio = function(){
+		var SQL = "SELECT * FROM equilibrio WHERE propriedadeId_FK="+Propriedade.getId();
+
+		basel.database.runAsync(SQL, function(data){
+			if(data[0] != null){
+				basel.database.delete("equilibrio", {propriedadeId_FK : Propriedade.getId()});
+			}
+		});
+
+		$scope.form = {};
+		$scope.form.id;
+		$scope.form.descricao = "Preco Medio";
+		$scope.form.valor = 0.0;
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+		basel.database.insert("equilibrio", $scope.form);
+		
+		$scope.form = {};
+		$scope.form.id;
+		$scope.form.descricao = "Arrobas";
+		$scope.form.valor = $scope.custoOp.total_arroba;
+		$scope.form.propriedadeId_FK = Propriedade.getId();
+		basel.database.insert("equilibrio", $scope.form);
 	}
 
 	$scope.save = function(){

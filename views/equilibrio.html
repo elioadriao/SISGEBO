@@ -1,0 +1,100 @@
+<div ng-controller="equilibrioController">
+	<div class="row">
+		<div class="page-header">
+			<h1>Ponto de Equilibrio</h1>
+			<a href="" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span></a>
+			<a href="" ng-click="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-responsive table-hover table-sm table-bordered" ng-init="initCustoOperacional()">
+			<thead class="thead-inverse">
+				<th>Descrição</th>
+				<th>Valor</th>
+			</thead>
+			<tbody class="table-body">
+			<tr>
+				<td>Custo Fixo Total</td>
+				<td>{{total_fixo | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Custo Variavel Unitario</td>
+				<td>{{total_variavel_unitario | number:2}}</td>
+			</tr>
+			<tr>
+				<td>Preço Medio de Venda</td>
+				<td>{{total_preco_medio | number:2}}</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-responsive table-hover table-sm table-bordered">
+			<thead class="thead-inverse">
+				<th>Item</th>
+				<th>PE</th>
+				<th>PA</th>
+				<th>Balanço</th>
+				<th>Unidade</th>
+			</thead>
+			<tbody class="table-body">
+			<tr>
+				<td>Ponto de Equilibrio Anual</td>
+				<td>{{total_pe_anual | number:2}}</td>
+				<td>{{total_pa_anual | number:2}}</td>
+				<td>{{total_balanco_anual | number:2}}</td>
+				<td>@/ano</td>
+			</tr>
+			<tr>
+				<td>Ponto de Equilibrio Mensal</td>
+				<td>{{total_pe_mensal | number:2}}</td>
+				<td>{{total_pa_mensal | number:2}}</td>
+				<td>{{total_balanco_mensal | number:2}}</td>
+				<td>@/mes</td>
+			</tr>
+			<tr>
+				<td>Ponto de Equilibrio Diario</td>
+				<td>{{total_pe_diario | number:2}}</td>
+				<td>{{total_pa_diario | number:2}}</td>
+				<td>{{total_balanco_diario | number:2}}</td>
+				<td>@/dia</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="modal fade" id="equilibrioModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Componente de Ponto de Equilibrio</h4>
+				</div>
+
+				<div class="modal-body">
+					<form class="basel-form">
+						<input type="hidden" class="form-control" ng-model="form.id">
+						<input type="hidden" class="form-control" ng-model="form.propriedadeId_FK">
+
+						<div class="form-group col-md-6">
+							<label>Descrição</label><input type="text" class="form-control" ng-model="form.descricao" readonly>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label>Valor</label><input type="text" class="form-control" ng-model="form.valor">
+						</div>
+				</div>
+
+				<div class="modal-footer">
+					<div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
