@@ -10,10 +10,10 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 			basel.database.runAsync("SELECT * FROM propriedade WHERE usuarioLogin_FK='"+$scope.getUser()+"'", function(data){
 				if(data[0] != null){
 					$scope.items = data;
-					$('#selectController').modal('show');
+					$('#selectModal').modal('show');
 				}else{
-					$('#selectController').modal('hide');
-					$('#inicioController').modal('show');
+					$('#selectModal').modal('hide');
+					$('#inicioModal').modal('show');
 					//Não tem propriedades
 				}
 			});
@@ -22,7 +22,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 				if(data[0] != null){
 					$scope.atual = data[0];
 				}else{
-					$('#selectController').modal('show');
+					$('#selectModal').modal('show');
 					//Error
 				}
 			});
@@ -54,27 +54,29 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	}
 
 	$scope.hideSelect = function(){
-		$('#selectController').modal('hide');
+		$('#selectModal').modal('hide');
 	}
 
 	//Salva no Banco
 	$scope.save = function(){
-		$scope.form.usuarioLogin_FK = $scope.getUser();
 		$scope.form.reserva = $scope.selectedReserva * $scope.form.area;
+		$('#inicioModal').modal('hide');
 
-		if($scope.form["id"]){
-			//Edit
-			var id = $scope.form["id"];
-			delete $scope.form["id"];
-			delete $scope.form.$$hashKey; 
-			basel.database.update("propriedade", $scope.form, {id: id}); //entidade, dados, where
-		}else{
-			//new
-			basel.database.insert("propriedade", $scope.form); // entidade, dados
-		}
+		var id = $scope.form["id"];
+		delete $scope.form["id"];
+		delete $scope.form.$$hashKey; 
+		basel.database.update("propriedade", $scope.form, {id: id}); //entidade, dados, where
+
 		$scope.form = {};
 		$scope.list();
-		$('#inicioController').modal('hide');
+	}
+
+	$scope.new = function(){
+		$scope.form.usuarioLogin_FK = $scope.getUser();
+		$scope.form.reserva = $scope.selectedReserva * $scope.form.area;
+		$('#inicioNewModal').modal('hide');
+
+		basel.database.insert("propriedade", $scope.form); // entidade, dados
 	}
 
 	$scope.cancel = function(){
@@ -84,7 +86,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 	//Abrindo para editar
 	$scope.edit = function(data){
 		$scope.form = data;
-		$('#inicioController').modal('show');
+		$('#inicioModal').modal('show');
 	}
 
 	//Excluindo

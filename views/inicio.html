@@ -24,33 +24,13 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <!--div class="container">
-                    <div class="text-center" role="group">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-info" ng-click="">Projecao</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sq-lg btn-success" ng-click="">Administrativo</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="btn-group btn-group-justified" role="group">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-warning" ng-click="clearId()" >Deslogar Propriedade</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-danger" ng-click="logoff()" >Deslogar Usuario</button>
-                        </div>
-                    </div>
-                </div-->                  
+                </div>                 
             </div>
         </div>
     </div>
 	</div>
 
-	<div class="modal fade" id="inicioController" tabindex="-1" role="dialog">
+	<div class="modal fade" id="inicioNewModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -61,16 +41,25 @@
 					<form class="basel-form">
 						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
 						<div class="form-group"><input type="hidden" class="form-control" ng-model="form.usuarioLogin_FK"></div>
-						<div class="form-group"><label>Nome da Propriedade</label><input type="text" class="form-control" ng-model="form.nome"></div>
-						<div class="form-group"><label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio"></div>
-						<div class="form-group"><label>Area</label><input type="text" class="form-control" ng-model="form.area"></div>
-                        <div class="form-group"><label>Reserva </label><select ng-model="selectedReserva" ng-options="x for (x, y) in reserva"></select></div>
+
+						<div class="form-group">
+                            <label>Nome da Propriedade</label><input type="text" class="form-control" ng-model="form.nome">
+                        </div>
+						<div class="form-group">
+                            <label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio">
+                        </div>
+						<div class="form-group">
+                            <label>Area</label><input type="text" class="form-control" ng-model="form.area">
+                        </div>
+                        <div class="form-group">
+                            <label>Reserva </label><select ng-model="selectedReserva" ng-options="x for (x, y) in reserva"></select>
+                        </div>
 					</form>
 				</div>
 				<div class="modal-footer">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                            <button class="btn btn-success" ng-click="new()"><span class="glyphicon glyphicon-ok"></button>
                         </div>
                         <div class="btn-group" role="group">
                             <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
@@ -81,7 +70,47 @@
 		</div>
 	</div>
 
-    <div class="modal fade" id="selectController" tabindex="-1" role="dialog">
+    <div class="modal fade" id="inicioModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">Edição de Propriedade</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="basel-form">
+                        <div class="form-group"><input type="hidden" class="form-control" ng-model="form.id"></div>
+                        <div class="form-group"><input type="hidden" class="form-control" ng-model="form.usuarioLogin_FK"></div>
+                        
+                        <div class="form-group">
+                            <label>Nome da Propriedade</label><input type="text" class="form-control" ng-model="form.nome" ng-value="form.nome">
+                        </div>
+                        <div class="form-group">
+                            <label>Municipio</label><input type="text" class="form-control" ng-model="form.municipio" ng-value="form.municipio">
+                        </div>
+                        <div class="form-group">
+                            <label>Area</label><input type="text" class="form-control" ng-model="form.area" ng-value="form.area">
+                        </div>
+                        <div class="form-group">
+                            <label>Reserva </label><select ng-model="selectedReserva" ng-options="x for (x, y) in reserva"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default" ng-click="cancel()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="selectModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,25 +120,31 @@
                 <div class="modal-body">
                     <table class="table table-striped" ng-init="list()">
                         <thead class="basel-table-head"><tr>
-                            <th></th>
                             <th>Nome</th>
                             <th>Municipio</th>
+                            <th>Area</th>
+                            <th>Reserva</th>
                             <th></th>
                         </tr></thead>
                         <tbody class="basel-table-body"><tr ng-repeat="item in items">
-                            <td>
-                                <button class="btn btn-success" ng-click="setId(item.id)" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></button>
-                            </td>
-                            <td>{{item.nome}}</td>
+                            <th>{{item.nome}}</th>
                             <td>{{item.municipio}}</td>
+                            <td>{{item.area}}</td>
+                            <td>{{item.reserva}}</td>
                             <td>
-                                <button class="btn btn-danger" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-success btn-sq-xs" ng-click="setId(item.id)" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info btn-sq-xs" ng-click="edit(item)" data-dismiss="modal"><span class="glyphicon glyphicon-pencil"></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sq-xs" ng-click="delete(item)"><span class="glyphicon glyphicon-trash"></span></button>
                             </td>
                         </tr></tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#inicioController" ng-click="hideSelect()">Nova Propriedade</button>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#inicioModal" ng-click="hideSelect()">Nova Propriedade</button>
                 </div>
             </div>
         </div>
