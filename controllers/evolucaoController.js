@@ -133,14 +133,14 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 		return {	
 			descricao : tipoAnimal[tipo],
 			ua : uaAnimal[tipo],
-			cabi : Math.round($scope.getCabi(ano, tipo)),
-			uai : Math.round(uaAnimal[tipo] * $scope.getCabi(ano, tipo)),
-			cabf : Math.round($scope.getCabf(ano,tipo)),
-			uaf : Math.round(uaAnimal[tipo] * $scope.getCabf(ano, tipo)),
-			mortes : Math.round($scope.getMort(ano, tipo)),
-			compras : Math.round($scope.getComp(ano, tipo)),
-			vendas : Math.round($scope.getVend(ano, tipo)),
-			nasc : Math.round($scope.getNasc(ano, tipo))
+			cabi : $scope.getCabi(ano, tipo),
+			uai : uaAnimal[tipo] * $scope.getCabi(ano, tipo),
+			cabf : $scope.getCabf(ano,tipo),
+			uaf : uaAnimal[tipo] * $scope.getCabf(ano, tipo),
+			mortes : $scope.getMort(ano, tipo),
+			compras : $scope.getComp(ano, tipo),
+			vendas : $scope.getVend(ano, tipo),
+			nasc : $scope.getNasc(ano, tipo)
 		};
 	}
 
@@ -162,7 +162,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 		
 		if(ano == 1){
 			res = $scope.getComp(ano-1, tipo);
-		}else if(ano > 3 && tipo == 1){
+		}else if(ano >= 3 && tipo == 1){
 			res = $scope.getCabf(ano-1, tipo) + $scope.getComp(ano-1, tipo) + $scope.getCabf(ano-1, 8);
 		}else{
 			switch(tipo){
@@ -186,7 +186,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 			}			
 		}
 
-		return res;
+		return Math.round(res);
 	}
 
 	// Calcula valor de Cabeças Final
@@ -207,7 +207,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 			}
 		}
 
-		return res;
+		return Math.round(res);
 	}
 
 	// Calcula valor de Nascimentos
@@ -218,7 +218,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 			res = ((($scope.getCabi(ano, 1) * TAXAS.natalidade) /2) + (($scope.getComp(ano, 1) * TAXAS.natalidade) /2)) - $scope.getCabi(ano, tipo);
 		}
 
-		return res;
+		return Math.round(res);
 	}
 
 	// Calcula valor de Mortes
@@ -240,7 +240,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 				res = ($scope.getCabi(ano,tipo) + $scope.getComp(ano,tipo)) * TAXAS.mortalidadeAdultos;
 		}
 		
-		return res;
+		return Math.round(res);
 	}
 
 	// Calcula valor de Vendas
@@ -272,7 +272,7 @@ app.controller("evolucaoController", function($scope, $location, $window, Propri
 				res = 0;
 		}
 
-		return res;
+		return Math.round(res);
 	}
 
 	$scope.save = function(){

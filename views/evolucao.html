@@ -32,7 +32,7 @@
 				<tbody class="basel-table-body">
 					<tr ng-repeat="linha in ano">
 						<td>{{linha.descricao}}</td>
-						<td>{{linha.ua}}</td>
+						<td>{{linha.ua | number:2}}</td>
 						<td>{{linha.cabi}}</td>
 						<td>{{linha.uai}}</td>
 						<td>{{linha.cabf}}</td>

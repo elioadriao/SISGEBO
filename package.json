@@ -38,7 +38,8 @@
         "appId": "sisgebo.pibic",
         "files": [
             "./node_modules/**/*",
-            "**/*"
+            "**/*",
+            "model/icone.ico"
         ],
         "asar": true,
         "mac": {
