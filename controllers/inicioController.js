@@ -13,7 +13,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 					$('#selectModal').modal('show');
 				}else{
 					$('#selectModal').modal('hide');
-					$('#inicioModal').modal('show');
+					$('#inicioNewModal').modal('show');
 					//Não tem propriedades
 				}
 			});
@@ -77,6 +77,7 @@ app.controller("inicioController", function($scope, $rootScope, $location, $wind
 		$('#inicioNewModal').modal('hide');
 
 		basel.database.insert("propriedade", $scope.form); // entidade, dados
+		$scope.list();
 	}
 
 	$scope.cancel = function(){
