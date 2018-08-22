@@ -27,10 +27,10 @@
 				</tr>
 				<tbody class="table-body" ng-repeat="item in repeatData">
 				<tr >
-					<th colspan="14" class="text-center"><span class="glyphicon glyphicon-chevron-down"></span>	&nbsp; {{item.qtd.descricao}} &nbsp; <span class="glyphicon glyphicon-chevron-down"></span></th>
+					<th colspan="14" class="text-center"></th>
 				</tr>
 				<tr>
-					<th>Quantidade</th>
+					<th>{{item.qtd.descricao}}</th>
 					<td>{{item.qtd.jan | number:1}}</td>
 					<td>{{item.qtd.fev | number:1}}</td>
 					<td>{{item.qtd.mar | number:1}}</td>
@@ -46,7 +46,7 @@
 					<td><button class="btn btn-info btn-sq-xs" ng-click="editQtd(item.qtd)"><span class="glyphicon glyphicon-pencil"></span></button></td>
 				</tr>
 				<tr>
-					<th>Peso Medio <small>Kg</small>></th>
+					<th>{{item.qtd.descricao}}<small>(Peso/Kg)</small></th>
 					<td>{{item.peso.jan | number:1}}</td>
 					<td>{{item.peso.fev | number:1}}</td>
 					<td>{{item.peso.mar | number:1}}</td>
@@ -98,7 +98,7 @@
 				<th></td>
 			</tr>
 			<tr>
-				<th>Peso Medio</th>
+				<th>Peso Medio(kg)</th>
 				<th>{{peso_medio_mes[0] | number:1}}</th>
 				<th>{{peso_medio_mes[1] | number:1}}</th>
 				<th>{{peso_medio_mes[2] | number:1}}</th>
@@ -114,7 +114,7 @@
 				<th></th>
 			</tr>
 			<tr>
-				<th>Estoque em @</th>
+				<th>Estoque(@)</th>
 				<th>{{estoque_mes[0] | number:1}}</th>
 				<th>{{estoque_mes[1] | number:1}}</th>
 				<th>{{estoque_mes[2] | number:1}}</th>
@@ -130,7 +130,7 @@
 				<th></th>
 			</tr>
 			<tr>
-				<th>Area Util</th>
+				<th>Area Util(Ha)</th>
 				<th>{{area_util_mes.jan | number:1}}</th>
 				<th>{{area_util_mes.fev | number:1}}</th>
 				<th>{{area_util_mes.mar | number:1}}</th>
@@ -146,7 +146,7 @@
 				<th><button class="btn btn-info btn-sq-xs" ng-click="editArea(area_util_mes)"><span class="glyphicon glyphicon-pencil"></span></button></th>
 			</tr>
 			<tr>
-				<th>Densidade de Lotação</th>
+				<th>Densidade de Lotação(Cab/Ha)</th>
 				<th>{{densidade_mes[0] | number:1}}</th>
 				<th>{{densidade_mes[1] | number:1}}</th>
 				<th>{{densidade_mes[2] | number:1}}</th>
@@ -162,7 +162,7 @@
 				<th></th>
 			</tr>
 			<tr>
-				<th>Taxa de Lotação</th>
+				<th>Taxa de Lotação(UA/Ha)</th>
 				<th>{{lotacao_mes[0] | number:1}}</th>
 				<th>{{lotacao_mes[1] | number:1}}</th>
 				<th>{{lotacao_mes[2] | number:1}}</th>

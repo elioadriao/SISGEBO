@@ -6,100 +6,106 @@
 	</div>
 
 	<div class="row" ng-init="initRebanhoArea()">
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Custos</th>
-				<th>Valor</th>
-				<th>%</th>				
-			</thead>
-			<tbody class="table-body">
-			<tr>
-				<td>Fixo Total</td>
-				<td>{{total_fixo | number:2}}</td>
-				<td>{{total_fixo/total_total*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Variavel Total</td>
-				<td>{{total_variavel | number:2}}</td>
-				<td>{{total_variavel/total_total*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Administrativo Total</td>
-				<td>{{total_adm | number:2}}</td>
-				<td>{{total_adm/total_total*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Operacional Total</td>
-				<td>{{total_operacional | number:2}}</td>
-				<td>{{total_operacional/total_total*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Oportunidade Total</td>
-				<td>{{total_oportunidade | number:2}}</td>
-				<td>{{total_oportunidade/total_total*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<th>Total</th>
-				<th>{{total_total | number:2}}</th>
-				<th>{{total_total/total_total*100 | number:1}} %</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Ativos</th>
-				<th>Valor</th>				
-			</thead>
-			<tbody class="table-body">
-			<tr>
-				<td>Capital Medio do Inventario</td>
-				<td>{{total_inventario | number:2}}</td>
-			</tr>
-			<tr>
-				<th>Receita Total</th>
-				<th>{{total_receita | number:2}}</th>
-			</tr>
-			<tr>
-				<td>Resultado Caixa</td>
-				<td>{{total_caixa | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Lucro Operacional</td>
-				<td>{{total_lucro_o | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Lucro Economico</td>
-				<td>{{total_lucro_e | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Lucro Operacional/ha</td>
-				<td>{{total_lucro_o_ha | number:2}}</td>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-			</tr>
-			<tr>
-				<th>Lucratividade</th>
-				<th>{{total_operacional/total_receita*100 | number:1}} %</th>
-			</tr>
-			<tr>
-				<th>Rentabilidade</th>
-				<th>{{total_operacional/total_inventario*100 | number:1}} %</th>
-			</tr>
-			<tr>
-				<th>Pay Back</th>
-				<th>{{total_inventario/total_caixa | number:1}}</th>
-			</tr>
-			<tr>
-				<th>T.I.R.</th>
-				<th>{{100/(total_inventario/total_caixa) | number:1}} %</th>
-			</tr>
-			<tr>
-				<th>Relação Beneficio/Custo</th>
-				<th>{{total_caixa/(total_adm + total_variavel) | number:1}}</th>
-			</tr>
-			</tbody>
-		</table>
+		<div class="col-md-6">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>Custos</th>
+					<th>Valor</th>
+					<th>%</th>				
+				</thead>
+				<tbody class="table-body">
+				<tr>
+					<th>Fixo Total</th>
+					<td>{{total_fixo | number:2}}</td>
+					<td>{{(total_fixo/total_total)*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Variavel Total</th>
+					<td>{{total_variavel | number:2}}</td>
+					<td>{{(total_variavel/total_total)*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Administrativo Total</th>
+					<td>{{total_adm | number:2}}</td>
+					<td>{{(total_adm/total_total)*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Operacional Total</th>
+					<td>{{total_operacional | number:2}}</td>
+					<td>{{(total_operacional/total_total)*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Oportunidade Total</th>
+					<td>{{total_oportunidade | number:2}}</td>
+					<td>{{(total_oportunidade/total_total)*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{total_total | number:2}}</th>
+					<th>{{(total_total/total_total)*100 | number:1}} %</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>Custos</th>
+					<th>Valor</th>				
+				</thead>
+				<tbody class="table-body">
+				<tr>
+					<th>Receita Total</th>
+					<td>{{total_receita | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Capital Medio do Inventario</th>
+					<td>{{total_inventario | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Resultado Caixa</th>
+					<td>{{total_caixa | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Lucro Economico</th>
+					<td>{{total_lucro_e | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Lucro Operacional</th>
+					<td>{{total_lucro_o | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Lucro Operacional/Ha</th>
+					<td>{{total_lucro_o_ha | number:2}}</td>
+				</tr>				
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<tbody class="table-body">
+				<tr>
+					<th>Lucratividade(%)</th>
+					<th>{{(total_lucro_o/total_receita)*100 | number:1}} %</th>
+				</tr>
+				<tr>
+					<th>Rentabilidade(%)</th>
+					<th>{{(total_lucro_o/total_inventario)*100 | number:1}} %</th>
+				</tr>
+				<tr>
+					<th>Pay Back(anos)</th>
+					<th>{{total_inventario/total_caixa | number:1}}</th>
+				</tr>
+				<tr>
+					<th>T.I.R.(%)</th>
+					<th>{{100/(total_inventario/total_caixa) | number:1}} %</th>
+				</tr>
+				<tr>
+					<th>Relação Beneficio/Custo</th>
+					<th>{{total_caixa/(total_adm + total_variavel) | number:1}}</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

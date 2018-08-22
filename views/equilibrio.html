@@ -31,7 +31,7 @@
 
 		<table class="table table-responsive table-hover table-sm table-bordered">
 			<thead class="thead-inverse">
-				<th>Item</th>
+				<th>Item<small>(@ Produzidas)</small></th>
 				<th>PE</th>
 				<th>PA</th>
 				<th>Balanço</th>
@@ -39,25 +39,25 @@
 			</thead>
 			<tbody class="table-body">
 			<tr>
-				<td>Ponto de Equilibrio Anual</td>
-				<td>{{total_pe_anual | number:2}}</td>
-				<td>{{total_pa_anual | number:2}}</td>
-				<td>{{total_balanco_anual | number:2}}</td>
-				<td>@/ano</td>
+				<th>Ponto de Equilibrio Anual</th>
+				<th>{{total_pe_anual | number:2}}</th>
+				<th>{{total_pa_anual | number:2}}</th>
+				<th>{{total_balanco_anual | number:2}}</th>
+				<th>@/ano</th>
 			</tr>
 			<tr>
-				<td>Ponto de Equilibrio Mensal</td>
-				<td>{{total_pe_mensal | number:2}}</td>
-				<td>{{total_pa_mensal | number:2}}</td>
-				<td>{{total_balanco_mensal | number:2}}</td>
-				<td>@/mes</td>
+				<th>Ponto de Equilibrio Mensal</th>
+				<th>{{total_pe_mensal | number:2}}</th>
+				<th>{{total_pa_mensal | number:2}}</th>
+				<th>{{total_balanco_mensal | number:2}}</th>
+				<th>@/mes</th>
 			</tr>
 			<tr>
-				<td>Ponto de Equilibrio Diario</td>
-				<td>{{total_pe_diario | number:2}}</td>
-				<td>{{total_pa_diario | number:2}}</td>
-				<td>{{total_balanco_diario | number:2}}</td>
-				<td>@/dia</td>
+				<th>Ponto de Equilibrio Diario</th>
+				<th>{{total_pe_diario | number:2}}</th>
+				<th>{{total_pa_diario | number:2}}</th>
+				<th>{{total_balanco_diario | number:2}}</th>
+				<th>@/dia</th>
 			</tr>
 			</tbody>
 		</table>

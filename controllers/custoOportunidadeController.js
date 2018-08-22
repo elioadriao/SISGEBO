@@ -248,6 +248,7 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 			switch(INVENTARIO_BD[i].descricao){
 				case "Terra":
 					VALOR_TERRA = (INVENTARIO_BD[i].valor_inicial + INVENTARIO_BD[i].valor_final)/2;
+					aux += (INVENTARIO_BD[i].valor_inicial + INVENTARIO_BD[i].valor_final)/2;
 					break;
 				case "Reprodutores Machos":
 				case "Reprodutores Femeas":
@@ -342,7 +343,7 @@ app.controller("custoOportunidadeController", function($scope, $location, Propri
 		$scope.custoOp.valor_desembolso = VALOR_DESEMBOLSO;
 		$scope.custoOp.valor_economico = VALOR_TERRA + VALOR_ANIMAIS + VALOR_DESEMBOLSO;
 		$scope.custoOp.densidade = MEDIA_DENSIDADE;
-		$scope.custoOp.valor_total_terra = $scope.custoOp.aluguel_valor * $scope.custoOp.aluguel_tempo * $scope.custoOp.area;
+		$scope.custoOp.valor_total_terra = $scope.custoOp.aluguel_valor * $scope.custoOp.aluguel_tempo * $scope.custoOp.area * $scope.custoOp.densidade;
 		$scope.custoOp.receita = $scope.custoOp.valor_total_terra / $scope.custoOp.area;
 		$scope.custoOp.valor_terra_ha = $scope.custoOp.valor_terra / ($scope.custoOp.area + $scope.custoOp.area_reserva);
 		$scope.custoOp.imobilizado = VALOR_IMOBILIZADO;

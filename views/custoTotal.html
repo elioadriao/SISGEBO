@@ -22,7 +22,6 @@
 				<th>Outubro</th>
 				<th>Novembro</th>
 				<th>Dezembro</th>
-				<th class="text-center">R$</th>
 			</thead>
 			<tbody class="basel-table-body">
 			<tr ng-repeat="item in custo_total">
@@ -61,7 +60,7 @@
 			</thead>
 			<tbody class="basel-table-body">
 			<tr>
-				<td>Total</td>
+				<th>Total</th>
 				<td>{{total_mes[0] | number:2}}</td>
 				<td>{{total_mes[1] | number:2}}</td>
 				<td>{{total_mes[2] | number:2}}</td>
@@ -76,7 +75,7 @@
 				<td>{{total_mes[11] | number:2}}</td>
 			</tr>
 			<tr>
-				<td>Total/Ca Com Reposição</td>
+				<th><small>Total/Ca Com Reposição</small></th>
 				<td>{{total_c[0] | number:2}}</td>
 				<td>{{total_c[1] | number:2}}</td>
 				<td>{{total_c[2] | number:2}}</td>
@@ -91,7 +90,7 @@
 				<td>{{total_c[11] | number:2}}</td>
 			</tr>
 			<tr>
-				<td>Total/Ca Sem Reposição</td>
+				<th><small>Total/Ca Sem Reposição</small></th>
 				<td>{{total_s[0] | number:2}}</td>
 				<td>{{total_s[1] | number:2}}</td>
 				<td>{{total_s[2] | number:2}}</td>

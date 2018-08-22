@@ -8,187 +8,187 @@
 	</div>
 
 	<div class="row" ng-init="initRebanhoPeso()">
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Indices Produtivos</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<td>Rebanho</td>
-				<td>{{custoOp.rebanho | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Peso Medio</td>
-				<td>{{custoOp.peso | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Area Reserva</td>
-				<td>{{custoOp.area_reserva | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Area Util</td>
-				<td>{{custoOp.area | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Ganho @/ano</td>
-				<td>{{custoOp.ganho_arroba | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Lotação</td>
-				<td>{{custoOp.lotacao | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Produtividade</td>
-				<td>{{custoOp.produtividade | number:1}}</td>
-			</tr>
-			<tr>
-				<th>Total @</th>
-				<th>{{custoOp.total_arroba | number:1}}</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Indices Economicos</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<td>Em Terra</td>
-				<td>{{custoOp.valor_terra | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Em Animais</td>
-				<td>{{custoOp.valor_animais | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Desembolsos</td>
-				<td>{{custoOp.valor_desembolso | number:2}}</td>
-			</tr>
-			<tr>
-				<th>Total</th>
-				<th>{{custoOp.valor_economico | number:2}}</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>1º Da Terra</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<td>Aluguel</td>
-				<td>{{custoOp.aluguel_valor | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Tempo de Aluguel</td>
-				<td>{{custoOp.aluguel_tempo | number:1}}</td>
-			</tr>
-			<tr>
-				<td>Densidade de Lotção</td>
-				<td>{{custoOp.densidade | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Receita</td>
-				<td>{{custoOp.receita | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Valor Terra (ha)</td>
-				<td>{{custoOp.valor_terra_ha | number:2}}</td>
-			</tr>
-			<tr>
-				<th>Receita na Area Util</th>
-				<th>{{custoOp.valor_total_terra | number:2}}</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>2º Dos Animais</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<th>Imobilizado</th>
-				<th>{{custoOp.imobilizado | number:2}}</th>
-			</tr>
-			<tr>
-				<td>Custo Oportunidade</td>
-				<td>{{custoOp.oportunidade*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Taxa SELIC</td>
-				<td>{{custoOp.selic*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Imposto Bancario</td>
-				<td>{{custoOp.imposto*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Inflação</td>
-				<td>{{custoOp.inflacao*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<th>Total</th>
-				<th>{{custoOp.valor_total_animais | number:2}}</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>3º Dos Desembolsos</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<th>Operacional</th>
-				<th>{{custoOp.operacional | number:2}}</th>
-			</tr>
-			<tr>
-				<td>Custo Oportunidade</td>
-				<td>{{custoOp.oportunidade*50 | number:2}} %</td>
-			</tr>
-			<tr>
-				<td>Taxa SELIC</td>
-				<td>{{custoOp.selic*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Imposto Bancario</td>
-				<td>{{custoOp.imposto*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<td>Inflação</td>
-				<td>{{custoOp.inflacao*100 | number:1}} %</td>
-			</tr>
-			<tr>
-				<th>Total</th>
-				<th>{{custoOp.valor_total_desembolsos | number:2}}</th>
-			</tr>
-			</tbody>
-		</table>
-
-		<table class="table table-responsive table-hover table-sm table-bordered">
-			<thead class="thead-inverse">
-				<th>Capital na Atividade</th>
-				<th>Valores</th>				
-			</thead>
-			<tbody class="basel-table-body">
-			<tr>
-				<td>Somatoria Total (1º+2º+3º)</td>
-				<td>{{custoOp.somatoria | number:2}}</td>
-			</tr>
-			<tr>
-				<td>Remuneração</td>
-				<td>{{custoOp.somatoria/custoOp.valor_economico | number:1}}%</td>
-			</tr>
-			</tbody>
-		</table>
+		<div class="col-md-4">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>1º Da Terra</th>
+					<th>Valores</th>				
+				</thead>
+				<tbody class="basel-table-body">
+				<tr>
+					<td>Aluguel<small>(CA/MES)</small></td>
+					<td>{{custoOp.aluguel_valor | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Tempo de Aluguel<small>(MESES)</small></td>
+					<td>{{custoOp.aluguel_tempo | number:1}}</td>
+				</tr>
+				<tr>
+					<td>CA/HA</td>
+					<td>{{custoOp.densidade | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Receita/Ha/Ano</td>
+					<td>{{custoOp.receita | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Valor Terra<small>(HA)</small></td>
+					<td>{{custoOp.valor_terra_ha | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Receita na Area Util</th>
+					<th>{{custoOp.valor_total_terra | number:2}}</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>2º Dos Animais</th>
+					<th>Valores</th>				
+				</thead>
+				<tbody class="basel-table-body">
+				<tr>
+					<th>Imobilizado</th>
+					<th>{{custoOp.imobilizado | number:2}}</th>
+				</tr>
+				<tr>
+					<td>Custo Oportunidade</td>
+					<td>{{custoOp.oportunidade*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<td>Taxa SELIC</td>
+					<td>{{custoOp.selic*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<td>Imposto Bancario</td>
+					<td>{{custoOp.imposto*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<td>Inflação</td>
+					<td>{{custoOp.inflacao*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{custoOp.valor_total_animais | number:2}}</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>3º Dos Desembolsos</th>
+					<th>Valores</th>				
+				</thead>
+				<tbody class="basel-table-body">
+				<tr>
+					<th>Operacional</th>
+					<th>{{custoOp.operacional | number:2}}</th>
+				</tr>
+				<tr>
+					<td>Custo Oportunidade</td>
+					<td>{{custoOp.oportunidade*50 | number:2}} %</td>
+				</tr>
+				<tr>
+					<td>Taxa SELIC</td>
+					<td>{{custoOp.selic*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<td>Imposto Bancario</td>
+					<td>{{custoOp.imposto*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<td>Inflação</td>
+					<td>{{custoOp.inflacao*100 | number:1}} %</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{custoOp.valor_total_desembolsos | number:2}}</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>Indices Produtivos</th>
+					<th>Valores</th>				
+				</thead>
+				<tbody class="basel-table-body">
+				<tr>
+					<td>Rebanho<small>(CA)</small></td>
+					<td>{{custoOp.rebanho | number:1}}</td>
+				</tr>
+				<tr>
+					<td>Peso Medio<small>(KG)</small></td>
+					<td>{{custoOp.peso | number:1}}</td>
+				</tr>
+				<tr>
+					<td>Area Reserva<small>(HA)</small></td>
+					<td>{{custoOp.area_reserva | number:1}}</td>
+				</tr>
+				<tr>
+					<td>Area Util(HA)</td>
+					<td>{{custoOp.area | number:1}}</td>
+				</tr>
+				<tr>
+					<td>Ganho<small>(@/CA/ANO)</small></td>
+					<td>{{custoOp.ganho_arroba | number:1}}</td>
+				</tr>
+				<tr>
+					<td>Lotação<small>(CA/HA)</small></td>
+					<td>{{custoOp.lotacao | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Produtividade<small>(@/HA)</small></td>
+					<td>{{custoOp.produtividade | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Total Produzido<small>(@)</small></th>
+					<th>{{custoOp.total_arroba | number:1}}</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-responsive table-hover table-sm table-bordered">
+				<thead class="thead-inverse">
+					<th>Indices Economicos</th>
+					<th>Valores</th>				
+				</thead>
+				<tbody class="basel-table-body">
+				<tr>
+					<td>Em Terra</td>
+					<td>{{custoOp.valor_terra | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Em Animais</td>
+					<td>{{custoOp.valor_animais | number:2}}</td>
+				</tr>
+				<tr>
+					<td>Desembolsos</td>
+					<td>{{custoOp.valor_desembolso | number:2}}</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<th>{{custoOp.valor_economico | number:2}}</th>
+				</tr>
+				<tr >
+					<th colspan="2" class="text-center"></th>
+				</tr>
+				<tr>
+					<th>Somatoria Total (1º+2º+3º)</th>
+					<th>{{custoOp.somatoria | number:2}}</th>
+				</tr>
+				<tr>
+					<th>Remuneração</th>
+					<th>{{(custoOp.somatoria/custoOp.valor_economico)*100 | number:1}} %</th>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<div class="modal fade" id="custoOportunidadeModal" role="dialog">

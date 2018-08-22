@@ -9,8 +9,8 @@ app.controller("variacaoRebanhoController", function($scope, $location, $window,
 	var ESTOQUE_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var DENSIDADE_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	var LOTACAO_MES = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var DESC_ANIMAL = ["Matrizes", "Novilhos +14@", "Novilhos 12@ a 14@", "Novilhos até 12@",
-					 "Novilhas até 12@", "Bezerros", "Bezerras", "Outros", "Equideos"];
+	var DESC_ANIMAL = ["Matrizes", "Novilhos[+14@]", "Novilhos[12@-14@]", "Novilhos[1@-12@]",
+					 "Novilhas[1@-12@]", "Bezerros", "Bezerras", "Outros", "Equideos"];
 
 	$scope.initRebanhoPeso = function(){
 		var SQL = "SELECT * FROM variacao_rebanho_peso WHERE propriedadeId_FK="+Propriedade.getId();

@@ -218,7 +218,7 @@ app.controller("analiseController", function($scope, $location, Propriedade){
 			case 11:
 				return VARIACAO_REBANHO_AREA_BD.dez;
 			default:
-				return 0;
+				return 0.0;
 		}
 	}
 });
