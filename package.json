@@ -23,7 +23,7 @@
         "linux64": "build --linux deb tar.xz --x64"
     },
     "dependencies": {
-        "jquery": "2.2.2",
+        "jquery": "3.5.0",
         "angular": "1.5.1",
         "basel-cli": "*",
         "angular-route": "1.5.1",
