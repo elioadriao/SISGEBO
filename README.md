@@ -2,7 +2,7 @@
 Sistema de Gerenciamento de Bovinocultura
 
 ## Diagrama de Casos de Uso
-https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20A.png
+
 ![diagrama de casos de uso](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20A.png?raw=true)
 
 ## Diagrama de Banco de Dados
