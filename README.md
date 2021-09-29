@@ -1,5 +1,7 @@
 # SISGEBO
 Sistema de Gerenciamento de Bovinocultura
+Desenvolvido em Angular + NodeJs
+Construido em Electron
 
 ## Diagrama de Casos de Uso
 
