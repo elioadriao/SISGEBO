@@ -3,13 +3,13 @@ Sistema de Gerenciamento de Bovinocultura
 
 ## Diagrama de Casos de Uso
 
-![diagrama de casos de uso](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20A.png?raw=true)
+![diagrama de casos de uso](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20USE%20CASE.png?raw=true)
 
 ## Diagrama de Banco de Dados
 
-![diagrama de banco de dados](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20A?raw=true)
+![diagrama de banco de dados](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20A.png?raw=true)
 
-![diagrama de banco de dados](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20B?raw=true)
+![diagrama de banco de dados](https://github.com/elioadriao/SISGEBO/blob/master/docs/SISGEBO%20ER%20DIAGRAM%20B.png?raw=true)
 
 #### Pré Requisitos de Instalação
 **[Node.Js](https://nodejs.org/en/download/package-manager/)**
